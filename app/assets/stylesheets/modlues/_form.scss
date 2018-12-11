@@ -1,0 +1,87 @@
+.hidden_item{
+  display: none;
+}
+
+.user_type{
+  display: block;
+}
+
+
+.avatar_preview{
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+.picture_preview{
+  border: 1px solid black;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  cursor : pointer
+}
+
+.add_picture_bottun{
+  cursor : pointer;
+  color: green;
+}
+
+.avatar_thumb{
+  width: 50px;
+  height: 50px;
+
+}
+
+.user_bottun{
+  width: 100px;
+  height: 50px;
+  margin: auto ;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid lightgray;
+  cursor : pointer;
+  display: block;
+
+}
+.user_bottun:hover{
+  background-color: lightgray;
+}
+
+.need_item{
+  border-bottom: 1px solid red;
+}
+
+.form_item{
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+
+.picture_field{
+  position: relative;
+  width: 400px;
+  height: 200px;
+  margin-bottom: 40px;
+}
+
+#remove_PF{
+  position: absolute;
+  font-size: 20px;
+  color: red;
+  left: 94%;
+  z-index: 10;
+}
+
+label{
+  position: relative;
+  img{
+    z-index: 0;
+  }
+}
+
+
+.picture_comment{
+  position: absolute;
+  top: 80%;
+  left: 110%;
+}

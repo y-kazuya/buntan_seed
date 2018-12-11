@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title BuntanSeed
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .hedder
+      = link_to "トップページへ", root_path
+      - if current_user
+        = image_tag(set_avatar(current_user, :thumb), class: "avatar_thumb")
+        = full_name(current_user)
+        = link_to "ログアウト", logout_path, method: :delete
+        = link_to "ユーザー設定へ", edit_user_path(current_user.id)
+        = link_to "資産を登録する", new_item_path
+      - else
+        = link_to "新規登録", new_user_path
+        = link_to "ログイン", login_path
+
+    = yield
+
+
+-# !!!
+-# %html
+-#   %head
+-#     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+-#     %title ChatSpace
+-#     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+-#     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+-#     = csrf_meta_tags
+-#   %body
+-#     = yield

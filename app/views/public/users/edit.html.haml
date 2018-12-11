@@ -1,0 +1,65 @@
+ユーザー編集ページ
+
+= form_for(@user) do |f|
+  = render 'shared/error_messages', object: f.object
+
+  .form_item
+    = f.label :frist_name, "姓"
+    = f.text_field :frist_name, class: 'form-control'
+
+    = f.label :last_name, "名"
+    = f.text_field :last_name, class: 'form-control'
+
+  .form_item
+    = f.label :email, "メールアドレス"
+    = f.email_field :email, class: 'form-control'
+
+  .form_item
+    = f.label :state, "都道府県"
+    = f.select :state, User.states.keys,{}, {class: "select_state"}
+
+  .form_item
+    = f.label :city, "市町村"
+    = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys"}
+
+  .form_item.avatar_field
+    = f.label :avatar do
+      = image_tag("hito.jpg", class: "avatar_preview")
+
+    = f.file_field :avatar, class: "display_none"
+
+  .form_item
+    = f.label :profile , "自己紹介文"
+    = f.text_area :profile
+
+
+
+  .form_owner
+    .form_item.user_type
+      = f.label :owner, "オーナーとして登録"
+      = f.check_box :owner
+
+    .hidden_item
+      = f.fields_for :owner_profile,@user.owner_profile || @user.build_owner_profile  do |o|
+        .form_item
+          = o.label :category, "オーナーのタイプ"
+          = o.select :category, OwnerProfile.categories.keys, prompt: "タイプを選択してください"
+
+
+  .form_manager
+    .form_item.user_type
+      = f.label :manager, "経営者として登録"
+      = f.check_box :manager
+
+    .hidden_item
+      = f.fields_for :manager_profile,@user.manager_profile || @user.build_manager_profile  do |m|
+        .form_item
+          = m.label :category, "経営者のタイプ"
+          = m.select :category, ManagerProfile.categories.keys, prompt: "タイプを選択してください"
+
+        .form_item
+          = m.label :phone_number, "電話番号"
+          = m.number_field :phone_number
+
+
+  = f.submit "変更を保存", class: "btn btn-primary"

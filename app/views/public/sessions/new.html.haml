@@ -1,0 +1,15 @@
+.user_title
+  ログイン画面
+= form_for(:session,url: login_path,html: {class: 'logform'} ) do |f|
+  .form-item
+    = f.email_field :email,placeholder: "Email Address"
+  .form-item
+    = f.password_field :password, placeholder: "Password"
+  .checkbox
+    %label
+      =f.check_box :remember_me, id: "user_remenber_me"
+      Remember me
+  .button-panel
+    =f.submit "Sign In", class: "button"
+.form-footer
+  = link_to "新規アカウント作成", new_user_path
