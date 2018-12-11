@@ -15,3 +15,11 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+config/secrets.yml
+.vscode/settings.json
+/public/uploads
+/public/assets
+/spec/tmp
+capybara-*.html
+.rspec
+config/initializers/secret_token.rb
