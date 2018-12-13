@@ -84,7 +84,17 @@
         = fo.label :amount , "量"
         = fo.text_area :amount
 
+  - 3.times do |n|
+    = f.fields_for :tags,@item.tags[n] || @item.tags.build  do |t|
+      %span.form_item
+        =t.label :name ,"タグ名"
+        =t.text_field :name
 
 
 
-  = f.submit "資産を登録する", class: "btn btn-primary"
+
+
+
+
+  .form_item
+    = f.submit "資産を登録する", class: "btn btn-primary"

@@ -1,7 +1,6 @@
 $(document).on('turbolinks:load', function(){
 
   $(document).on("change",".file" ,function(e) {
-    console.log("ss")
     var file = e.target.files[0];
     var reader = new FileReader();
     var target = $(this).parent(".picture_field").find("img")

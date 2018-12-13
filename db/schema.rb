@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181211050828) do
+ActiveRecord::Schema.define(version: 20181213024258) do
 
   create_table "building_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "about",      limit: 65535,                 null: false
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 20181211050828) do
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
+  create_table "items_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "item_id",    null: false
+    t.integer  "tag_id",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id", "tag_id"], name: "index_items_tags_on_item_id_and_tag_id", unique: true, using: :btree
+    t.index ["item_id"], name: "index_items_tags_on_item_id", using: :btree
+    t.index ["tag_id"], name: "index_items_tags_on_tag_id", using: :btree
+  end
+
   create_table "manager_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "category",     null: false
     t.integer  "user_id",      null: false
@@ -91,6 +101,13 @@ ActiveRecord::Schema.define(version: 20181211050828) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_pictures_on_item_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",                       null: false
+    t.boolean  "official",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "usages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -122,6 +139,8 @@ ActiveRecord::Schema.define(version: 20181211050828) do
   add_foreign_key "item_usages", "items"
   add_foreign_key "item_usages", "usages"
   add_foreign_key "items", "users"
+  add_foreign_key "items_tags", "items"
+  add_foreign_key "items_tags", "tags"
   add_foreign_key "manager_profiles", "users"
   add_foreign_key "owner_profiles", "users"
   add_foreign_key "pictures", "items"

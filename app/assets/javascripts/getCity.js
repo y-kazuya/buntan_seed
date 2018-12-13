@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function(){
   }
 
 
-  if (location.pathname.includes('users') ||location.pathname.includes('items') ){
+  if ($(".select_citys").length ){
     startCity()
   }
 

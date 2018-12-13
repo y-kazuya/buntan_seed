@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function(){
 
-  if (location.pathname.includes('users')){
+  if ($(".user_type").length){
     var ownerTarget = $(".user_type").find("input")[1]
     var managerTarget = $(".user_type").find("input")[3]
     console.log(ownerTarget)
