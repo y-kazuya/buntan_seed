@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     resources :items
   end
 
-
   namespace :api, {format: 'json'} do
   end
 

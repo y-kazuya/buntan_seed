@@ -7,9 +7,12 @@ class Item < ApplicationRecord
   has_many :usages, through: :item_usages
   has_many :pictures, dependent: :destroy
 
+  has_and_belongs_to_many :tags
+
   accepts_nested_attributes_for :building_info, reject_if: :reject_build
   accepts_nested_attributes_for :food_info, reject_if: :reject_food
   accepts_nested_attributes_for :pictures, reject_if: :reject_blank
+  accepts_nested_attributes_for :tags, reject_if: :tag_blank
 
   enum category: {土地: 1, 建物: 2, 廃棄食材: 3, その他: 4}
   enum status: {審査: 0, 公開: 1, 下書き: 2}
@@ -51,6 +54,10 @@ class Item < ApplicationRecord
 
     def reject_food
       self.category != "廃棄食材"
+    end
+
+    def tag_blank(attributed)
+      attributed['name'].blank?
     end
 
     def need_usage
