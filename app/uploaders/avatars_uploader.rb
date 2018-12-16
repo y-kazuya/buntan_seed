@@ -6,12 +6,11 @@ class AvatarsUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
 
 
-  # if Rails.env == "development"
-  #   storage :file
-  # else
-  #   storage :fog
-  # end
-  storage :file
+  if Rails.env == "development"
+    storage :file
+  else
+    storage :fog
+  end
 
    # Large size
    process resize_to_limit: [640, 640]
