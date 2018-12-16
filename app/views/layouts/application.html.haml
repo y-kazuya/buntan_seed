@@ -14,7 +14,10 @@
         = full_name(current_user)
         = link_to "ログアウト", logout_path, method: :delete
         = link_to "ユーザー設定へ", edit_user_path(current_user.id)
-        = link_to "資産を登録する", new_item_path
+        - if  current_user.items == []
+          = link_to "資産を登録する", new_item_path
+        -else
+          = link_to "資産を管理する", items_path
       - else
         = link_to "新規登録", new_user_path
         = link_to "ログイン", login_path

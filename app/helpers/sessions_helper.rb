@@ -44,6 +44,11 @@ module SessionsHelper
     user == current_user
   end
 
+  def correct_user?(item) #そのitemの持ち主が今のユーザーの場合のみtrue
+    return false unless current_user
+    item.user.id == current_user.id
+  end
+
   # 記憶したURL (もしくはデフォルト値) にリダイレクト
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
