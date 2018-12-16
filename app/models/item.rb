@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  attr_accessor :before_tags
+  include TagsHelper
   belongs_to :user
   has_one :building_info, dependent: :destroy
   has_one :food_info, dependent: :destroy
@@ -15,7 +17,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :tags, reject_if: :tag_blank
 
   enum category: {土地: 1, 建物: 2, 廃棄食材: 3, その他: 4}
-  enum status: {審査: 0, 公開: 1, 下書き: 2}
+  enum status: {審査中: 0, 公開中: 1, 下書き: 2}
   enum sub_land_category: {山: 1, 畑: 2, 空き地: 3}
   enum sub_build_category: {空家: 10, 小屋: 11, 公共施設跡: 12, 商業施設跡: 13}
 
@@ -42,6 +44,44 @@ class Item < ApplicationRecord
   validate :need_picture
   validate :check_picture_count
 
+
+  before_destroy :delete_unuse_tag
+  after_destroy :delete_unuse_tag
+
+
+  def need_food_info?
+    self.category == "廃棄食材"
+  end
+
+  def food_info_raw
+    food_info.raw
+  end
+
+  def food_info_amount
+    food_info.amount
+  end
+
+  def need_building_info?
+    self.category == "建物"
+  end
+
+  def building_info_about
+    building_info.about
+  end
+
+  def building_info_status
+    building_info.status
+  end
+
+  def building_info_price
+    building_info.price
+  end
+
+  def building_info_rent
+    building_info.rent
+  end
+
+
   private
     def reject_build
       self.category != "建物"
@@ -60,6 +100,10 @@ class Item < ApplicationRecord
       attributed['name'].blank?
     end
 
+    def same_tag(attributed)
+      binding.pry
+    end
+
     def need_usage
       if self.category == "建物"
         errors[:base] << '使用可能用途を一つ以上選択してください' if self.usages.length == 0
@@ -74,6 +118,8 @@ class Item < ApplicationRecord
       errors[:base] << '写真は5枚以下にする必要があります' if self.pictures.length >5
     end
 
-
+    def destroy_items_tags
+      ItemsTag.where(item_id: self.id).destroy_all
+    end
 
 end

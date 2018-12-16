@@ -1,0 +1,24 @@
+個人資産一覧
+= link_to "資産を追加する", new_item_path
+- @items.each do |item|
+  .current_user-item
+    .current_user-item__content
+      = item.title
+    .current_user-item__bottun
+      = link_to "詳細へ", item_path(item.id)
+
+    .current_user-item__content
+      = item.category
+    .current_user-item__content
+      = full_address(item)
+    .current_user-item__content
+      = item.status
+
+    .current_user-item__picture
+      = item_main_picutre(item)
+
+    - if item.tags.length
+      .current_user-item__content
+        タグ：
+        -item.tags.each do |tag|
+          =tag.name

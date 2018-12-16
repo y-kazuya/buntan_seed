@@ -1,0 +1,78 @@
+資産詳細ページ
+
+.show-item
+  - if correct_user?(@item)
+    .show-item--status
+      = @item.status
+    .show-item--bottun
+      =link_to "編集する" ,edit_item_path(@item.id)
+      =link_to "削除する", item_path(@item.id), method: :delete,data: { confirm: "削除してよろしいですか？"}
+
+  .show-item--content
+    資産の名称:
+    = @item.title
+  .show-item--content
+    資産のカテゴリー:
+    = @item.category
+  - if @item.sub_category
+    .show-item--content
+      資産のサブカテゴリー:
+      = @item.sub_category
+
+  - @item.pictures.each do |pic|
+    .show-item--picture_area
+      .show-item--picture_area__picture
+        = image_tag(pic.content_url(:thumb))
+      .show-item--picture_area__comment
+        = pic.comment
+
+  .show-item--content
+    資産の説明:
+    = @item.profile
+
+  - if @item.remark
+    .show-item--content
+      資産の備考:
+      = @item.remark
+
+  .show-item--content
+    資産の所在地:
+    = full_address(@item)
+
+  - if @item.comment
+    .show-item--content
+      オーナーからのコメント:
+      = @item.comment
+
+  -if @item.need_food_info?
+    .show-item--content
+      原材料:
+      = @item.food_info_raw
+
+    - if @item.food_info_amount
+      .show-item--content
+        量:
+        = @item.food_info_amount
+
+  -if @item.need_building_info?
+    .show-item--content
+      建物の特徴:
+      = @item.building_info_about
+    .show-item--content
+      建物の状態:
+      = @item.building_info_status
+
+    .show-item--content
+      建物の値段:
+      = @item.building_info_price
+
+
+      賃貸/販売:
+      = rent_type(@item)
+
+  - if @item.tags.length
+    .show-item--content
+      タグ：
+      -@item.tags.each do |tag|
+        =tag.name
+
