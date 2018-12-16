@@ -70,3 +70,5 @@ gem 'faker'
 gem 'haml-rails'
 gem 'erb2haml'
 gem 'bcrypt',         '3.1.12'
+
+gem 'fog-aws'
