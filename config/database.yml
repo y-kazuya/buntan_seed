@@ -51,4 +51,5 @@ production:
   <<: *default
   database: buntan_seed_production
   username: buntan_seed
-  password: <%= ENV['BUNTAN_SEED_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
