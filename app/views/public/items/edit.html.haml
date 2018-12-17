@@ -89,7 +89,8 @@
     = f.fields_for :tags,@item.tags[n] || @item.tags.build  do |t|
       %span.form_item
         =t.label :name ,"タグ名"
-        =t.text_field :name
+        =t.text_field :name, class: "tag_field"
+        .tag_summarys
 
 
   .form_item

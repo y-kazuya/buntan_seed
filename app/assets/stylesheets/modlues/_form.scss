@@ -85,3 +85,19 @@ label{
   top: 80%;
   left: 110%;
 }
+
+
+.tag_summary_title{
+  margin: 0 20px;
+}
+
+.tag_summary{
+  cursor: pointer;
+  cursor: hand;
+  margin-right: 20px;
+}
+
+.tag_summary:hover{
+  color: lightblue;
+
+}
