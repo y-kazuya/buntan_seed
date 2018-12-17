@@ -48,6 +48,20 @@ $(document).on('turbolinks:load', function(){
     }
   }
 
+  function appendTagSummary(tag){
+    var html =`<span class="tag_summary">${tag.name}</span>`
+
+    return html
+
+  }
+
+
+
+
+
+
+
+
   $("#item_category").on("change", function(){
     checkCategory()
   })
@@ -55,6 +69,38 @@ $(document).on('turbolinks:load', function(){
   if (location.pathname.includes('items')){
     checkCategory()
   }
+
+
+  $(".tag_field").on("keyup",function(){
+    let keyword = $(this).val()
+    let target = $(this).siblings(".tag_summarys")
+    $(".tag_summarys").empty()
+    if (keyword !== "") {
+      $.ajax({
+        url: "/api/get_tags",
+        type: "GET",
+        data: {keyword: keyword},
+        dataType: 'json',
+      })
+      .done(function(data){
+        if (data.length !== 0){
+          target.append(`<span class="tag_summary_title">類似のタグ</span>`)
+          data.forEach(function(data){
+            let html = appendTagSummary(data)
+            target.append(html)
+          });
+        }
+      })
+      .fail(function() {
+      });
+    }
+  })
+
+  $(document).on("click",".tag_summary", function(){
+    let target = $(this).parent(".tag_summarys").siblings(".tag_field")
+    console.log($(this).text())
+    target.val($(this).text())
+  })
 
 
 });

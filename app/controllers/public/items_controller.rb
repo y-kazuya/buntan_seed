@@ -42,7 +42,7 @@ class Public::ItemsController < Public::ApplicationController
   end
 
   def update
-
+    @item.status = "審査中"
     if @item.update(item_update_params)
       update_tag
       redirect_to item_path(@item.id), alert: 'Item was successfully Update'

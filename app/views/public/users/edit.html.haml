@@ -24,7 +24,7 @@
 
   .form_item.avatar_field
     = f.label :avatar do
-      = image_tag("hito.jpg", class: "avatar_preview")
+      = image_tag(@user.avatar_url(:thumb), class: "avatar_preview")
 
     = f.file_field :avatar, class: "display_none"
 

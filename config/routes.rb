@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, {format: 'json'} do
+    get    "/get_tags", to: "get_tags#index"
   end
 
 end
