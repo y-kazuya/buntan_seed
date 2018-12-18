@@ -1,0 +1,26 @@
+資産管理ページ
+= link_to "資産を追加する",new_admin_item_path
+.waitng-items
+  審査待ち資産一覧
+  = "(#{@wait_items.length}件)"
+  - @wait_items.each do |item|
+    .waiting-item
+      = link_to item_path(item.id) do
+        = "名前：#{item.title} "
+        = item_main_picutre(item)
+    .waiting-bottun
+      = link_to "資産削除", admin_item_path(item.id), method: :delete,data: { confirm: "本当にこの資産を削除しますか？"}
+      = link_to "公開中にする", toggle_status_admin_item_path(item.id), method: :patch, data: { confirm: "この資産を公開中にしますか？"}
+
+.public-items
+  公開中資産一覧
+  = "(#{@items.length}件)"
+  - @items.each do |item|
+    .waiting-item
+      = link_to item_path(item.id) do
+        = "名前：#{item.title} "
+        = item_main_picutre(item)
+    .waiting-bottun
+      = link_to "資産削除", admin_item_path(item.id), method: :delete,data: { confirm: "本当にこの資産を削除しますか？"}
+      = link_to "審査中にする", toggle_status_admin_item_path(item.id), method: :patch, data: { confirm: "この資産を審査中にしますか？"}
+

@@ -7,6 +7,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    - if admin_user?
+      .admin_hedder
+        管理者用ヘッダー
+        =link_to "ユーザー管理", admin_users_path
+        = link_to "資産管理", admin_items_path
+        = link_to "使用可能用途一覧", admin_usages_path
+        = link_to "タグ管理",admin_tags_path
     .hedder
       = link_to "トップページへ", root_path
       - if current_user

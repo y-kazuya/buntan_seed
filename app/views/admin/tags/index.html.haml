@@ -1,0 +1,23 @@
+.tags
+  公式タグ一覧
+-@of_tags.each do |tag|
+  .tag
+    =tag.name
+    ="#{tag.items.length}件の建物で使われています"
+    = link_to "削除", admin_tag_path(tag.id), method: :delete,data: { confirm: "本当に削除しますか？"}
+
+= form_for @tag, url: admin_tags_path do |f|
+  .form_item.need_item
+    = f.label :name, "タグ名"
+    = f.text_field :name, class: 'form-control'
+
+  = f.submit "公式タグ追加", class: "btn btn-primary"
+
+.tags
+  非公式タグ一覧
+-@tags.each do |tag|
+  .tag
+    =tag.name
+    ="#{tag.items.length}件の建物で使われています"
+    = link_to "削除", admin_tag_path(tag.id), method: :delete,data: { confirm: "本当に削除しますか？"}
+

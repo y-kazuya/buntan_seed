@@ -3,6 +3,22 @@ Rails.application.routes.draw do
   root "public/pages#top"
 
   namespace :admin do
+
+    resources :users do
+      member do
+        patch :toggle_admin
+      end
+    end
+
+    resources :items do
+      member do
+        patch :toggle_status
+      end
+    end
+
+    resources :tags
+    resources :usages
+
   end
 
   scope module: :public do

@@ -3,6 +3,6 @@ class Tag < ApplicationRecord
 
   has_many :items_tags
 
-
+  validates :name, presence: true
 
 end

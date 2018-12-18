@@ -16,4 +16,8 @@ module UsersHelper
     end
   end
 
+  def admin_user?(user = current_user)
+    return false unless current_user
+    user.admin?
+  end
 end
