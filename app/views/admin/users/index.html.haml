@@ -1,0 +1,24 @@
+
+.admin_users
+  アドミンユーザー一覧
+  = link_to "管理者ユーザーを追加する",new_admin_user_path
+  - @admins.each do |admin|
+    .admin-user
+      = link_to user_path(admin.id) do
+        = "名前：#{full_name(admin)} "
+      = "メールアドレス：#{admin.email} "
+    .admin-bottun
+      = link_to "アカウント削除", admin_user_path(admin.id), method: :delete,data: { confirm: "本当にこのアカウントを削除しますか？"}
+      = link_to "アドミン解除", toggle_admin_admin_user_path(admin.id), method: :patch, data: { confirm: "このアカウントの管理者権限を剥奪しますか？"}
+
+.normal_users
+  一般ユーザー一覧
+  = "(#{@users.length}人}"
+  -@users.each do |user|
+    .normal_user
+      = link_to user_path(user.id) do
+        = "・#{full_name(user)}"
+      = user.email
+    .admin-bottun
+      = link_to "アカウント削除", admin_user_path(user.id), method: :delete,data: { confirm: "本当にこのアカウントを削除しますか？"}
+      = link_to "アドミン権限付与" , toggle_admin_admin_user_path(user.id), method: :patch, data: { confirm: "このアカウントに管理者権限を付与しますか？"}

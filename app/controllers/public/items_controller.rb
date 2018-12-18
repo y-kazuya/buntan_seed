@@ -1,5 +1,5 @@
 class Public::ItemsController < Public::ApplicationController
-  include TagsHelper
+
   before_action :logged_in_user, only: [:index, :new, :edit, :create, :update, :destroy]
   before_action :set_before_tags ,only: [:update]
   before_action :set_item, only: [:show, :edit,:update, :destroy]
@@ -15,7 +15,7 @@ class Public::ItemsController < Public::ApplicationController
 
   def show
     current_user ? current_user_id = current_user.id : current_user_id = 0
-    redirect_to root_path if @item.user.id != current_user_id && @item.status != "公開中"
+    redirect_to root_path if @item.user.id != current_user_id && @item.status != "公開中" && !admin_user?
 
   end
 

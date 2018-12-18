@@ -1,5 +1,7 @@
 class Public::UsersController < Public::ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
   def new
+    redirect_to root_path if current_user
     @user = User.new
   end
 

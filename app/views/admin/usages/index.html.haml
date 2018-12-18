@@ -1,0 +1,14 @@
+.usages
+  資産の使用可能用途一覧（資産タイプが建物の場合のみ選べるように
+-@usages.each do |usage|
+  .usage
+    =usage.name
+    ="#{usage.items.length}件の建物で使われています"
+    = link_to "削除", admin_usage_path(usage.id), method: :delete,data: { confirm: "本当に削除しますか？"}
+
+= form_for @usage, url: admin_usages_path do |f|
+  .form_item.need_item
+    = f.label :name, "用途名"
+    = f.text_field :name, class: 'form-control'
+
+  = f.submit "用途保存", class: "btn btn-primary"
