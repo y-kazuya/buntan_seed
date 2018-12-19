@@ -5,19 +5,19 @@
     .show-item--status
       = @item.status
     .show-item--bottun
-      =link_to "編集する" ,edit_item_path(@item.id)
-      =link_to "削除する", item_path(@item.id), method: :delete,data: { confirm: "削除してよろしいですか？"}
+      =link_to "編集する" ,edit_item_path(@item)
+      =link_to "削除する", item_path(@item), method: :delete,data: { confirm: "削除してよろしいですか？"}
 
   .show-item--content
     資産の名称:
     = @item.title
   .show-item--content
     資産のカテゴリー:
-    = @item.category
+    = @item.category_name
   - if @item.sub_category
     .show-item--content
       資産のサブカテゴリー:
-      = @item.sub_category
+      = @item.sub_category_name
 
   - @item.pictures.each do |pic|
     .show-item--picture_area

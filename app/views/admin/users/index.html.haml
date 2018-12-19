@@ -16,9 +16,9 @@
   = "(#{@users.length}人}"
   -@users.each do |user|
     .normal_user
-      = link_to user_path(user.id) do
+      = link_to user_path(user) do
         = "・#{full_name(user)}"
       = user.email
     .admin-bottun
-      = link_to "アカウント削除", admin_user_path(user.id), method: :delete,data: { confirm: "本当にこのアカウントを削除しますか？"}
-      = link_to "アドミン権限付与" , toggle_admin_admin_user_path(user.id), method: :patch, data: { confirm: "このアカウントに管理者権限を付与しますか？"}
+      = link_to "アカウント削除", admin_user_path(user), method: :delete,data: { confirm: "本当にこのアカウントを削除しますか？"}
+      = link_to "アドミン権限付与" , toggle_admin_admin_user_path(user), method: :patch, data: { confirm: "このアカウントに管理者権限を付与しますか？"}

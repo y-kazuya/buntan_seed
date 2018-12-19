@@ -5,10 +5,10 @@
     .current_user-item__content
       = item.title
     .current_user-item__bottun
-      = link_to "詳細へ", item_path(item.id)
+      = link_to "詳細へ", item_path(item)
 
     .current_user-item__content
-      = item.category
+      = item.category_name
     .current_user-item__content
       = full_address(item)
     .current_user-item__content

@@ -9,9 +9,13 @@
 
   .form_item.need_item.need_item
     = f.label :category, "タイプは?"
-    = f.select :category,Item.categories.keys,{}, class: 'form-control'
+    = f.collection_radio_buttons :category_id, Category.all, :id, :name,{},class: "item_category"
+
 
   .form_item#sub_category_form.need_item
+    - if @item.sub_category
+      = f.label :sub_category_ategory, "サブカテゴリーは?"
+      = f.collection_radio_buttons :sub_category_id, SubCategory.where(category_id: @item.category.id), :id, :name,{},class: "item_category"
 
 
 

@@ -40,13 +40,13 @@ class Admin::ItemsController < Admin::ApplicationController
   def item_params
     params.require(:item).permit(
       :title,
-      :category,
+      :category_id,
       :profile,
       :remark,
       :state,
       :city,
       :comment,
-      :sub_category,
+      :sub_category_id,
       { :usage_ids=> [] },
       building_info_attributes: [:about,:status,:price,:rent],
       food_info_attributes: [:raw, :amount],

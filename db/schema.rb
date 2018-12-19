@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181213024258) do
+ActiveRecord::Schema.define(version: 20181219072514) do
 
   create_table "building_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "about",      limit: 65535,                 null: false
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20181213024258) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["item_id"], name: "index_building_infos_on_item_id", using: :btree
+  end
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",       null: false
+    t.string   "path_name",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "food_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -52,18 +59,21 @@ ActiveRecord::Schema.define(version: 20181213024258) do
   end
 
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title",                      null: false
-    t.integer  "category",                   null: false
-    t.integer  "status",                     null: false
-    t.text     "profile",      limit: 65535, null: false
-    t.text     "remark",       limit: 65535
-    t.integer  "state",                      null: false
-    t.string   "city",                       null: false
-    t.text     "comment",      limit: 65535
-    t.integer  "user_id",                    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "sub_category"
+    t.string   "title",                         null: false
+    t.integer  "status",                        null: false
+    t.text     "profile",         limit: 65535, null: false
+    t.text     "remark",          limit: 65535
+    t.integer  "state",                         null: false
+    t.string   "city",                          null: false
+    t.text     "comment",         limit: 65535
+    t.integer  "user_id",                       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "path_name"
+    t.integer  "category_id"
+    t.integer  "sub_category_id"
+    t.index ["category_id"], name: "index_items_on_category_id", using: :btree
+    t.index ["sub_category_id"], name: "index_items_on_sub_category_id", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
@@ -103,6 +113,15 @@ ActiveRecord::Schema.define(version: 20181213024258) do
     t.index ["item_id"], name: "index_pictures_on_item_id", using: :btree
   end
 
+  create_table "sub_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",        null: false
+    t.string   "path_name",   null: false
+    t.integer  "category_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_sub_categories_on_category_id", using: :btree
+  end
+
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                       null: false
     t.boolean  "official",   default: false
@@ -138,10 +157,13 @@ ActiveRecord::Schema.define(version: 20181213024258) do
   add_foreign_key "images", "items"
   add_foreign_key "item_usages", "items"
   add_foreign_key "item_usages", "usages"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "sub_categories"
   add_foreign_key "items", "users"
   add_foreign_key "items_tags", "items"
   add_foreign_key "items_tags", "tags"
   add_foreign_key "manager_profiles", "users"
   add_foreign_key "owner_profiles", "users"
   add_foreign_key "pictures", "items"
+  add_foreign_key "sub_categories", "categories"
 end

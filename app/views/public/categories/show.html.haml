@@ -1,0 +1,10 @@
+-@categories.each do |cate|
+  = link_to "#{cate.name}", category_path(cate)
+
+.category--title
+  ="#{@category.name}の資産"
+
+- @items.each do |item|
+  = link_to item_path(item) do
+    = item.title
+    =item_main_picutre(item)
