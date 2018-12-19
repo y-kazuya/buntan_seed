@@ -1,40 +1,42 @@
 $(document).on('turbolinks:load', function(){
 
-  function checkCategory(){
-    let category = $("#item_category").val()
-    $("#sub_category_form").empty()
+  function checkCategory(category){
+    console.log(category)
     $(".hidden_item").css("display", "none")
-    if (category == "土地" || category == "建物"){
-      appendSubCategory(category)
-    }
     if (category == "廃棄食材" || category == "建物"){
+
       visibleNextForm(category)
     }
-
   }
 
 
   function buildHtml(category){
     let html = ``
-    if(category == "建物"){
-      html = `<label for="item_sub_category">サブカテゴリーは？</label>
-        <select class="form-control" name="item[sub_category]" id="item_sub_category"><option value="10">空家</option>
-        <option value="11">小屋</option>
-        <option value="12">公共施設跡</option>
-        <option value="13">商業施設跡</option></select>`
-    }
-    else if(category == "土地"){
-      html = `<label for="item_sub_category">サブカテゴリーは？</label>
-        <select class="form-control" name="item[sub_category]" id="item_sub_category"><option value="1">山</option>
-        <option value="2">畑</option>
-        <option value="3">空き地</option></select>`
-    }
+    html = `<input type="radio" value="${category.id}" name="item[sub_category_id]" id="item_sub_category_id_${category.id}">
+            <label for="item_sub_category_id_${category.id}">${category.name}</label>`
     return html
   }
 
   function appendSubCategory(category){
-    var target = $("#sub_category_form")
-    target.append(buildHtml(category))
+    $.ajax({
+      url: "/api/get_sub_cates",
+      type: "GET",
+      data: {category: category},
+      dataType: 'json',
+    })
+    .done(function(data){
+      console.log(data)
+      if (data.length !== 0){
+        var target = $("#sub_category_form")
+        target.append(`<input type="hidden" name="item[sub_category_id]" value>`)
+        data.forEach(function(cate){
+          let html = buildHtml(cate)
+          target.append(html)
+        });
+      }
+    })
+    .fail(function() {
+    });
   }
 
 
@@ -62,12 +64,18 @@ $(document).on('turbolinks:load', function(){
 
 
 
-  $("#item_category").on("change", function(){
-    checkCategory()
+  $(".item_category").on("change", function(){
+    let category = $("input[name='item[category_id]']:checked").next().text();
+    $("#sub_category_form").empty()
+    checkCategory(category)
+    appendSubCategory(category)
+
   })
 
   if (location.pathname.includes('items')){
-    checkCategory()
+    let category = $("input[name='item[category_id]']:checked").next().text();
+    checkCategory(category)
+
   }
 
 

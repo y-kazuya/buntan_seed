@@ -20,7 +20,7 @@
         = image_tag(set_avatar(current_user, :thumb), class: "avatar_thumb")
         = full_name(current_user)
         = link_to "ログアウト", logout_path, method: :delete
-        = link_to "ユーザー設定へ", edit_user_path(current_user.id)
+        = link_to "ユーザー設定へ", edit_user_path(current_user)
         - if  current_user.items == []
           = link_to "資産を登録する", new_item_path
         -else

@@ -20,7 +20,7 @@ class Public::ItemsController < Public::ApplicationController
   end
 
   def new
-    return redirect_to edit_user_path(current_user.id) unless current_user.owner
+    return redirect_to edit_user_path(current_user) unless current_user.owner
     @item = Item.new
     @item.pictures.build
     3.times{@item.tags.build}
@@ -43,9 +43,11 @@ class Public::ItemsController < Public::ApplicationController
 
   def update
     @item.status = "審査中"
+    admin_user? ? @item.status = "公開中" : @item.status = "審査中"
+    @item.sub_category = nil unless params.require("item")[:sub_category_id]
     if @item.update(item_update_params)
       update_tag
-      redirect_to item_path(@item.id), alert: 'Item was successfully Update'
+      redirect_to item_path(@item), alert: 'Item was successfully Update'
     else
       render :edit
     end
@@ -75,13 +77,13 @@ class Public::ItemsController < Public::ApplicationController
   def item_params
     params.require(:item).permit(
       :title,
-      :category,
+      :category_id,
       :profile,
       :remark,
       :state,
       :city,
       :comment,
-      :sub_category,
+      :sub_category_id,
       { :usage_ids=> [] },
       building_info_attributes: [:about,:status,:price,:rent],
       food_info_attributes: [:raw, :amount],
@@ -93,13 +95,13 @@ class Public::ItemsController < Public::ApplicationController
   def item_update_params
     params.require(:item).permit(
       :title,
-      :category,
+      :category_id,
       :profile,
       :remark,
       :state,
       :city,
       :comment,
-      :sub_category,
+      :sub_category_id,
       { :usage_ids=> [] },
       building_info_attributes: [:about,:status,:price,:rent, :id],
       food_info_attributes: [:raw, :amount, :id],

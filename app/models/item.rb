@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   attr_accessor :before_tags
   include TagsHelper
   belongs_to :user
+  belongs_to :category
+  belongs_to :sub_category ,optional: true
+
   has_one :building_info, dependent: :destroy
   has_one :food_info, dependent: :destroy
   has_many :images, dependent: :destroy
@@ -16,10 +19,8 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :pictures, reject_if: :reject_blank
   accepts_nested_attributes_for :tags, reject_if: :tag_blank
 
-  enum category: {土地: 1, 建物: 2, 廃棄食材: 3, その他: 4}
   enum status: {審査中: 0, 公開中: 1, 下書き: 2}
-  enum sub_land_category: {山: 1, 畑: 2, 空き地: 3}
-  enum sub_build_category: {空家: 10, 小屋: 11, 公共施設跡: 12, 商業施設跡: 13}
+
 
   enum state: {
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -33,12 +34,17 @@ class Item < ApplicationRecord
   }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
-  validates :category, presence: true
+
   validates :profile, presence: true, length: { maximum: 800 }
   validates :remark,:comment,
             length: { maximum: 800 }
   validates :state,:city,
             presence: true
+
+
+  validates :sub_category_id , presence: true, if: :need_sub_categroy
+
+
 
   validate :need_usage
   validate :need_picture
@@ -48,9 +54,21 @@ class Item < ApplicationRecord
   before_destroy :delete_unuse_tag
   after_destroy :delete_unuse_tag
 
+  before_save :make_path_name
+
+  def category_name
+    return unless self.category
+    self.category.name
+  end
+
+  def sub_category_name
+    return  unless self.sub_category
+    self.sub_category.name
+  end
 
   def need_food_info?
-    self.category == "廃棄食材"
+    return false unless self.category_name
+    self.category_name == "廃棄食材"
   end
 
   def food_info_raw
@@ -62,7 +80,7 @@ class Item < ApplicationRecord
   end
 
   def need_building_info?
-    self.category == "建物"
+    self.category_name == "建物"
   end
 
   def building_info_about
@@ -81,10 +99,31 @@ class Item < ApplicationRecord
     building_info.rent
   end
 
+  # def to_param
+  #   id
+  # end
+
+  # def find_by!(arg, *args)
+  #   where(arg, *args).take!
+  # rescue ::RangeError
+  #   raise RecordNotFound.new("Couldn't find #{@klass.name} with an out of range value",
+  #                            @klass.name)
+  # end
+
+  def make_path_name
+    self.path_name = ".#{self.title}"
+  end
+
+  def need_sub_categroy
+    need_sub_cateroy_categories = ["建物", "土地"]
+
+    return need_sub_cateroy_categories.include?(self.category_name)
+  end
+
 
   private
     def reject_build
-      self.category != "建物"
+      self.category_name != "建物"
     end
 
     def reject_blank(attributed)
@@ -93,7 +132,7 @@ class Item < ApplicationRecord
 
 
     def reject_food
-      self.category != "廃棄食材"
+      self.category_name != "廃棄食材"
     end
 
     def tag_blank(attributed)
@@ -101,11 +140,10 @@ class Item < ApplicationRecord
     end
 
     def same_tag(attributed)
-      binding.pry
     end
 
     def need_usage
-      if self.category == "建物"
+      if self.category_name == "建物"
         errors[:base] << '使用可能用途を一つ以上選択してください' if self.usages.length == 0
       end
     end
@@ -121,5 +159,10 @@ class Item < ApplicationRecord
     def destroy_items_tags
       ItemsTag.where(item_id: self.id).destroy_all
     end
+
+
+
+
+
 
 end
