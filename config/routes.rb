@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
     resources :items do
       member do
-        patch :toggle_status
+        patch :confirm
+        patch :reject
       end
     end
 
@@ -31,7 +32,11 @@ Rails.application.routes.draw do
     post   '/login',   to: 'sessions#create'
     delete '/logout',  to: 'sessions#destroy'
     resources :users
-    resources :items
+    resources :items do
+      resources :chat do
+        resources :messages, only: [:create, :update]
+      end
+    end
     resources :categories, only: [:show],param: :path_name
   end
 

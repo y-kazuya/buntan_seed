@@ -1,5 +1,7 @@
 class Admin::ItemsController < Admin::ApplicationController
 
+  before_action :set_item, only: [:confirm, :reject, :destroy]
+
   def index
     @items = Item.where(status: 1)
     @wait_items = Item.where(status: 0)
@@ -24,19 +26,26 @@ class Admin::ItemsController < Admin::ApplicationController
     end
   end
 
-  def toggle_status
-    item = Item.find(params[:id])
-    item.status == "公開中" ? item.update(status: 0) : item.update(status: 1)
+  def confirm
+    @item.update(status: 1, reject_text: nil)
+    redirect_to :back
+  end
+
+  def reject
+    @item.update(status: 3, reject_text: params["item"]["reject_text"])
     redirect_to :back
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    @item.destroy
     redirect_to :back
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
   def item_params
     params.require(:item).permit(
       :title,

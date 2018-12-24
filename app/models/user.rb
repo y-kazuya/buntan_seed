@@ -4,6 +4,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarsUploader
 
   has_many :items, dependent: :destroy
+  has_many :item_contacts, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_one :owner_profile, dependent: :destroy
   has_one :manager_profile, dependent: :destroy
 
@@ -84,6 +86,14 @@ class User < ApplicationRecord
 
   def manager_phone_number
     manager_profile.phone_number || nil
+  end
+
+  def yet_look_message_items
+    Item.joins(item_contacts: [:messages]).where(user_id: self.id).distinct.where("looked = ?", "0")
+  end
+
+  def reject_items
+    Item.where(user_id: self.id, status: 3)
   end
 
   private

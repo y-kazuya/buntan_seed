@@ -27,7 +27,7 @@ class Public::UsersController < Public::ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      redirect_to root_url
+      redirect_back_or(root_path)
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

@@ -8,7 +8,7 @@ module UsersHelper
     "#{user.state} #{user.city}"
   end
 
-  def set_avatar(user, type= ":thumb")
+  def set_avatar(user, type= :thumb)
     if user.avatar.file
       return user.avatar_url(type)
     else
@@ -19,5 +19,10 @@ module UsersHelper
   def admin_user?(user = current_user)
     return false unless current_user
     user.admin?
+  end
+
+  def correct_user?(item)
+    return false unless current_user
+    item.user.id == current_user.id
   end
 end

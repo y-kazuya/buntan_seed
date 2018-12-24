@@ -34,6 +34,5 @@ $(document).on('turbolinks:load', function(){
 
   $(document).on("click","#remove_PF", function(){
     $(this).parent(".picture_field").remove()
-    console.log("ss")
   })
 });

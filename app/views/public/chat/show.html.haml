@@ -1,0 +1,54 @@
+対象資産問い合わせ画面
+
+.content
+  = "資産名: #{@item.title}"
+
+.content
+  = "カテゴリー: #{@item.category_name}"
+
+.content
+  = "所在地: #{full_address(@item)}"
+
+.content
+  = "資産紹介: #{@item.profile}"
+
+-if @item.remark
+  = "備考: #{@item.remark}"
+
+- @item.pictures.each do |pic|
+  .content
+    = image_tag(pic.content_url(:thumb))
+
+
+
+.messages
+  -@messages.each do |mes|
+    .message
+      .message__person
+        = link_to user_path(mes.user) do
+          = "投稿者： #{full_name(mes.user)}"
+      - if mes.text != ""
+        .message__content
+          = "本文: #{mes.text}"
+      - if mes.image.file
+        .message__image
+          = image_tag(mes.image_url(:thumb))
+
+.message__form
+  .message__form__title
+    -if owner?(@item)
+      返信する
+    - else
+      問い合わせ
+  = form_for @message, url: item_chat_messages_path(@item.id, params[:id]) do |f|
+    .form_item
+      = f.label :text, "メッセージ"
+      = f.text_field :text, class: 'form-control'
+    .form_item
+      写真を送信する
+      = f.file_field :image
+
+      = f.submit "送信する", class: "btn btn-primary"
+
+
+

@@ -8,6 +8,10 @@
       =link_to "編集する" ,edit_item_path(@item)
       =link_to "削除する", item_path(@item), method: :delete,data: { confirm: "削除してよろしいですか？"}
 
+  - if @item.reject_text && (correct_user?(@item) || admin_user?(@item))
+    .show-item--content
+      審査落ちの理由
+      = @item.reject_text
   .show-item--content
     資産の名称:
     = @item.title
@@ -75,4 +79,30 @@
       タグ：
       -@item.tags.each do |tag|
         =tag.name
+
+
+  - unless correct_user?(@item)
+    = link_to "チャットで問い合わせる", new_item_chat_path(@item)
+
+  - if owner?(@item) && @contacts.length != 0
+    .show-item--content
+      この資産に対する問い合わせ一覧
+    - @contacts.each do |chat|
+      .chat__name
+        = link_to item_chat_path(@item, chat) do
+          ="#{full_name(chat.user)}さんからの問い合わせがあります"
+        - if chat.have_yet_look_message?
+          未読メッセージあり
+
+  .show-item--content
+    この資産のオーナー
+    =link_to user_path(@item.user) do
+      = full_name(@item.user)
+    = image_tag(set_avatar(@item.user))
+
+//お知らせ表示（ヘッダー）
+//資産に対する状態が変わった（審査→ 落ちor 合格)
+//資産に対する問い合わせあり（未読の）
+
+
 

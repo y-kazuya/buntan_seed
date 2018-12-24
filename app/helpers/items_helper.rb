@@ -14,4 +14,11 @@ module ItemsHelper
       return "販売"
     end
   end
+
+  def owner?(item)
+    return false unless current_user
+    current_user.id == item.user.id
+  end
+
+
 end
