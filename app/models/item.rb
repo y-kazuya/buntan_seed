@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   has_many :item_usages, dependent: :destroy
   has_many :usages, through: :item_usages
   has_many :pictures, dependent: :destroy
+  has_many :item_contacts, dependent: :destroy
 
   has_and_belongs_to_many :tags
 
@@ -19,7 +20,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :pictures, reject_if: :reject_blank
   accepts_nested_attributes_for :tags, reject_if: :tag_blank
 
-  enum status: {審査中: 0, 公開中: 1, 下書き: 2}
+  enum status: {審査中: 0, 公開中: 1, 下書き: 2, 審査落ち:3}
 
 
   enum state: {

@@ -1,7 +1,6 @@
 $(document).on('turbolinks:load', function(){
 
   function checkCategory(category){
-    console.log(category)
     $(".hidden_item").css("display", "none")
     if (category == "廃棄食材" || category == "建物"){
 
@@ -25,7 +24,6 @@ $(document).on('turbolinks:load', function(){
       dataType: 'json',
     })
     .done(function(data){
-      console.log(data)
       if (data.length !== 0){
         var target = $("#sub_category_form")
         target.append(`<input type="hidden" name="item[sub_category_id]" value>`)
@@ -106,7 +104,6 @@ $(document).on('turbolinks:load', function(){
 
   $(document).on("click",".tag_summary", function(){
     let target = $(this).parent(".tag_summarys").siblings(".tag_field")
-    console.log($(this).text())
     target.val($(this).text())
   })
 

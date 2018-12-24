@@ -16,6 +16,14 @@ class Public::ItemsController < Public::ApplicationController
   def show
     current_user ? current_user_id = current_user.id : current_user_id = 0
     redirect_to root_path if @item.user.id != current_user_id && @item.status != "公開中" && !admin_user?
+    if owner?(@item)
+      chats = ItemContact.where(item_id: @item.id)
+      chats.each do |chat|
+        chat.destroy if chat.messages.length == 0
+      end
+    end
+
+    @contacts = ItemContact.where(item_id: @item.id)
 
   end
 
@@ -46,6 +54,7 @@ class Public::ItemsController < Public::ApplicationController
     admin_user? ? @item.status = "公開中" : @item.status = "審査中"
     @item.sub_category = nil unless params.require("item")[:sub_category_id]
     if @item.update(item_update_params)
+      @item.reject_text = nil
       update_tag
       redirect_to item_path(@item), alert: 'Item was successfully Update'
     else

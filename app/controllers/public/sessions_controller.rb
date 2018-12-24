@@ -10,7 +10,7 @@ class Public::SessionsController < Public::ApplicationController
 
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to root_path
+      redirect_back_or(root_path)
     else
       render 'new'
     end

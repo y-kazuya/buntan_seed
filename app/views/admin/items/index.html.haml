@@ -8,9 +8,19 @@
       = link_to item_path(item) do
         = "名前：#{item.title} "
         = item_main_picutre(item)
+    - if item.reject_text
+      .reject_title
+        この資産はユーザーが修正をしました
+      .reject_text
+        = "前回審査落ち理由: #{item.reject_text}"
     .waiting-bottun
       = link_to "資産削除", admin_item_path(item), method: :delete,data: { confirm: "本当にこの資産を削除しますか？"}
-      = link_to "公開中にする", toggle_status_admin_item_path(item), method: :patch, data: { confirm: "この資産を公開中にしますか？"}
+      = link_to "公開中にする", confirm_admin_item_path(item), method: :patch, data: { confirm: "この資産を公開中にしますか？"}
+      = form_for item, url: reject_admin_item_path(item) do |f|
+        .form_item.need_item
+          = f.label :reject_text, "審査落ち理由"
+          = f.text_field :reject_text, class: 'form-control'
+        = f.submit "公開取り消し(審査落ち)にする",class: "btn btn-primary",data: { confirm: "この資産を審査落ちにしますか？"}
 
 .public-items
   公開中資産一覧
@@ -22,5 +32,9 @@
         = item_main_picutre(item)
     .waiting-bottun
       = link_to "資産削除", admin_item_path(item), method: :delete,data: { confirm: "本当にこの資産を削除しますか？"}
-      = link_to "審査中にする", toggle_status_admin_item_path(item), method: :patch, data: { confirm: "この資産を審査中にしますか？"}
+      = form_for item, url: reject_admin_item_path(item) do |f|
+        .form_item.need_item
+          = f.label :reject_text, "審査落ち理由"
+          = f.text_field :reject_text, class: 'form-control'
+        = f.submit "公開取り消し(審査落ち)にする",class: "btn btn-primary",data: { confirm: "この資産を審査落ちにしますか？"}
 

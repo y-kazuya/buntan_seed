@@ -25,6 +25,26 @@
           = link_to "資産を登録する", new_item_path
         -else
           = link_to "資産を管理する", items_path
+
+        -if  current_user.yet_look_message_items != [] || current_user.reject_items != []
+          .noti_title
+            お知らせがあります
+          -if  current_user.yet_look_message_items != []
+            .contact_for_item
+              資産に対する問い合わせが来てます
+            -current_user.yet_look_message_items.each do |item|
+              = link_to item_path(item) do
+                =item.title
+
+          -if current_user.reject_items != []
+            .reject_items
+              審査落ちした資産があります
+            - current_user.reject_items.each do |item|
+              = link_to item_path(item) do
+                =item.title
+
+
+
       - else
         = link_to "新規登録", new_user_path
         = link_to "ログイン", login_path
