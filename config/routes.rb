@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
+    get    "/manual",  to: "pages#manual"
+
 
     resources :users do
       member do
