@@ -5,11 +5,11 @@
 
   .form_item.need_item
     = f.label :title, "名称"
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, class: 'form-control', required: true
 
   .form_item.need_item.need_item
     = f.label :category_id, "タイプは?"
-    = f.collection_radio_buttons :category_id, Category.all, :id, :name,{},class: "item_category"
+    = f.collection_radio_buttons :category_id, Category.all, :id, :name,{},class: "item_category", required: true
 
   .form_item#sub_category_form.need_item
     - if @item.sub_category
@@ -20,7 +20,7 @@
 
   .form_item.need_item
     = f.label :profile, "説明"
-    = f.text_field :profile, class: 'form-control'
+    = f.text_field :profile, class: 'form-control', required: true
 
 
   .form_item
@@ -29,7 +29,7 @@
 
   .form_item.need_item
     = f.label :state, "都道府県"
-    = f.select :state, Item.states.keys,{}, {class: "select_state"}
+    = f.select :state, Item.states.keys,{selected: "高知県"}, {class: "select_state"}
 
   .form_item.need_item
     = f.label :city, "市町村"

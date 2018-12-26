@@ -6,10 +6,10 @@
 
   .form_item.need_item
     = f.label :frist_name, "姓"
-    = f.text_field :frist_name, class: 'form-control'
+    = f.text_field :frist_name, class: 'form-control',required: true
 
     = f.label :last_name, "名"
-    = f.text_field :last_name, class: 'form-control'
+    = f.text_field :last_name, class: 'form-control',required: true
 
   .form_item.need_item
     = f.label :email, "メールアドレス"
@@ -17,7 +17,7 @@
 
   .form_item.need_item
     = f.label :state, "都道府県"
-    = f.select :state, User.states.keys,{}, {class: "select_state"}
+    = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state"}
 
   .form_item.need_item
     = f.label :city, "市町村"
@@ -60,7 +60,7 @@
 
         .form_item.need_item
           = m.label :phone_number, "電話番号"
-          = m.number_field :phone_number
+          = m.number_field :phone_number, required: true
 
 
 

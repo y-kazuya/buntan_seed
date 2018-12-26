@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function(){
 
   function buildHtml(category){
     let html = ``
-    html = `<input type="radio" value="${category.id}" name="item[sub_category_id]" id="item_sub_category_id_${category.id}">
+    html = `<input type="radio" value="${category.id}" name="item[sub_category_id]" id="item_sub_category_id_${category.id}" required="required">
             <label for="item_sub_category_id_${category.id}">${category.name}</label>`
     return html
   }

@@ -17,7 +17,7 @@
 
   .form_item.need_item
     = f.label :state, "都道府県"
-    = f.select :state, User.states.keys,{}, {class: "select_state"}
+    = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state"}
 
   .form_item.need_item
     = f.label :city, "市町村"
