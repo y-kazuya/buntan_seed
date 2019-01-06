@@ -7,15 +7,14 @@
 
 import Vue from "vue";
 import App from "../components/app.vue";
-import Header from "../components/header.vue";
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));
   new Vue({
-    el: "#navbar",
-    components: {
-      navbar: Header
-    },
+    el: "#app",
+    // components: {
+    //   App
+    // },
     render: h => h(App)
   });
   console.log(app);
@@ -29,23 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
 // Add <%= javascript_pack_tag 'hello_vue' %> to your layout
 // Then add this markup to your html template:
 //
-// <div id='hello'>
-//   {{message}}
-//   <app></app>
-// </div>
+// import Vue from "vue";
+// import Vue from "vue/dist/vue.esm";
+// import App from "../components/app.vue";
 
-// import Vue from 'vue/dist/vue.esm'
-// import App from '../app.vue'
-//
-// document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener("DOMContentLoaded", () => {
 //   const app = new Vue({
-//     el: '#hello',
+//     el: "#navbar",
 //     data: {
 //       message: "Can you say hello?"
 //     },
 //     components: { App }
-//   })
-// })
+//   });
+// });
+
 //
 //
 //

@@ -1,22 +1,26 @@
 <template>
-  <div id="navbar">
-    <div class="siteName">{{ siteName }}</div>
+  <div id="app">
+    <header-vue></header-vue>
   </div>
 </template>
 
 <script>
+import HeaderVue from "./header_vue.vue";
+
 export default {
   data: function() {
-    return {
-      siteName: "K space"
-    };
+    return {};
+  },
+  components: {
+    HeaderVue
   }
 };
 </script>
 
 <style scoped>
-p {
+.siteName {
   font-size: 2em;
   text-align: center;
+  color: gray;
 }
 </style>

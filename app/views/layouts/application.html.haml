@@ -8,7 +8,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     - if admin_user?
-      #navbar
+      #app
         .admin_hedder
           管理者用ヘッダー
           =link_to "ユーザー管理", admin_users_path
@@ -16,7 +16,7 @@
           = link_to "使用可能用途一覧", admin_usages_path
           = link_to "タグ管理",admin_tags_path
           = link_to "マニュアル", admin_manual_path
-    #navbar
+    #app
     .header
       %navbar
         = link_to "トップページへ", root_path
@@ -54,7 +54,8 @@
           = link_to "ログイン", login_path
 
     = yield
-    = javascript_pack_tag 'main_vue'
+    = javascript_pack_tag 'app_vue'
+    = stylesheet_pack_tag 'app_vue'
 
 -# !!!
 -# %html
