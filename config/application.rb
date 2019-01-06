@@ -13,6 +13,7 @@ module BuntanSeed
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    config.i18n.fallbacks = [I18n.default_locale]
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
