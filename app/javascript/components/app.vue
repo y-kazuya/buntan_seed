@@ -1,11 +1,6 @@
 <template>
-  <div id="app">
-    <p>{{ name }}</p>
-    <ul>
-      <li v-for="location in locations" v-bind:key="location">
-        <span>{{ location }}</span>
-      </li>
-    </ul>
+  <div id="navbar">
+    <div class="siteName">{{ siteName }}</div>
   </div>
 </template>
 
@@ -13,8 +8,7 @@
 export default {
   data: function() {
     return {
-      name: "kyuma",
-      locations: ["Canada", "Thailand", "Indonesia"]
+      siteName: "K space"
     };
   }
 };

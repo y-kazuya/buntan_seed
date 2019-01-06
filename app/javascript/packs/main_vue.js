@@ -7,14 +7,17 @@
 
 import Vue from "vue";
 import App from "../components/app.vue";
+import Header from "../components/header.vue";
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));
-  const app = new Vue({
-    el,
+  new Vue({
+    el: "#navbar",
+    components: {
+      navbar: Header
+    },
     render: h => h(App)
   });
-
   console.log(app);
 });
 
