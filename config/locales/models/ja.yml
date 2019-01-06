@@ -1,0 +1,69 @@
+ja:
+  activerecord:
+    models:
+      building_info: 建物情報
+      category: カテゴリー
+      food_info: 食材情報
+      picture: 資産画像
+      item: 資産
+      manager_profile: 経営者情報
+      message: メッセージ
+      owner_profile: オーナー情報
+      sub_category: サブカテゴリー
+      tag: タグ
+      usage: 使用用途
+      user: ユーザー
+    attributes:
+      building_info:
+        about: 説明
+        status: 状態
+        price: 価格
+        rent: 貸出/販売
+      category:
+        name: カテゴリー名
+      food_info:
+        raw: 原材料
+        amount: 量
+      picture:
+        content: ファイル
+        memo: 補足文
+      item:
+        title: 見出し
+        status: 状態
+        profile: 説明
+        remark: 備考
+        state: 都道府県
+        city: 市町村
+        comment: オーナーからのコメント
+      manager_profile:
+        category: タイプ
+        phone_number: 電話番号
+      message:
+        text: 本文
+        image: 画像
+      owner_profile:
+        category: タイプ
+      sub_category:
+        name: タイプ
+      tag:
+        name: タグ名
+      usage:
+        name: 用途名
+      user:
+        first_name: 姓
+        last_name: 名
+        email: メールアドレス
+        state: 都道府県
+        city: 市町村
+        avatar: プロフィール画像
+        profile: 自己紹介文
+
+
+
+
+
+
+
+
+
+
