@@ -34,7 +34,7 @@ class Item < ApplicationRecord
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
   }
 
-  validates :title, presence: true, uniqueness: { case_sensitive: false }
+  validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 40 }
 
   validates :profile, presence: true, length: { maximum: 800 }
   validates :remark,:comment,
