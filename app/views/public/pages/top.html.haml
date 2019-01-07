@@ -5,6 +5,7 @@ toppage
 .category_lists
   -@categories.each do |cate|
     = link_to "#{cate.name}", category_path(cate)
+  = link_to "全てのアイテム",  all_categories_path
 
 
 

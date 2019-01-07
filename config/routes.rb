@@ -39,7 +39,11 @@ Rails.application.routes.draw do
         resources :messages, only: [:create, :update]
       end
     end
-    resources :categories, only: [:show],param: :path_name
+    resources :categories, only: [:show],param: :path_name do
+      collection do
+        get :all
+      end
+    end
   end
 
   namespace :api, {format: 'json'} do

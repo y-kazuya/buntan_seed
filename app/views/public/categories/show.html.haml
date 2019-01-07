@@ -1,8 +1,13 @@
 -@categories.each do |cate|
   = link_to "#{cate.name}", category_path(cate)
+= link_to "全ての資産", all_categories_path
+
 
 .category--title
-  ="#{@category.name}の資産"
+  - if @category
+    ="#{@category.name}の資産"
+  - else
+    全ての資産
 
 - @items.each do |item|
   = link_to item_path(item) do
