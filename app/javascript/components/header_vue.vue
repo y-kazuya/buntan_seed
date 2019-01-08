@@ -15,11 +15,9 @@
       </b-nav-form>
       <b-nav-item-dropdown right>
         <template slot="button-content">
-          <em>カテゴリ</em>
+          <em>エリア</em>
         </template>
-        <b-dropdown-item href="#">海沿い</b-dropdown-item>
-        <b-dropdown-item href="#">山沿い</b-dropdown-item>
-        <b-dropdown-item href="#">築10年以内</b-dropdown-item>
+        <b-dropdown-item href="#" v-for="(area, key, index) in areas" :key="index">{{ area }}</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown right>
         <template slot="button-content">
@@ -39,7 +37,21 @@
 export default {
   data: function() {
     return {
-      siteName: "K Space"
+      siteName: "K Space",
+      areas: [
+        "北海道",
+        "東北",
+        "甲信越",
+        "北関東",
+        "首都圏",
+        "北陸",
+        "東海",
+        "近畿",
+        "山陰・山陽",
+        "四国",
+        "九州",
+        "沖縄"
+      ]
     };
   }
 };
