@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <header-vue></header-vue>
+    <main-vue></main-vue>
   </div>
 </template>
 
 <script>
 import HeaderVue from "./header_vue.vue";
+import MainVue from "./main_vue.vue";
 
 export default {
   data: function() {
     return {};
   },
   components: {
-    HeaderVue
+    HeaderVue,
+    MainVue
   }
 };
 </script>
