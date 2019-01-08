@@ -1,6 +1,9 @@
 <template>
   <div class="main">
     {{main}}
+    <div>
+  
+</div>
   </div>
 </template>
 
