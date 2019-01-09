@@ -6,19 +6,22 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from "vue";
+import BootstrapVue from "bootstrap-vue";
 import App from "../components/app.vue";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));
   new Vue({
     el: "#app",
-    // components: {
-    //   App
-    // },
     render: h => h(App)
   });
   console.log(app);
 });
+
+Vue.use(BootstrapVue);
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
