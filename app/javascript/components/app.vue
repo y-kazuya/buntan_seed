@@ -21,9 +21,9 @@ export default {
 </script>
 
 <style scoped>
-.siteName {
-  font-size: 2em;
-  text-align: center;
-  color: gray;
+#app {
+  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic,
+    "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo,
+    Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 </style>

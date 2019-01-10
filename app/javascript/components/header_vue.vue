@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-  <b-navbar-brand href="#">{{siteName}}</b-navbar-brand>
+  <b-navbar-brand href="#" class="top_logo">{{siteName}}</b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
       <b-nav-item href="#">資産一覧</b-nav-item>
@@ -59,13 +59,14 @@ export default {
 <style scoped>
 .navbar {
   color: gray;
-  background-color: lightblue;
+  background-color: whitesmoke;
   padding: 10px;
   text-align: center;
 }
 .top_logo {
   font-size: 30px;
   font-weight: bold;
+  color: gray;
 }
 .links {
   float: right;
