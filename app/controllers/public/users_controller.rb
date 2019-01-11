@@ -17,8 +17,10 @@ class Public::UsersController < Public::ApplicationController
     @user = User.find(params[:id])
     return redirect_to root_path unless current_user.id == @user.id
     if @user.update(user_params)
+      flash[:notice] = "編集に成功しました"
       return redirect_to edit_user_path(current_user.id)
     else
+      flash[:alert] = "フォームに誤りがあります"
       return render "edit"
     end
   end
@@ -28,9 +30,10 @@ class Public::UsersController < Public::ApplicationController
     @user.update(admin: 1) if @user.email == "admin@test.com"
     if @user.save
       log_in @user
+      flash[:notice] = "ようこそ K-spaceへ！"
       redirect_back_or(root_path)
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash[:alert] = "フォームに誤りがあります"
       render 'new'
     end
   end

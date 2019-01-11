@@ -53,6 +53,7 @@
           = link_to "新規登録", new_user_path
           = link_to "ログイン", login_path
 
+    = render 'layouts/alert'
     = yield
     = javascript_pack_tag 'app_vue'
     = stylesheet_pack_tag 'app_vue'

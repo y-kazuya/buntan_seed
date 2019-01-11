@@ -39,8 +39,10 @@ class Public::ItemsController < Public::ApplicationController
     @item.status = 0
     set_tag
     if @item.save
+      flash[:notice] = "作成に成功しました"
       redirect_to root_url
     else
+      flash.now[:alert] = "フォームに誤りがあります"
       @item.pictures.build
       render 'new'
     end
@@ -56,14 +58,17 @@ class Public::ItemsController < Public::ApplicationController
     if @item.update(item_update_params)
       @item.reject_text = nil
       update_tag
-      redirect_to item_path(@item), alert: 'Item was successfully Update'
+      flash[:notice] = "編集に成功しました"
+      redirect_to item_path(@item)
     else
+      flash.now[:alert] = "フォームに誤りがあります"
       render :edit
     end
   end
 
   def destroy
     @item.destroy
+    flash[:notice] = "削除に成功しました"
     if current_user.items == []
       return redirect_to root_path
     else

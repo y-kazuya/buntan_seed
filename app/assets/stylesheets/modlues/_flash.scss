@@ -1,0 +1,31 @@
+.flash{
+  height: 5vh;
+  text-align: center;
+  line-height: 5vh;
+  border-radius: 10px;
+  width: 99%;
+  margin: 1% auto;
+  position: relative;
+}
+
+.flash-alert{
+  background-color: #f3c0c0;
+  border-color: #f3c0c0;
+  color: #666666;
+}
+
+.flash-notice{
+  background-color: #bde9ff;
+  border-color: #bde9ff;
+  color: #4c6977;
+}
+
+
+.flash-delete-button{
+  color: gray;
+  font-size: 30px;
+  position: absolute;
+  right: 1%;
+  cursor : pointer;
+
+}
