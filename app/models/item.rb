@@ -7,7 +7,6 @@ class Item < ApplicationRecord
 
   has_one :building_info, dependent: :destroy
   has_one :food_info, dependent: :destroy
-  has_many :images, dependent: :destroy
   has_many :item_usages, dependent: :destroy
   has_many :usages, through: :item_usages
   has_many :pictures, dependent: :destroy
