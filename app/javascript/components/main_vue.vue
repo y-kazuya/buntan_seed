@@ -136,50 +136,51 @@ export default {
         }
       }
     }
-    @media screen and (min-width: 481px) {
-      .top {
-        background: url("../../assets/images/house_m.png");
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 700px;
-        background-position: bottom center;
-        background-size: cover;
+  }
 
-        .top-text {
-          position: relative;
-          top: 100px;
-          left: 10%;
+  @media screen and (min-width: 481px) {
+    .top {
+      background-image: url("../../assets/images/house_m.png");
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 700px;
+      background-position: bottom center;
+      background-size: cover;
 
-          p {
-            color: white;
-            font-size: 35px;
-            font-weight: bold;
-          }
+      .top-text {
+        position: relative;
+        top: 100px;
+        left: 10%;
 
-          .top-text-big {
-            font-size: 50px;
-          }
+        p {
+          color: white;
+          font-size: 35px;
+          font-weight: bold;
         }
 
-        .top-searchForm {
-          width: 50%;
-          position: relative;
-          top: 100px;
-          left: 10%;
+        .top-text-big {
+          font-size: 50px;
         }
       }
 
-      .items-area {
-        .items {
-          .item-card {
-            width: 30%;
-            text-align: auto 0;
-            margin: 15px 20px 15px 20px;
+      .top-searchForm {
+        width: 50%;
+        position: relative;
+        top: 100px;
+        left: 10%;
+      }
+    }
 
-            .card-title {
-              font-size: 20px;
-              font-weight: bold;
-            }
+    .items-area {
+      .items {
+        .item-card {
+          width: 30%;
+          text-align: auto 0;
+          margin: 15px 20px 15px 20px;
+
+          .card-title {
+            font-size: 20px;
+            font-weight: bold;
           }
         }
       }
