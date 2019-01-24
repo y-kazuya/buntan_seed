@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <header-vue></header-vue>
-    <main-vue></main-vue>
-    <item-detail></item-detail>
+    <router-view/>
     <footer-vue></footer-vue>
   </div>
 </template>

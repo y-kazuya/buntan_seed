@@ -8,51 +8,49 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    - if admin_user?
-      #app
-        .admin_hedder
-          管理者用ヘッダー
-          =link_to "ユーザー管理", admin_users_path
-          = link_to "資産管理", admin_items_path
-          = link_to "使用可能用途一覧", admin_usages_path
-          = link_to "タグ管理",admin_tags_path
-          = link_to "マニュアル", admin_manual_path
-    #app
-    .header
-      %navbar
-        = link_to "トップページへ", root_path
-        - if current_user
-          = image_tag(set_avatar(current_user, :thumb), class: "avatar_thumb")
-          = full_name(current_user)
-          = link_to "ログアウト", logout_path, method: :delete
-          = link_to "ユーザー設定へ", edit_user_path(current_user)
-          - if  current_user.items == []
-            = link_to "資産を登録する", new_item_path
-          -else
-            = link_to "資産を管理する", items_path
+    -# - if admin_user?
+    -#     .admin_hedder
+    -#       管理者用ヘッダー
+    -#       =link_to "ユーザー管理", admin_users_path
+    -#       = link_to "資産管理", admin_items_path
+    -#       = link_to "使用可能用途一覧", admin_usages_path
+    -#       = link_to "タグ管理",admin_tags_path
+    -#       = link_to "マニュアル", admin_manual_path
+    -# .header
+    -#   %navbar
+    -#     = link_to "トップページへ", root_path
+    -#     - if current_user
+    -#       = image_tag(set_avatar(current_user, :thumb), class: "avatar_thumb")
+    -#       = full_name(current_user)
+    -#       = link_to "ログアウト", logout_path, method: :delete
+    -#       = link_to "ユーザー設定へ", edit_user_path(current_user)
+    -#       - if  current_user.items == []
+    -#         = link_to "資産を登録する", new_item_path
+    -#       -else
+    -#         = link_to "資産を管理する", items_path
 
-          -if  current_user.yet_look_message_items != [] || current_user.reject_items != []
-            .noti_title
-              お知らせがあります
-            -if  current_user.yet_look_message_items != []
-              .contact_for_item
-                資産に対する問い合わせが来てます
-              -current_user.yet_look_message_items.each do |item|
-                = link_to item_path(item) do
-                  =item.title
+    -#       -if  current_user.yet_look_message_items != [] || current_user.reject_items != []
+    -#         .noti_title
+    -#           お知らせがあります
+    -#         -if  current_user.yet_look_message_items != []
+    -#           .contact_for_item
+    -#             資産に対する問い合わせが来てます
+    -#           -current_user.yet_look_message_items.each do |item|
+    -#             = link_to item_path(item) do
+    -#               =item.title
 
-            -if current_user.reject_items != []
-              .reject_items
-                審査落ちした資産があります
-              - current_user.reject_items.each do |item|
-                = link_to item_path(item) do
-                  =item.title
+    -#         -if current_user.reject_items != []
+    -#           .reject_items
+    -#             審査落ちした資産があります
+    -#           - current_user.reject_items.each do |item|
+    -#             = link_to item_path(item) do
+    -#               =item.title
 
 
 
-        - else
-          = link_to "新規登録", new_user_path
-          = link_to "ログイン", login_path
+    -#     - else
+    -#       = link_to "新規登録", new_user_path
+    -#       = link_to "ログイン", login_path
 
     = render 'layouts/alert'
     = yield

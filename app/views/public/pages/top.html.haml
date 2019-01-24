@@ -1,22 +1,22 @@
-toppage
+#app
 
-.category__title
-  カテゴリーごとに見る
-.category_lists
-  -@categories.each do |cate|
-    = link_to "#{cate.name}", category_path(cate)
-  = link_to "全てのアイテム",  all_categories_path
+-# .category__title
+-#   カテゴリーごとに見る
+-# .category_lists
+-#   -@categories.each do |cate|
+-#     = link_to "#{cate.name}", category_path(cate)
+-#   = link_to "全てのアイテム",  all_categories_path
 
 
 
-.items__title
-  資産一覧
-.items__lists
-  - @items.each do | item|
-    .items__list
-      .items__title
-      = link_to item_path(item) do
-        = item.title
-        =item_main_picutre(item)
+-# .items__title
+-#   資産一覧
+-# .items__lists
+-#   - @items.each do | item|
+-#     .items__list
+-#       .items__title
+-#       = link_to item_path(item) do
+-#         = item.title
+-#         =item_main_picutre(item)
 
 
