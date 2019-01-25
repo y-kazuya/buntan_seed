@@ -3,9 +3,36 @@
     <section id="item-mobile">
       <b-card no-body
             style="max-width: 100%;"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top>
+            >
+        <b-carousel id="carousel1"
+                    style="text-shadow: 1px 1px 2px #333;"
+                    controls
+                    indicators
+                    background="#ababab"
+                    :interval="4000"
+                    img-width="480"
+                    img-height="180"
+                    v-model="slide"
+                    @sliding-start="onSlideStart"
+                    @sliding-end="onSlideEnd"
+              >
+                <b-carousel-slide caption="スライド１"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド２"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド３"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド４"
+                                  text="スライドのキャッチコピー  "
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+              </b-carousel>
         <h4 slot="header">馬路村の山奥</h4>
         <b-card-body>
           <p class="card-text">
