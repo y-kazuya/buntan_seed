@@ -48,6 +48,7 @@
               {{ item.text }}
             </p>
             <span variant="danger">¥{{ item.price }}</span>
+            <router-link to="/item"><b-button>詳細</b-button></router-link>
           </b-card>
         </b-row>
       </b-container>

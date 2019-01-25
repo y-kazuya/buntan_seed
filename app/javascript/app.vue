@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <header-vue></header-vue>
-    <main-vue></main-vue>
+    <router-view/>
     <footer-vue></footer-vue>
   </div>
 </template>
 
 <script>
-import HeaderVue from "./header_vue.vue";
-import MainVue from "./main_vue.vue";
-import FooterVue from "./footer_vue.vue";
+import HeaderVue from "./components/header_vue.vue";
+import MainVue from "./components/main_vue.vue";
+import FooterVue from "./components/footer_vue.vue";
+import ItemDetail from "./components/item_detail.vue";
 
 export default {
   data: function() {
@@ -18,7 +19,8 @@ export default {
   components: {
     HeaderVue,
     MainVue,
-    FooterVue
+    FooterVue,
+    ItemDetail
   }
 };
 </script>
