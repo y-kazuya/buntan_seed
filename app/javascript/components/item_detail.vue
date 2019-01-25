@@ -1,6 +1,7 @@
 <template>
-  <div id="item-mobile">
-    <b-card no-body
+  <div id="itempage">
+    <section id="item-mobile">
+      <b-card no-body
             style="max-width: 100%;"
             img-src="https://picsum.photos/600/300/?image=25"
             img-alt="Image"
@@ -31,30 +32,119 @@
         </b-card-body>
         <b-card-footer>所在地</b-card-footer>
         <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
-    </b-card>
+      </b-card>
+    </section>
+    <section id="item-md">
+      <b-container class="bg-white">
+        <b-row>
+          <b-col md="8">
+            <b-row>
+              <b-carousel id="carousel1"
+                    style="text-shadow: 1px 1px 2px #333;"
+                    controls
+                    indicators
+                    background="#ababab"
+                    :interval="4000"
+                    img-width="1024"
+                    img-height="480"
+                    v-model="slide"
+                    @sliding-start="onSlideStart"
+                    @sliding-end="onSlideEnd"
+              >
+                <b-carousel-slide caption="スライド１"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド２"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド３"
+                                  text="スライドのキャッチコピー"
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+                <b-carousel-slide caption="スライド４"
+                                  text="スライドのキャッチコピー  "
+                                  img-src="https://picsum.photos/1024/480/?image=52">
+                </b-carousel-slide>
+              </b-carousel>
+            </b-row>
+            <b-row>
+              <b-table striped hover :items="items" :fields="fields"></b-table>
+            </b-row>
+          </b-col>
+          <b-col md="4">
+            <b-card border-variant="info" header="所在地" align="center" class="mt-3">
+              <p class="card-text">アクセス：</p>
+              <p class="card-text">四万十東インターから20分</p>
+              <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
+            </b-card>
+          </b-col>
+        </b-row>
+          
+        
+        
+        
+
+
+      </b-container>
+    </section>
   </div>
 </template>
 <script>
 export default {
   data: function() {
     return {
-      message: "item detail!"
+      slide: 0,
+      sliding: null,
+      fields: ["table_left", "table_right"],
+      items: [
+        { isActive: true, table_left: "カテゴリ", table_right: "キャンプ向け" },
+        {
+          isActive: false,
+          table_left: "所在地",
+          table_right: "幡多郡中村市朝倉22-41"
+        },
+        { isActive: false, table_left: "築年数", table_right: "55年" },
+        { isActive: true, table_left: "物件情報", table_right: "2LDK" },
+        { isActive: true, table_left: "状態", table_right: "要改修" }
+      ]
     };
+  },
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    }
   }
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 800px) {
-  #item-mobile {
-    .map {
-      margin: 5px;
+#itempage {
+  @media screen and (max-width: 800px) {
+    #item-mobile {
+      .map {
+        margin: 5px;
+      }
+    }
+    #item-md {
+      display: none;
     }
   }
-}
 
-@media screen and (min-width: 801px) {
-  #item-mobile {
-    display: none;
+  @media screen and (min-width: 801px) {
+    #item-md {
+      background-color: #f6f4f3;
+
+      .bg-white {
+        background-color: white;
+      }
+    }
+    #item-mobile {
+      display: none;
+    }
   }
 }
 </style>
