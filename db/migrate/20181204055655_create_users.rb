@@ -1,17 +1,20 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
-      t.string :frist_name, null: false
-      t.string :last_name, null: false
-      t.string :email, null: false, unique: true
-      t.string :password_digest, null: false
+      t.string :name
+      t.string :email,              null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
 
-      t.integer :state, null: false
-      t.string :city, null: false
+      t.integer :state
+      t.string :city
       t.string :avatar
       t.text :profile
-      t.boolean :owner, null: false ,default: false
-      t.boolean :manager, null: false ,default: false
+
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      t.datetime :remember_created_at
 
       t.boolean :admin, null: false, default: false
       t.timestamps

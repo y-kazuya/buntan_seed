@@ -149,19 +149,19 @@ ActiveRecord::Schema.define(version: 20181221101213) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "frist_name",                                    null: false
-    t.string   "last_name",                                     null: false
-    t.string   "email",                                         null: false
-    t.string   "password_digest",                               null: false
-    t.integer  "state",                                         null: false
-    t.string   "city",                                          null: false
+    t.string   "name"
+    t.string   "email",                                default: "",    null: false
+    t.string   "encrypted_password",                   default: "",    null: false
+    t.integer  "state"
+    t.string   "city"
     t.string   "avatar"
-    t.text     "profile",         limit: 65535
-    t.boolean  "owner",                         default: false, null: false
-    t.boolean  "manager",                       default: false, null: false
-    t.boolean  "admin",                         default: false, null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.text     "profile",                limit: 65535
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.boolean  "admin",                                default: false, null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "remember_digest"
   end
 
