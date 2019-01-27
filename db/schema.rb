@@ -39,15 +39,6 @@ ActiveRecord::Schema.define(version: 20181221101213) do
     t.index ["item_id"], name: "index_food_infos_on_item_id", using: :btree
   end
 
-  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content",                  null: false
-    t.text     "memo",       limit: 65535
-    t.integer  "item_id",                  null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["item_id"], name: "index_images_on_item_id", using: :btree
-  end
-
   create_table "item_contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "item_id",    null: false
     t.integer  "user_id",    null: false
@@ -168,15 +159,14 @@ ActiveRecord::Schema.define(version: 20181221101213) do
     t.text     "profile",         limit: 65535
     t.boolean  "owner",                         default: false, null: false
     t.boolean  "manager",                       default: false, null: false
+    t.boolean  "admin",                         default: false, null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.string   "remember_digest"
-    t.boolean  "admin",                         default: false
   end
 
   add_foreign_key "building_infos", "items"
   add_foreign_key "food_infos", "items"
-  add_foreign_key "images", "items"
   add_foreign_key "item_contacts", "items"
   add_foreign_key "item_contacts", "users"
   add_foreign_key "item_usages", "items"

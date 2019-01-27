@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.boolean :owner, null: false ,default: false
       t.boolean :manager, null: false ,default: false
 
+      t.boolean :admin, null: false, default: false
       t.timestamps
     end
   end
