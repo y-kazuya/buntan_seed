@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  attr_accessor :remember_token
+
   before_save   :downcase_email
   mount_uploader :avatar, AvatarsUploader
 
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :manager_profile, reject_if: :reject_manager
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :frist_name, :last_name,
+  validates :name,
             presence: true,
             length: { maximum: 20 }
 
@@ -25,13 +25,9 @@ class User < ApplicationRecord
 
   validates :profile,length: { maximum: 500 }
 
-  validates :state,:city,
-            presence: true
 
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  has_secure_password
 
-  validate :need_role
+
 
   enum state: {
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -103,11 +99,6 @@ class User < ApplicationRecord
       self.email = email.downcase
     end
 
-    def need_role
-      if owner == false && manager == false
-        errors[:base] << '経営者か提供者かどちらかは必要です'
-      end
-    end
 
     def reject_owner(attributed)
       !self.owner
