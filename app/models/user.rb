@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,:omniauthable,omniauth_providers: [:facebook]
 
   before_save   :downcase_email
   mount_uploader :avatar, AvatarsUploader
