@@ -77,3 +77,5 @@ gem 'devise'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+gem 'open_uri_redirections'

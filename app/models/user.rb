@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  require 'open-uri'
+  require 'open_uri_redirections'
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:omniauthable
 
@@ -42,6 +44,7 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
+
     user = User.where(email: auth.info.email).first
     if user
       return user
@@ -51,13 +54,16 @@ class User < ApplicationRecord
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
         user.name = auth.info.name
-        user.avatar = auth.info.image
+
+        image_url = auth.info.image.to_s + "?type=large"
+        user.remote_avatar_url = image_url.gsub('http://','https://')
+
         user.uid = auth.uid
         user.provider = auth.provider
 
-        # If you are using confirmable and the provider(s) you use validate emails,
-        # uncomment the line below to skip the confirmation emails.
-        user.skip_confirmation!
+        # # If you are using confirmable and the provider(s) you use validate emails,
+        # # uncomment the line below to skip the confirmation emails.
+        # user.skip_confirmation!
       end
     end
   end
@@ -126,4 +132,6 @@ class User < ApplicationRecord
     def reject_manager(attributed)
       !self.manager
     end
+
+
 end
