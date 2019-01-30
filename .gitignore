@@ -15,7 +15,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-config/secrets.yml
+# config/secrets.yml
 .vscode/settings.json
 /public/uploads
 /public/assets
