@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181221101213) do
+ActiveRecord::Schema.define(version: 20190129051622) do
 
   create_table "building_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "about",      limit: 65535,                 null: false
@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 20181221101213) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_food_infos_on_item_id", using: :btree
-  end
-
-  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "content",                  null: false
-    t.text     "memo",       limit: 65535
-    t.integer  "item_id",                  null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["item_id"], name: "index_images_on_item_id", using: :btree
   end
 
   create_table "item_contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -158,25 +149,26 @@ ActiveRecord::Schema.define(version: 20181221101213) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "frist_name",                                    null: false
-    t.string   "last_name",                                     null: false
-    t.string   "email",                                         null: false
-    t.string   "password_digest",                               null: false
-    t.integer  "state",                                         null: false
-    t.string   "city",                                          null: false
+    t.string   "name"
+    t.string   "email",                                default: "",    null: false
+    t.string   "encrypted_password",                   default: "",    null: false
+    t.integer  "state"
+    t.string   "city"
     t.string   "avatar"
-    t.text     "profile",         limit: 65535
-    t.boolean  "owner",                         default: false, null: false
-    t.boolean  "manager",                       default: false, null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.text     "profile",                limit: 65535
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.boolean  "admin",                                default: false, null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "remember_digest"
-    t.boolean  "admin",                         default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_foreign_key "building_infos", "items"
   add_foreign_key "food_infos", "items"
-  add_foreign_key "images", "items"
   add_foreign_key "item_contacts", "items"
   add_foreign_key "item_contacts", "users"
   add_foreign_key "item_usages", "items"

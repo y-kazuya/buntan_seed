@@ -1,5 +1,9 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  require 'open-uri'
+  require 'open_uri_redirections'
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,:omniauthable
+
   before_save   :downcase_email
   mount_uploader :avatar, AvatarsUploader
 
@@ -13,7 +17,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :manager_profile, reject_if: :reject_manager
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :frist_name, :last_name,
+  validates :name,
             presence: true,
             length: { maximum: 20 }
 
@@ -23,13 +27,9 @@ class User < ApplicationRecord
 
   validates :profile,length: { maximum: 500 }
 
-  validates :state,:city,
-            presence: true
 
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  has_secure_password
 
-  validate :need_role
+
 
   enum state: {
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -43,7 +43,30 @@ class User < ApplicationRecord
   }
 
 
+  def self.from_omniauth(auth)
 
+    user = User.where(email: auth.info.email).first
+    if user
+      return user
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        # userモデルが持っているカラムをそれぞれ定義していく
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name
+
+        image_url = auth.info.image.to_s + "?type=large"
+        user.remote_avatar_url = image_url.gsub('http://','https://')
+
+        user.uid = auth.uid
+        user.provider = auth.provider
+
+        # # If you are using confirmable and the provider(s) you use validate emails,
+        # # uncomment the line below to skip the confirmation emails.
+        # user.skip_confirmation!
+      end
+    end
+  end
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -101,11 +124,6 @@ class User < ApplicationRecord
       self.email = email.downcase
     end
 
-    def need_role
-      if owner == false && manager == false
-        errors[:base] << '経営者か提供者かどちらかは必要です'
-      end
-    end
 
     def reject_owner(attributed)
       !self.owner
@@ -114,4 +132,6 @@ class User < ApplicationRecord
     def reject_manager(attributed)
       !self.manager
     end
+
+
 end
