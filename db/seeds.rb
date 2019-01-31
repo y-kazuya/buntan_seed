@@ -15,14 +15,14 @@ tags = %W[ 小学校跡 国道沿い 山奥 古民家 好立地 ]
 
 tags.each { |a| Tag.create(name: a, official: true)}
 
-cates = [{name: "土地", path_name: "land"}, {name: "建物", path_name: "building"}, {name: "廃棄食材", path_name: "food"}, {name: "その他", path_name: "other"}]
+cates = [{name: "土地", path_name: "land"}, {name: "山", path_name: "mountain"}, {name: "畑", path_name: "hatake"}, {name: "建物", path_name: "building"}]
 
 cates.each { |cate| Category.create(name: cate[:name], path_name: cate[:path_name]) }
 
-land_sub_cates = [{name: "山", path_name: "mountain"}, {name: "畑", path_name: "hatake"}, {name: "空き地", path_name: "akiti"}]
-land_id = Category.find_by(name: "土地").id
-land_sub_cates.each { |cate| SubCategory.create(name: cate[:name], path_name: cate[:path_name], category_id: land_id) }
+# land_sub_cates = [{name: "山", path_name: "mountain"}, {name: "畑", path_name: "hatake"}, {name: "空き地", path_name: "akiti"}]
+# land_id = Category.find_by(name: "土地").id
+# land_sub_cates.each { |cate| SubCategory.create(name: cate[:name], path_name: cate[:path_name], category_id: land_id) }
 
-building_sub_cates = [{name: "空家", path_name: "akiya"}, {name: "小屋", path_name: "koya"}, {name: "公共施設跡", path_name: "public"}, {name: "商業施設跡", path_name: "stores"}]
-building_id = Category.find_by(name: "建物").id
-building_sub_cates.each { |cate| SubCategory.create(name: cate[:name], path_name: cate[:path_name], category_id: building_id) }
+# building_sub_cates = [{name: "空家", path_name: "akiya"}, {name: "小屋", path_name: "koya"}, {name: "公共施設跡", path_name: "public"}, {name: "商業施設跡", path_name: "stores"}]
+# building_id = Category.find_by(name: "建物").id
+# building_sub_cates.each { |cate| SubCategory.create(name: cate[:name], path_name: cate[:path_name], category_id: building_id) }

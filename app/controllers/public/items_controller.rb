@@ -36,7 +36,7 @@ class Public::ItemsController < Public::ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.status = 0
+    @item.status = 1
     set_tag
     if @item.save
       flash[:notice] = "作成に成功しました"
@@ -52,9 +52,8 @@ class Public::ItemsController < Public::ApplicationController
   end
 
   def update
-    @item.status = "審査中"
-    admin_user? ? @item.status = "公開中" : @item.status = "審査中"
-    @item.sub_category = nil unless params.require("item")[:sub_category_id]
+    @item.status = "公開中"
+    # @item.sub_category = nil unless params.require("item")[:sub_category_id]
     if @item.update(item_update_params)
       @item.reject_text = nil
       update_tag
@@ -93,11 +92,9 @@ class Public::ItemsController < Public::ApplicationController
       :title,
       :category_id,
       :profile,
-      :remark,
       :state,
       :city,
       :comment,
-      :sub_category_id,
       { :usage_ids=> [] },
       building_info_attributes: [:about,:status,:price,:rent],
       food_info_attributes: [:raw, :amount],
@@ -111,11 +108,9 @@ class Public::ItemsController < Public::ApplicationController
       :title,
       :category_id,
       :profile,
-      :remark,
       :state,
       :city,
       :comment,
-      :sub_category_id,
       { :usage_ids=> [] },
       building_info_attributes: [:about,:status,:price,:rent, :id],
       food_info_attributes: [:raw, :amount, :id],

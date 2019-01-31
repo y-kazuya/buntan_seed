@@ -36,13 +36,13 @@ class Item < ApplicationRecord
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 40 }
 
   validates :profile, presence: true, length: { maximum: 800 }
-  validates :remark,:comment,
+  validates :comment,
             length: { maximum: 800 }
   validates :state,:city,
             presence: true
 
 
-  validates :sub_category_id , presence: true, if: :need_sub_categroy
+  # validates :sub_category_id , presence: true, if: :need_sub_categroy
 
 
 
@@ -123,7 +123,8 @@ class Item < ApplicationRecord
 
   private
     def reject_build
-      self.category_name != "建物"
+      # self.category_name != "建物"
+      true
     end
 
     def reject_blank(attributed)
@@ -132,7 +133,8 @@ class Item < ApplicationRecord
 
 
     def reject_food
-      self.category_name != "廃棄食材"
+      # self.category_name != "廃棄食材"
+      true
     end
 
     def tag_blank(attributed)
