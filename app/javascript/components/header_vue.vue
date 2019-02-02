@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-  <b-navbar-brand href="/" class="top_logo">{{siteName}}</b-navbar-brand>
+  <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/VACANT_LOGO.png"></b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
       <b-nav-item href="#">資産一覧</b-nav-item>
@@ -37,20 +37,15 @@
 export default {
   data: function() {
     return {
-      siteName: "K Space",
       areas: [
-        "北海道",
-        "東北",
-        "甲信越",
-        "北関東",
-        "首都圏",
-        "北陸",
-        "東海",
-        "近畿",
-        "山陰・山陽",
-        "四国",
-        "九州",
-        "沖縄"
+        "高知市",
+        "仁淀川",
+        "嶺北",
+        "物部川",
+        "安芸・室戸",
+        "奥四万十",
+        "四万十・足摺",
+        "高知県外"
       ]
     };
   }

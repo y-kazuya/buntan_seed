@@ -4,37 +4,37 @@
       <b-card no-body
             style="max-width: 100%;"
             >
-        <b-carousel id="carousel1"
-                    style="text-shadow: 1px 1px 2px #333;"
+        <b-carousel id="item-carousel"
+                    style="text-shadow: 1px 1px 2px #333; height: 373px;"
                     controls
                     indicators
                     background="#ababab"
-                    :interval="4000"
-                    img-width="480"
-                    img-height="180"
+                    :interval="8000"
+                    img-width="373"
+                    img-height="373"
                     v-model="slide"
                     @sliding-start="onSlideStart"
                     @sliding-end="onSlideEnd"
               >
                 <b-carousel-slide caption="スライド１"
                                   text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
+                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
                 </b-carousel-slide>
                 <b-carousel-slide caption="スライド２"
                                   text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
+                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
                 </b-carousel-slide>
                 <b-carousel-slide caption="スライド３"
                                   text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
+                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
                 </b-carousel-slide>
                 <b-carousel-slide caption="スライド４"
                                   text="スライドのキャッチコピー  "
-                                  img-src="https://picsum.photos/1024/480/?image=52">
+                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
                 </b-carousel-slide>
               </b-carousel>
-        <h4 slot="header">馬路村の山奥</h4>
         <b-card-body>
+          <h4><strong>馬路村の山奥</strong></h4>
           <p class="card-text">
               周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
           </p>
@@ -46,10 +46,12 @@
         </b-list-group>
         <div class="clearfix">
           <b-img left src="https://picsum.photos/125/125/?image=58" alt="left image" />
-          <h4>空き家太郎</h4>
-          <p>出身地：高知県幡多郡中村市</p>
-          <p>職業：中村市役所職員</p>
-          <p>評価：★★★★☆</p>
+          <div style="position: relative; left: 15px; top: 15px;">
+            <h4>空き家太郎</h4>
+            <p>出身地：高知県幡多郡中村市</p>
+            <p>職業：中村市役所職員</p>
+            <p>評価：★★★★☆</p>
+          </div>
         </div>
         <b-card-body>
             <a href="#"
@@ -66,7 +68,7 @@
         <b-row>
           <b-col md="8">
             <b-row>
-              <b-carousel id="carousel1"
+              <b-carousel id="item-carousel"
                     style="text-shadow: 1px 1px 2px #333;"
                     controls
                     indicators
@@ -97,6 +99,12 @@
               </b-carousel>
             </b-row>
             <b-row>
+              <b-card-body>
+                <h4><strong>馬路村の山奥</strong></h4>
+                <p class="card-text">
+                    周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
+                </p>
+              </b-card-body>
               <b-table striped hover :items="items" :fields="fields"></b-table>
             </b-row>
           </b-col>
