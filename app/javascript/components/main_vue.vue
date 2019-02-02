@@ -63,11 +63,11 @@ export default {
       input_area: "",
       selected: null,
       options: [
-        { value: null, text: "条件を指定" },
-        { value: "a", text: "海辺でゆったり" },
-        { value: "b", text: "首都圏に近い" },
-        { value: "c", text: "観光地に近い" },
-        { value: "d", text: "空港近く" }
+        { value: null, text: "カテゴリを選ぶ" },
+        { value: "a", text: "空き家" },
+        { value: "b", text: "空き山" },
+        { value: "c", text: "空き畑" },
+        { value: "d", text: "その他" }
       ],
       items: [
         {
