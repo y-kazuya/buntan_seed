@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     get    "/get_tags", to: "get_tags#index"
     get    "/get_sub_cates", to: "get_sub_cates#index"
+    get    "/get_items",     to: "items#index"
   end
 
 end
