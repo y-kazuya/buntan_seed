@@ -1,68 +1,59 @@
 .user_title
   ユーザー新規作成画面
 
+
+
+  -# .form_owner
+  -#   .form_item.user_type.need_item
+  -#     = f.label :owner, "オーナーとして登録"
+  -#     = f.check_box :owner
+
+  -#   .hidden_item
+  -#     = f.fields_for :owner_profile,@user.owner_profile || @user.build_owner_profile  do |o|
+  -#       .form_item.need_item
+  -#         = o.label :category, "オーナーのタイプ"
+  -#         = o.select :category, OwnerProfile.categories.keys, prompt: "タイプを選択してください"
+
+
+  -# .form_manager
+  -#   .form_item.user_type.need_item
+  -#     = f.label :manager, "経営者として登録"
+  -#     = f.check_box :manager
+
+  -#   .hidden_item
+  -#     = f.fields_for :manager_profile,@user.manager_profile || @user.build_manager_profile  do |m|
+  -#       .form_item.need_item
+  -#         = m.label :category, "経営者のタイプ"
+  -#         = m.select :category, ManagerProfile.categories.keys, prompt: "タイプを選択してください"
+
+  -#       .form_item.need_item
+  -#         = m.label :phone_number, "電話番号"
+  -#         = m.number_field :phone_number, required:
+
+
 = form_for(@user) do |f|
   = render 'shared/error_messages', object: f.object
+  .form-group
+    = f.label :name, "名前"
+    = f.text_field :name, class: 'form-control',placeholder: "土佐 太郎",required: true
 
-  .form_item.need_item
-    = f.label :frist_name, "姓"
-    = f.text_field :frist_name, class: 'form-control',required: true
-
-    = f.label :last_name, "名"
-    = f.text_field :last_name, class: 'form-control',required: true
-
-  .form_item.need_item
+  .form-group
     = f.label :email, "メールアドレス"
-    = f.email_field :email, class: 'form-control'
+    = f.email_field :email,placeholder: "vacant@vacant.com", class: 'form-control'
 
-  .form_item.need_item
+  .form-group.form_item
     = f.label :state, "都道府県"
-    = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state"}
+    = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state form-control"}
 
-  .form_item.need_item
+  .form-group.form_item
     = f.label :city, "市町村"
-    = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys"}
+    = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys form-control"}
 
-  .form_item.picture_field
+  .form_item.picture_field.form-group
     = f.label :avatar do
       = image_tag("hito.jpg", class: "avatar_preview")
 
     = f.file_field :avatar, class: "display_none file"
-
-  .form_item
-    = f.label :profile , "自己紹介文"
-    = f.text_area :profile
-
-
-
-  .form_owner
-    .form_item.user_type.need_item
-      = f.label :owner, "オーナーとして登録"
-      = f.check_box :owner
-
-    .hidden_item
-      = f.fields_for :owner_profile,@user.owner_profile || @user.build_owner_profile  do |o|
-        .form_item.need_item
-          = o.label :category, "オーナーのタイプ"
-          = o.select :category, OwnerProfile.categories.keys, prompt: "タイプを選択してください"
-
-
-  .form_manager
-    .form_item.user_type.need_item
-      = f.label :manager, "経営者として登録"
-      = f.check_box :manager
-
-    .hidden_item
-      = f.fields_for :manager_profile,@user.manager_profile || @user.build_manager_profile  do |m|
-        .form_item.need_item
-          = m.label :category, "経営者のタイプ"
-          = m.select :category, ManagerProfile.categories.keys, prompt: "タイプを選択してください"
-
-        .form_item.need_item
-          = m.label :phone_number, "電話番号"
-          = m.number_field :phone_number, required: true
-
-
 
   .form_item.need_item
     = f.label :password, "パスワード"
@@ -70,5 +61,4 @@
   .form_item.need_item
     = f.label :password_confirmation, "パスワード確認"
     = f.password_field :password_confirmation, class: 'form-control'
-
-  = f.submit "Create my account", class: "btn btn-primary"
+  %button.btn.btn-primary{:type => "submit"} Submit
