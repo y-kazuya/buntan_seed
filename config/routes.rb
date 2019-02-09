@@ -1,7 +1,8 @@
 
 
 Rails.application.routes.draw do
-  devise_for :users,controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users,controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+                                    sessions: "users/sessions" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root "public/pages#top"
   root to: 'public/pages#top'
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
     get    "/get_tags", to: "get_tags#index"
     get    "/get_sub_cates", to: "get_sub_cates#index"
     get    "/get_items",     to: "items#index"
+    get    "/get_current_user", to: "current_user#index"
   end
 
 end

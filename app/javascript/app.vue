@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header-vue></header-vue>
+    <header-vue v-bind:current_user="current_user"></header-vue>
     <router-view/>
     <footer-vue></footer-vue>
   </div>
@@ -12,9 +12,24 @@ import MainVue from "./components/main_vue.vue";
 import FooterVue from "./components/footer_vue.vue";
 import ItemDetail from "./components/item_detail.vue";
 
+import axios from 'axios';
+
 export default {
   data: function() {
-    return {};
+    return {
+      current_user: ""
+    };
+  },
+  mounted: function () {
+    this.getCurrentUser();
+  },
+
+  methods: {
+    getCurrentUser:function() {
+      axios.get('/api/get_current_user').then((response) => {
+        this.current_user = response.data
+      })
+    }
   },
   components: {
     HeaderVue,
