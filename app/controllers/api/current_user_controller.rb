@@ -4,7 +4,7 @@ class Api::CurrentUserController < ActionController::Base
     @user = current_user || false
 
     if current_user
-      @user = {name: @user.name, age: 19, avatar: @user.avatar_url}
+      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state, city: @user.city, avatar: @user.avatar_url}
     end
 
     respond_to do |format|
