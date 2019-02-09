@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-vue v-bind:current_user="current_user"></header-vue>
-    <router-view/>
+    <router-view v-bind:items="items"/>
     <footer-vue></footer-vue>
   </div>
 </template>
@@ -12,23 +12,32 @@ import MainVue from "./components/main_vue.vue";
 import FooterVue from "./components/footer_vue.vue";
 import ItemDetail from "./components/item_detail.vue";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data: function() {
     return {
-      current_user: ""
+      current_user: "",
+      items: ""
     };
   },
-  mounted: function () {
+  mounted: function() {
+    this.getItems();
     this.getCurrentUser();
   },
 
   methods: {
-    getCurrentUser:function() {
-      axios.get('/api/get_current_user').then((response) => {
-        this.current_user = response.data
-      })
+    getCurrentUser: function() {
+      axios.get("/api/get_current_user").then(response => {
+        this.current_user = response.data;
+        // console.log(this.current_user);
+      });
+    },
+    getItems: function() {
+      axios.get("/api/get_items").then(response => {
+        this.items = response.data;
+        // console.log(this.item);
+      });
     }
   },
   components: {

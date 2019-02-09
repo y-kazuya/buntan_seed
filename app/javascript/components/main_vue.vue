@@ -43,11 +43,13 @@
                   style="max-width: 20rem;"
                   class="mb-2 item-card"
                   v-for="(item, key, index) in items" :key="index">
-            <p class="card-title">{{ item.name }}</p>
+            <p class="card-title">{{ item
+              .title }}</p>
             <p class="card-text">
-              {{ item.text }}
+              {{ item.profile }}
             </p>
-            <span variant="danger">¥{{ item.price }}</span>
+            <span variant="danger">{{ item
+              .city }}</span>
             <router-link to="/item"><b-button>詳細</b-button></router-link>
           </b-card>
         </b-row>
@@ -68,26 +70,12 @@ export default {
         { value: "b", text: "空き山" },
         { value: "c", text: "空き畑" },
         { value: "d", text: "その他" }
-      ],
-      items: [
-        {
-          name: "馬路村の山奥",
-          price: 1500000,
-          text: "ゆずの木が３本あります"
-        },
-        {
-          name: "JR高知駅の近く",
-          price: 1750000,
-          text: "閑静なエリアでアクセスもいいです"
-        },
-        { name: "柏島の海辺で", price: 1800000, text: "夕日が絶景です" },
-        {
-          name: "伊野インター近く",
-          price: 1400000,
-          text: "高速へのアクセスがよし"
-        }
       ]
     };
+  },
+  props: ["items"],
+  mounted: function() {
+    console.log(this.item);
   }
 };
 </script>
