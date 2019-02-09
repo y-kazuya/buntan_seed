@@ -5,10 +5,10 @@ class Public::SessionsController < Public::ApplicationController
   end
 
   def create#ログイン処理
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:user][:email].downcase)
+    if user && user.authenticate(params[:user][:password])
       log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      params[:user][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_back_or(root_path)
     else
       flash.now[:alert] = "パスワードまたはメールアドレスが違います"
