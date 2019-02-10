@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129051622) do
+ActiveRecord::Schema.define(version: 20190210081546) do
 
   create_table "building_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "about",      limit: 65535,                 null: false
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20190129051622) do
     t.string   "remember_digest"
     t.string   "provider"
     t.string   "uid"
+    t.integer  "job"
   end
 
   add_foreign_key "building_infos", "items"

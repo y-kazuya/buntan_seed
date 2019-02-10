@@ -44,6 +44,10 @@ class User < ApplicationRecord
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
   }
 
+  enum job: {
+    一般会社員: 1, 自治体関係者: 2, 地域おこし協力隊: 3, 学生:4, 起業家: 5, その他: 6
+  }
+
 
   def self.from_omniauth(auth)
 
