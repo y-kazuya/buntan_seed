@@ -49,10 +49,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #app {
   font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic,
     "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo,
     Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>
