@@ -34,7 +34,7 @@
                 </b-carousel-slide>
               </b-carousel>
         <b-card-body>
-          <h4><strong>タイトル</strong></h4>
+          <h4><strong>{{ id }}</strong></h4>
           <p class="card-text">
               周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
           </p>
@@ -100,7 +100,7 @@
             </b-row>
             <b-row>
               <b-card-body>
-                <h4><strong>タイトル</strong></h4>
+                <h4><strong>{{ id }}</strong></h4>
                 <p class="card-text">
                     周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
                 </p>
@@ -128,6 +128,7 @@
 </template>
 <script>
 export default {
+  props: { id: Number },
   data: function() {
     return {
       slide: 0,
@@ -143,12 +144,8 @@ export default {
         { isActive: false, table_left: "築年数", table_right: "55年" },
         { isActive: true, table_left: "物件情報", table_right: "2LDK" },
         { isActive: true, table_left: "状態", table_right: "要改修" }
-      ],
-      items: ""
+      ]
     };
-  },
-  mounted: function() {
-    this.getItems;
   },
   methods: {
     onSlideStart(slide) {

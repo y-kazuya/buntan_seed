@@ -36,7 +36,7 @@ export default {
     getItems: function() {
       axios.get("/api/get_items").then(response => {
         this.items = response.data;
-        // console.log(this.item);
+        console.log(this.items);
       });
     }
   },

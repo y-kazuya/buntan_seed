@@ -50,7 +50,10 @@
             </p>
             <span variant="danger">{{ item
               .city }}</span>
+              <span>{{ item.id }}</span>
             <router-link to="/item"><b-button>詳細</b-button></router-link>
+            <router-link :to="{ name: 'Item', params: { id: item.id }}">detail</router-link>
+            <!-- <router-link :to="`/item/${item.id}`">detail</router-link> -->
           </b-card>
         </b-row>
       </b-container>
@@ -75,7 +78,7 @@ export default {
   },
   props: ["items"],
   mounted: function() {
-    console.log(this.item);
+    console.log(this.items);
   }
 };
 </script>
