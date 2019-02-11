@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-  <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/VACANT_LOGO.png"></b-navbar-brand>
+  <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
       <b-nav-item href="#">資産一覧</b-nav-item>
@@ -64,7 +64,7 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">パスワード&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+          <span class="input-group-text" id="basic-addon1">パスワード&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </div>
         <input class="form-control" autocomplete="current-password" type="password" name="user[password]" id="user_password">
       </div>
@@ -102,11 +102,8 @@
 </template>
 
 <script>
-
-
-
 export default {
-  props: ['current_user'],
+  props: ["current_user"],
   data: function() {
     return {
       areas: [
@@ -119,26 +116,22 @@ export default {
         "四万十・足摺",
         "高知県外"
       ],
-      isTestDisabled : false,
-      message: "",
+      isTestDisabled: false,
+      message: ""
     };
   },
   methods: {
     button_disable: function() {
       this.isTestDisabled = true;
 
-      setTimeout(this.enable,3000);
+      setTimeout(this.enable, 3000);
     },
-    enable:function() {
-        this.isTestDisabled = false;
-        this.message = "メールアドレスまたはパスワードが間違っています。"
-    },
+    enable: function() {
+      this.isTestDisabled = false;
+      this.message = "メールアドレスまたはパスワードが間違っています。";
+    }
   }
-
-
-
 };
-
 </script>
 <style scoped>
 .navbar {
@@ -156,49 +149,48 @@ export default {
   float: right;
 }
 
-.validate-field{
-  color: #FF1493
+.validate-field {
+  color: #ff1493;
 }
 
-.mb-3{
+.mb-3 {
   margin-bottom: 2rem !important;
 }
 
-.login_btn{
+.login_btn {
   width: 50%;
   display: block;
   margin: 10px auto;
 }
 
-.other{
+.other {
   float: left;
   margin-top: -30px;
   margin-left: 44%;
   background-color: white;
 }
 
-.other-login__link-img{
+.other-login__link-img {
   width: 80%;
   margin: 10px 0;
   opacity: 1;
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
-.other-login__link-img:hover{
-  opacity: .5;
+.other-login__link-img:hover {
+  opacity: 0.5;
 }
 
-.avatar{
-
-    height: 35px;
-    width: 35px;
-    /* display: block; */
-    margin: 0px;
-    border-radius: 20px;
-    border: 1px solid gray;
-    box-sizing: border-box;
-    margin-top: -5px;
-    margin-right: 5px;
+.avatar {
+  height: 35px;
+  width: 35px;
+  /* display: block; */
+  margin: 0px;
+  border-radius: 20px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  margin-top: -5px;
+  margin-right: 5px;
 }
 </style>
