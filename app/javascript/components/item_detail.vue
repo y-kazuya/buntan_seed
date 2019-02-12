@@ -34,7 +34,7 @@
                 </b-carousel-slide>
               </b-carousel>
         <b-card-body>
-          <h4><strong>馬路村の山奥</strong></h4>
+          <h4><strong>{{ id }}</strong></h4>
           <p class="card-text">
               周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
           </p>
@@ -100,12 +100,12 @@
             </b-row>
             <b-row>
               <b-card-body>
-                <h4><strong>馬路村の山奥</strong></h4>
+                <h4><strong>{{ id }}</strong></h4>
                 <p class="card-text">
                     周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
                 </p>
               </b-card-body>
-              <b-table striped hover :items="items" :fields="fields"></b-table>
+              <b-table striped hover :detail="detail" :fields="fields"></b-table>
             </b-row>
           </b-col>
           <b-col md="4">
@@ -128,12 +128,13 @@
 </template>
 <script>
 export default {
+  props: { id: Number },
   data: function() {
     return {
       slide: 0,
       sliding: null,
       fields: ["table_left", "table_right"],
-      items: [
+      detail: [
         { isActive: true, table_left: "カテゴリ", table_right: "キャンプ向け" },
         {
           isActive: false,

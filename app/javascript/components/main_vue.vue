@@ -35,6 +35,8 @@
       <b-container>
         <h3>こんな物件があります</h3>
         <b-row class="items">
+          <div v-for="(item, key, index) in items" :key="index">
+            <router-link :to="{ name: 'Item', params: { id: item.id }}">
           <b-card
                   img-src="https://picsum.photos/600/300/?image=25"
                   img-alt="Image"
@@ -42,14 +44,19 @@
                   tag="article"
                   style="max-width: 20rem;"
                   class="mb-2 item-card"
-                  v-for="(item, key, index) in items" :key="index">
-            <p class="card-title">{{ item.name }}</p>
+                  >
+            <p class="card-title">{{ item
+              .title }}</p>
             <p class="card-text">
-              {{ item.text }}
+              {{ item.profile }}
             </p>
-            <span variant="danger">¥{{ item.price }}</span>
-            <router-link to="/item"><b-button>詳細</b-button></router-link>
+            <span variant="danger">{{ item
+              .city }}</span>
+            <!-- <router-link :to="{ name: 'Item', params: { id: item.id }}">detail</router-link> -->
           </b-card>
+          </router-link>
+          </div>
+          
         </b-row>
       </b-container>
     </section>
@@ -68,26 +75,12 @@ export default {
         { value: "b", text: "空き山" },
         { value: "c", text: "空き畑" },
         { value: "d", text: "その他" }
-      ],
-      items: [
-        {
-          name: "馬路村の山奥",
-          price: 1500000,
-          text: "ゆずの木が３本あります"
-        },
-        {
-          name: "JR高知駅の近く",
-          price: 1750000,
-          text: "閑静なエリアでアクセスもいいです"
-        },
-        { name: "柏島の海辺で", price: 1800000, text: "夕日が絶景です" },
-        {
-          name: "伊野インター近く",
-          price: 1400000,
-          text: "高速へのアクセスがよし"
-        }
       ]
     };
+  },
+  props: ["items"],
+  mounted: function() {
+    console.log(this.items);
   }
 };
 </script>
@@ -95,16 +88,16 @@ export default {
 #main {
   @media screen and (max-width: 480px) {
     .top {
-      background-image: url("../../assets/images/house_s.png");
+      background-image: url("../../assets/images/top-mobile.png");
       background-repeat: no-repeat;
       width: 100%;
       height: 600px;
-      background-position: bottom right;
+      background-position: top;
       background-size: cover;
 
       .top-text {
         position: relative;
-        top: 30px;
+        top: 80px;
         text-align: center;
 
         p {
@@ -117,7 +110,7 @@ export default {
       .top-searchForm {
         margin: 0 30px;
         position: relative;
-        top: 40px;
+        top: 210px;
       }
     }
 
@@ -126,7 +119,7 @@ export default {
         margin-left: 5%;
 
         .item-card {
-          width: 40%;
+          width: 80%;
           text-align: auto 0;
           margin: 5px 10px 5px 10px;
 
@@ -141,7 +134,7 @@ export default {
 
   @media screen and (min-width: 481px) {
     .top {
-      background-image: url("../../assets/images/house_m.png");
+      background-image: url("../../assets/images/top-pc.png");
       background-repeat: no-repeat;
       width: 100%;
       height: 700px;
@@ -175,7 +168,7 @@ export default {
     .items-area {
       .items {
         .item-card {
-          width: 30%;
+          width: 100%;
           text-align: auto 0;
           margin: 15px 20px 15px 20px;
 

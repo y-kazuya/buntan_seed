@@ -7,9 +7,17 @@ import ItemDetail from "../components/item_detail.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  { path: "/", component: MainVue },
-  { path: "/item", component: ItemDetail }
-];
+const router = new VueRouter({
+  mode: "history",
+  routes: [
+    { path: "/", component: MainVue },
+    {
+      path: "/item/:id",
+      name: "Item",
+      component: ItemDetail,
+      props: route => ({ id: Number(route.params.id) })
+    }
+  ]
+});
 
-export default new VueRouter({ routes });
+export default router;
