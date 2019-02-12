@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{ name: 'viewport', content: 'initial-scale=1.0, user-scalable=no' } 
+    %meta{ name: 'viewport', content: 'initial-scale=1.0, user-scalable=no' }
     %title Vacant
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -54,7 +54,7 @@
 
     = render 'layouts/alert'
     = yield
-    = javascript_pack_tag 'app_vue'
+
     = stylesheet_pack_tag 'app_vue'
 
 -# !!!

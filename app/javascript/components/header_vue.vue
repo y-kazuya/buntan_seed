@@ -39,7 +39,7 @@
       </b-nav-item-dropdown>
       <span v-else>
         <b-nav-item v-b-modal.modal-center style="float: left;">ログイン</b-nav-item>
-        <b-nav-item href="/users/new" style="float: right;">新規登録</b-nav-item>
+        <b-nav-item href="/users/sign_up" style="float: right;">新規登録</b-nav-item>
       </span>
     </b-navbar-nav>
   </b-collapse>

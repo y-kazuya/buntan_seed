@@ -102,6 +102,31 @@ label{
 
 }
 
+.warpper{
+  position: relative;
+  .warp-left{
+
+    position: absolute;
+    left: 0;
+    img{
+      width:100vw;
+      height:100vh;
+    }
+  }
+
+  .warp-right{
+    position: absolute;
+    right: 0;
+    background: white;
+    height: 100vh;
+    overflow: scroll;
+    padding: 20px;
+    /* border-left: 2px solid black; */
+    box-sizing: border-box;
+  }
+}
+
+
 
 
 
@@ -112,4 +137,8 @@ label{
   max-width: 40vw;
   margin: 0 auto;
   border: double;
+}
+
+.is-error{
+  border: 1px solid red !important;
 }

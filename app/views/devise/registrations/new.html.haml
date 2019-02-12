@@ -1,5 +1,6 @@
 
 
+
 .warpper
 
   .warp-left
@@ -9,7 +10,7 @@
     = form_for(@user) do |f|
       = render 'shared/error_messages', object: f.object
       .form-group
-        = f.label :name, "名前"
+        = f.label :name, "名前aaaaa"
         = f.text_field :name, class: 'form-control',placeholder: "土佐 太郎",required: true
 
       .form-group
@@ -30,10 +31,12 @@
 
         = f.file_field :avatar, class: "display_none file"
 
-      .form_item.need_item
+      .form_item
         = f.label :password, "パスワード"
         = f.password_field :password, class: 'form-control'
-      .form_item.need_item
+      .form_item
         = f.label :password_confirmation, "パスワード確認"
         = f.password_field :password_confirmation, class: 'form-control'
       %button.btn.btn-primary{:type => "submit"} Submit
+
+
