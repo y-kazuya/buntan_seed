@@ -1,42 +1,65 @@
-
-
+-# = javascript_pack_tag 'user_form'
+-# = stylesheet_pack_tag 'user_form'
+-# #app2
 
 .warpper
 
   .warp-left
     = image_tag("ie.jpg")
-
   .warp-right
-    = form_for(@user) do |f|
-      = render 'shared/error_messages', object: f.object
-      .form-group
-        = f.label :name, "名前aaaaa"
-        = f.text_field :name, class: 'form-control',placeholder: "土佐 太郎",required: true
+    .logo-title
+      = link_to "VACANT", root_path
 
-      .form-group
-        = f.label :email, "メールアドレス"
-        = f.email_field :email,placeholder: "vacant@vacant.com", class: 'form-control'
+    .form-title
+      新規登録
+    .user-form
+      = form_for(@user) do |f|
+        = render 'shared/error_messages', object: f.object
+        .content-box
+          .form-group.right-content
+            = f.label :name, "名前"
+            = f.text_field :name, class: 'form-control',placeholder: "土佐 太郎",required: true
 
-      .form-group.form_item
-        = f.label :state, "都道府県"
-        = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state form-control"}
+          .form_item.picture_field.form-group.left-content
+            %p
+              プロフィール画像
+            = f.label :avatar do
+              = image_tag("hito.jpg", class: "avatar_preview")
 
-      .form-group.form_item
-        = f.label :city, "市町村"
-        = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys form-control"}
+            = f.file_field :avatar, class: "display_none file"
 
-      .form_item.picture_field.form-group
-        = f.label :avatar do
-          = image_tag("hito.jpg", class: "avatar_preview")
+        .form-group
+          = f.label :email, "メールアドレス"
+          = f.email_field :email,placeholder: "vacant@vacant.com", class: 'form-control'
 
-        = f.file_field :avatar, class: "display_none file"
+        .form-group.form_item
+          = f.label :state, "都道府県"
+          = f.select :state, User.states.keys,{selected: "高知県"}, {class: "select_state form-control"}
 
-      .form_item
-        = f.label :password, "パスワード"
-        = f.password_field :password, class: 'form-control'
-      .form_item
-        = f.label :password_confirmation, "パスワード確認"
-        = f.password_field :password_confirmation, class: 'form-control'
-      %button.btn.btn-primary{:type => "submit"} Submit
+        .form-group.form_item
+          = f.label :city, "市町村"
+          = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys form-control"}
+
+
+
+        .form-group.form_item
+          = f.label :job, "職業"
+          = f.select :job, User.jobs.keys,{}, {class: "form-control"}
+
+        .form_item
+          = f.label :password, "パスワード"
+          = f.password_field :password, class: 'form-control'
+        .form_item
+          = f.label :password_confirmation, "パスワード確認"
+          = f.password_field :password_confirmation, class: 'form-control'
+        %button.btn.btn-outline-info.login_btn.signup-btn{:type => "submit"} Sign Up
+
+    %span.other
+      または
+    .other-login__link
+      %a{:href => "/users/auth/facebook"}
+        %img.other-login__link-img{:alt => "Facebook link", :src => "/assets/facebook_link.png"}/
+
+
 
 
