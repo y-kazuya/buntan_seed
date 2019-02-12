@@ -10,15 +10,15 @@
           <b-container>
             <b-row class="mb-2">
                 <b-col cols="12" class="pr-0 pl-0">
-                  <b-form-input v-model="input_area"
-                    type="text"
-                    placeholder="地名を入力">
-                  </b-form-input>
+                  <b-form-radio-group v-model="selectedCate"
+                          :options="cates"
+                          plain
+                          name="plainInline" />
                 </b-col>
             </b-row>
             <b-row>
               <b-col cols="8" class="pr-0 pl-0">
-                <b-form-select v-model="selected" :options="options">
+                <b-form-select v-model="selectedArea" :options="areas">
                 </b-form-select>
               </b-col>
               <b-col cols="4" class="pr-0 pl-2">
@@ -52,7 +52,6 @@
             </p>
             <span variant="danger">{{ item
               .city }}</span>
-            <!-- <router-link :to="{ name: 'Item', params: { id: item.id }}">detail</router-link> -->
           </b-card>
           </router-link>
           </div>
@@ -68,13 +67,19 @@ export default {
   data: function() {
     return {
       input_area: "",
-      selected: null,
-      options: [
-        { value: null, text: "カテゴリを選ぶ" },
+      selectedArea: null,
+      areas: [
+        { value: null, text: "エリアを選択" },
+        { value: "a", text: "高知市" },
+        { value: "b", text: "嶺北" },
+        { value: "c", text: "四万十" },
+        { value: "d", text: "室戸" }
+      ],
+      selectedCate: null,
+      cates: [
         { value: "a", text: "空き家" },
         { value: "b", text: "空き山" },
-        { value: "c", text: "空き畑" },
-        { value: "d", text: "その他" }
+        { value: "c", text: "空き畑" }
       ]
     };
   },
