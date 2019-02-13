@@ -1,5 +1,9 @@
 class Public::UsersController < Public::ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
+
+  def index
+    redirect_to new_user_registration_path
+  end
   def new
     redirect_to root_path if current_user
     @user = User.new
