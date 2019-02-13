@@ -103,6 +103,47 @@ label{
 }
 
 .warpper{
+  @media screen and (max-width: 480px) {
+    .warp-right{
+      width: 90vw;
+      left: 5vw;
+    }
+
+    .pc-img{
+      display:none;
+    }
+
+    .warp-left{
+      width: 100vw;
+      height: 100vh;
+      background: #17a2b8;
+    }
+
+    .signup-btn{
+      margin-left: 35%;
+    }
+
+    .right-content{
+      width: 50%;
+    }
+
+  }
+
+  @media screen and (min-width: 481px) {
+    .warp-right{
+      width :30vw;
+      right: 0;
+    }
+
+    .signup-btn{
+      margin-left: 40%;
+    }
+
+    .right-content{
+      width: 60%;
+    }
+
+  }
   position: relative;
   .warp-left{
 
@@ -131,25 +172,22 @@ label{
       padding-bottom: 20px;
     }
     position: absolute;
-    right: 0;
     background: #F6F6F6;
     height: 100vh;
     overflow: scroll;
     padding: 20px;
     /* border-left: 2px solid black; */
     box-sizing: border-box;
-    width: 30vw;
+
   }
 }
 
 
 .content-box{
   margin: 10px auto;
-
 }
 .right-content{
   float: left;
-  width: 60%;
   margin: 40px auto;
   margin-right: 20px
 }
@@ -158,9 +196,7 @@ label{
   display: inline;
 }
 
-.signup-btn{
-  margin-left: 40% !important;
-}
+
 
 .other-login__link{
   text-align: center;
@@ -182,7 +218,7 @@ label{
 ///////////////////エラーーーーーーっ分//
 #error_explanation{
   color: red;
-  max-width: 40vw;
+
   margin: 13px auto;
   .error-title{
     text-align: center
