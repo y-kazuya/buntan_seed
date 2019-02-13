@@ -19,7 +19,8 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name,
             presence: true,
-            length: { maximum: 20 }
+            length: { maximum: 20 },
+            uniqueness: { case_sensitive: false }
 
   validates :email, presence: true, length: { maximum: 50 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -28,7 +29,8 @@ class User < ApplicationRecord
   validates :profile,length: { maximum: 500 }
 
 
-
+  validates :state,:city,
+            presence: true
 
 
   enum state: {
@@ -40,6 +42,10 @@ class User < ApplicationRecord
     鳥取県:31,島根県:32,岡山県:33,広島県:34,山口県:35,
     徳島県:36,香川県:37,愛媛県:38,高知県:39,
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
+  }
+
+  enum job: {
+    一般会社員: 1, 自治体関係者: 2, 地域おこし協力隊: 3, 学生:4, 起業家: 5, その他: 6
   }
 
 

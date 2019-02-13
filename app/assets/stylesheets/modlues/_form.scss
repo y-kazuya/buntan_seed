@@ -11,6 +11,7 @@
   border: 1px solid black;
   width: 100px;
   height: 100px;
+  margin-left: 13%;
 }
 
 .picture_preview{
@@ -59,8 +60,7 @@
 
 .picture_field{
   position: relative;
-  width: 400px;
-  height: 200px;
+
   margin-bottom: 40px;
 }
 
@@ -102,14 +102,133 @@ label{
 
 }
 
+.warpper{
+  @media screen and (max-width: 480px) {
+    .warp-right{
+      width: 90vw;
+      left: 5vw;
+    }
 
+    .pc-img{
+      display:none;
+    }
+
+    .warp-left{
+      width: 100vw;
+      height: 100vh;
+      background: #17a2b8;
+    }
+
+    .signup-btn{
+      margin-left: 35%;
+    }
+
+    .right-content{
+      width: 50%;
+    }
+
+  }
+
+  @media screen and (min-width: 481px) {
+    .warp-right{
+      width :30vw;
+      right: 0;
+    }
+
+    .signup-btn{
+      margin-left: 40%;
+    }
+
+    .right-content{
+      width: 60%;
+    }
+
+  }
+  position: relative;
+  .warp-left{
+
+    position: absolute;
+    left: 0;
+    img{
+      width:100vw;
+      height:100vh;
+    }
+  }
+
+  .warp-right{
+    .logo-title{
+      a{
+      font-size: 1.4em;
+      color: #17a2b8 !important;
+      }
+    }
+    .form-title{
+      text-align: center;
+      font-size: 1.4em;
+      margin: 10px auto;
+    }
+    .user-form{
+      border-bottom: 1px solid gray;
+      padding-bottom: 20px;
+    }
+    position: absolute;
+    background: #F6F6F6;
+    height: 100vh;
+    overflow: scroll;
+    padding: 20px;
+    /* border-left: 2px solid black; */
+    box-sizing: border-box;
+
+  }
+}
+
+
+.content-box{
+  margin: 10px auto;
+}
+.right-content{
+  float: left;
+  margin: 40px auto;
+  margin-right: 20px
+}
+
+.left-content{
+  display: inline;
+}
+
+
+
+.other-login__link{
+  text-align: center;
+}
+
+.other-login__link-img {
+  width: 90%;
+  margin: 10px 0;
+  opacity: 1;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.other-login__link-img:hover {
+  opacity: 0.5;
+}
 
 
 ///////////////////エラーーーーーーっ分//
 #error_explanation{
   color: red;
-  text-align: center;
-  max-width: 40vw;
-  margin: 0 auto;
-  border: double;
+
+  margin: 13px auto;
+  .error-title{
+    text-align: center
+  }
+  ul{
+    border: 1px solid;
+    padding: 5px;
+  }
+}
+
+.is-error{
+  border: 1px solid red !important;
 }
