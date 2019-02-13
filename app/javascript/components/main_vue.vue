@@ -34,29 +34,54 @@
     <section class="items-area mt-4 mb-2">
       <b-container>
         <h3>こんな物件があります</h3>
-        <b-row class="items">
-          <div v-for="(item, key, index) in items" :key="index">
+        <div class="pc-only">
+          <b-row class="items">
+            <div v-for="(item, key, index) in items" :key="index">
+              <router-link :to="{ name: 'Item', params: { id: item.id }}">
+                <b-card
+                        img-src="https://picsum.photos/600/300/?image=25"
+                        img-alt="Image"
+                        img-top
+                        tag="article"
+                        style="max-width: 20rem;"
+                        class="mb-2 item-card"
+                        >
+                  <p class="card-title">{{ item
+                    .title }}</p>
+                  <p class="card-text">
+                    {{ item.profile }}
+                  </p>
+                  <span variant="danger">{{ item.city }}</span>
+                </b-card>
+              </router-link>
+            </div>
+          </b-row>
+        </div>
+        <div class="mobile-only">
+          <div v-for="(item, key, index) in items" :key="index" style="margin: 4px 0;">
             <router-link :to="{ name: 'Item', params: { id: item.id }}">
-          <b-card
-                  img-src="https://picsum.photos/600/300/?image=25"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem;"
-                  class="mb-2 item-card"
-                  >
-            <p class="card-title">{{ item
-              .title }}</p>
-            <p class="card-text">
-              {{ item.profile }}
-            </p>
-            <span variant="danger">{{ item
-              .city }}</span>
-          </b-card>
-          </router-link>
+              <b-card class="item-mobile">
+                <b-row>
+                  <b-col cols="4">
+                    <b-img left rounded blank width="100" height="100" blank-color="#777" alt="img"/>
+                  </b-col>
+                  <b-col cols="8">
+                    <h5>{{ item.title }}</h5>
+                    <p>{{ item.profile }}</p>
+                    <span>
+                      <b-badge> {{ item.city }} </b-badge>
+                      <b-badge>小学校跡</b-badge>
+                    </span>
+                  </b-col>
+                </b-row>
+              </b-card>
+            </router-link>
           </div>
+        </div>
+        
+        
           
-        </b-row>
+        
       </b-container>
     </section>
   </div>
@@ -133,6 +158,14 @@ export default {
             font-weight: bold;
           }
         }
+      }
+
+      .card-body {
+        padding: 8px;
+      }
+
+      .item-mobile:hover {
+        background-color: #C7EBF1;
       }
     }
   }
