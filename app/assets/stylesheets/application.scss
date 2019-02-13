@@ -3,3 +3,15 @@
 @import "./modlues/form";
 @import "./modlues/parts";
 @import "./modlues/flash";
+
+@media screen and (max-width: 480px) {
+  .pc-only {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .mobile-only {
+    display: none;
+  }
+}
