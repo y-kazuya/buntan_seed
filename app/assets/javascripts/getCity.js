@@ -26,11 +26,15 @@ $(document).on('turbolinks:load', function(){
     let url =""
 
     if (App.cable.url.match(/local/)) {
+      console.log(App.cable.url)
       url = `http://www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
     }
     else{
+      console.log(App.cable.url)
       url = `//www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
     }
+
+    console.log(url)
     $.ajax({
       url: url,
       type: "GET",
