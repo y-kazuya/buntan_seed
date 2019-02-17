@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function(){
       url = `http://www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
     }
     else{
-      url = '//www.land.mlit.go.jp/webland/api/CitySearch?area=${state}'
+      url = `//www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
     }
     $.ajax({
       url: url,
