@@ -11,6 +11,7 @@ $(document).on('turbolinks:load', function(){
 
   function startCity(){
 
+
     target.empty()
     if ($(".select_state").find('option:selected')[0] == undefined) {
       return false;
@@ -21,7 +22,15 @@ $(document).on('turbolinks:load', function(){
     if (state < 10) {
       state = ("0"+state).slice(-2)
     }
-    const url = `http://www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
+
+    let url =""
+
+    if (App.cable.url.match(/local/)) {
+      url = `http://www.land.mlit.go.jp/webland/api/CitySearch?area=${state}`
+    }
+    else{
+      url = '//www.land.mlit.go.jp/webland/api/CitySearch?area=${state}'
+    }
     $.ajax({
       url: url,
       type: "GET",
