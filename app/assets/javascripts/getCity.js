@@ -21,8 +21,6 @@ $(document).on('turbolinks:load', function(){
 
     let url = `https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=${state}`
     const api_key = "sLXRi2Ovt21lcBxeFykUus8r0XIiHIAqtPrxntoW"
-
-    console.log(url)
     $.ajax({
       headers: {
         "X-API-KEY" : api_key
@@ -32,7 +30,6 @@ $(document).on('turbolinks:load', function(){
       dataType: 'json',
     })
     .done(function(data){
-      console.log(data)
       replaceCitys(data)
 
     })
