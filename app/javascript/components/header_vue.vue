@@ -28,13 +28,15 @@
       <b-nav-item-dropdown v-if="current_user" right>
 
         <template slot="button-content">
-          <em>
-            <img class="avatar" v-bind:src="current_user.avatar" alt="Facebook link">
-            {{current_user.name}}さん
+          <em v-once>
+            <img class="avatar" v-bind:src="current_user.avatar" alt="">
+            {{this.current_user.name}}さん
           </em>
         </template>
 
-        <b-dropdown-item href="#">マイプロフィール</b-dropdown-item>
+        <b-dropdown-item >
+          <router-link to="/user/edit"> マイプロフィール</router-link>
+        </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
       <span v-else>
@@ -130,7 +132,9 @@ export default {
       this.isTestDisabled = false;
       this.message = "メールアドレスまたはパスワードが間違っています。";
     }
-  }
+  },
+
+
 };
 </script>
 <style scoped>
@@ -192,5 +196,13 @@ export default {
   box-sizing: border-box;
   margin-top: -5px;
   margin-right: 5px;
+}
+
+.dropdown-item a{
+  color: black;
+}
+
+.dropdown-item a:hover{
+  text-decoration: none;
 }
 </style>
