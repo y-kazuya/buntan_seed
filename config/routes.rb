@@ -59,7 +59,8 @@ Rails.application.routes.draw do
     get    "/get_items",     to: "get_items#index"
     get    "/get_state",     to:  "get_state#index"
     get    "/get_current_user", to: "current_user#index"
-    put    "/put_current_user", to: "current_user#update"
+    put    "/update_current_user", to: "current_user#update"
   end
+
 
 end
