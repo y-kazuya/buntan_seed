@@ -16,21 +16,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    render "public/pages#top"
+    @user = current_user
   end
 
   def update
-    current_user.assign_attributes(account_update_params)
-
-    if current_user.save
+    @user = current_user
+    @user.assign_attributes(account_update_params)
+    if @user.save
       flash[:notice] = "編集に成功しました"
       redirect_back(fallback_location: root_path)
     else
       flash[:alert] = "フォームに誤りがあります"
-
+      render :edit
     end
 
   end
+
 
   # DELETE /resource
   # def destroy
@@ -62,6 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
+
     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   end
 

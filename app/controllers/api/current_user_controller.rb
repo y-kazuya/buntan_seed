@@ -5,7 +5,9 @@ class Api::CurrentUserController < ActionController::Base
     @user = current_user || false
 
     if current_user
-      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state, city: @user.city, avatar: @user.avatar_url, job: @current_user.job}
+      @user.avatar_url = false unless @user.avatar_url
+      state_code = @user.state_before_type_cast
+      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state,state_code: state_code, city: @user.city, avatar: @user.avatar_url, job: @current_user.job}
     end
 
     respond_to do |format|
@@ -15,6 +17,7 @@ class Api::CurrentUserController < ActionController::Base
 
 
   def update
+
     current_user.assign_attributes(account_update_params)
 
     if current_user.save
@@ -35,6 +38,6 @@ class Api::CurrentUserController < ActionController::Base
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:update, keys: [:attribute])
   end
 end
