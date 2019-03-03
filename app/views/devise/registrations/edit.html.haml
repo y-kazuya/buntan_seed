@@ -4,9 +4,10 @@
     %navbar(v-bind:current_user="current_user")
     .dash-wrapper
       %side
+
       .dash-left-warpper
         .dash-content
-          .dash-content-title.middle-title
+          .dash-content-title.middle-title(v-on:click="ab")
             基本編集
           .user-form.dash-content-main
             = form_for(@user, url: user_registration_path, method: "patch") do |f|
@@ -43,7 +44,8 @@
                 = f.label :profile, "プロフィール"
                 = f.text_area :profile,{class: "form-control"}
 
-              %button.btn.btn-outline-info.login_btn.signup-btn.dash-submit{:type => "submit"} 保存
+              .form-group.form_item.dash-content-item
+                %button.btn.btn-outline-info.login_btn.signup-btn.dash-submit{:type => "submit"} 保存
 
 
     %foot

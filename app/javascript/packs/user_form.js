@@ -33,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(this.current_user);
         });
       },
+
+      ab: function(){
+        console.log("tetetetet")
+      }
     },
 
     mounted: function() {
