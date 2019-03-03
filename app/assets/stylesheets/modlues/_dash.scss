@@ -1,0 +1,154 @@
+
+
+
+.dash-wrapper{
+  display: flex;
+  position: relative;
+  min-height: 85vh;
+}
+.dash-left-warpper{
+  position:  relative;
+
+  width: 100%;
+}
+
+.dash-content{
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 30px 300px 50px 60px;
+  .dash-content-title{
+    font-size: 1.6rem;
+  }
+  .dash-content-main{
+
+  }
+}
+
+
+#dash-sidebar{
+  position: relative;
+
+  display: flex;
+
+
+  .dash-sidebar-main{
+    background: #f6f4f3;
+    width: 300px;
+    height: 100%;
+    .dash-sidebar-top{
+      border-bottom: 1px solid lightsteelblue;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 3.8rem;
+    }
+
+    .dash-sidebar-lists{
+      .dash-sidebar-list{
+        box-sizing: border-box;
+        padding: 30px 20px;
+      }
+
+      .dash-sidebar-list:hover{
+        background: lightgray;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+}
+
+.dash-sidebar-active{
+  background: lightgrey;
+}
+
+.middle-title{
+  margin-bottom: 0;
+  font-weight: 600
+}
+
+
+.link-fix{
+  color: black;
+  text-decoration: none
+}
+
+.link-fix:hover{
+  color: black;
+  text-decoration: none
+}
+
+.dash-submit{
+  padding: 10px 49px !important;
+  margin-top: 20px !important;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.dash-content-item{
+  margin-bottom: 2rem !important;
+  label{
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+.dash-wrapper {
+  @media screen and (max-width: 480px) { //moblie
+    display: block;
+
+    .toggle_sidebar{
+      margin-left: -63%;
+      transition: all 300ms 0s ease;
+    }
+
+    #dash-sidebar{
+      position: relative;
+      width: 100%;
+      position: fixed;
+      z-index: 100;
+
+
+      #side-open{
+        .sidebar-open-button{
+          border-radius: 0px 30px 30px 0px;
+        }
+      }
+
+
+      .dash-sidebar-main{
+        transition: all 300ms 0s ease;
+      }
+
+    }
+
+    .dash-content{
+      padding: 10px 20px;
+    }
+
+    .middle-title {
+      text-align: center;
+    }
+
+    .dash-sidebar-main{
+      width: 63% !important;
+      // display:none;
+      // position: fixed;
+      z-index: 1;
+      height: 100%
+    }
+
+  }
+
+  @media screen and (min-width: 481px) { //pc
+
+    .toggle_sidebar{
+
+    }
+    #side-open{
+      display: none;
+    }
+  }
+}

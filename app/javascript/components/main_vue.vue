@@ -78,10 +78,10 @@
             </router-link>
           </div>
         </div>
-        
-        
-          
-        
+
+
+
+
       </b-container>
     </section>
   </div>
@@ -110,7 +110,6 @@ export default {
   },
   props: ["items"],
   mounted: function() {
-    console.log(this.items);
   }
 };
 </script>

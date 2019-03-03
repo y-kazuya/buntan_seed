@@ -1,0 +1,52 @@
+= javascript_pack_tag 'user_form'
+#no-spa
+  .warpper
+    %navbar(v-bind:current_user="current_user")
+    .dash-wrapper
+      %side
+
+      .dash-left-warpper
+        .dash-content
+          .dash-content-title.middle-title(v-on:click="ab")
+            基本編集
+          .user-form.dash-content-main
+            = form_for(@user, url: user_registration_path, method: "patch") do |f|
+              = render 'shared/error_messages', object: f.object
+
+              .content-box
+                .form-group.right-content.dash-content-item
+                  = f.label :name, "名前", class: "need-item"
+
+                  = f.text_field :name, class: 'form-control',placeholder: "土佐 太郎",required: true
+
+                .form_item.picture_field.form-group.left-content
+                  %p
+                    プロフィール画像
+                  = f.label :avatar do
+                    = image_tag(set_avatar(current_user), class: "avatar_preview")
+
+                  = f.file_field :avatar, class: "display_none file"
+
+              .form-group.form_item.dash-content-item
+                = f.label :state, "都道府県", class: "need-item"
+                = f.select :state, User.states.keys,{}, {class: "select_state form-control"}
+
+              .form-group.form_item.dash-content-item
+                = f.label :city, "市町村",class: "need-item"
+                = f.select :city,[], {}, {class: "select_citys form-control"}
+
+              .form-group.form_item.dash-content-item
+                = f.label :job, "職業"
+                = f.select :job, User.jobs.keys,{}, {class: "form-control",rows: 3}
+
+
+              .form-group.form_item.dash-content-item
+                = f.label :profile, "プロフィール"
+                = f.text_area :profile,{class: "form-control"}
+
+              .form-group.form_item.dash-content-item
+                %button.btn.btn-outline-info.login_btn.signup-btn.dash-submit{:type => "submit"} 保存
+
+
+    %foot
+

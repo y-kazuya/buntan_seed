@@ -35,7 +35,7 @@
         </template>
 
         <b-dropdown-item >
-          <router-link to="/user/edit"> マイプロフィール</router-link>
+          <a href="users/edit"> マイプロフィール</a>
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
@@ -70,7 +70,7 @@
         </div>
         <input class="form-control" autocomplete="current-password" type="password" name="user[password]" id="user_password">
       </div>
-      <input name="user[now_path]" type="hidden" :value="$route.path">
+      <input name="user[now_path]" type="hidden" :value="root">
 
       <div class="form-check">
         <input name="user[remember_me]" type="hidden" value="0">
@@ -119,8 +119,12 @@ export default {
         "高知県外"
       ],
       isTestDisabled: false,
-      message: ""
+      message: "",
+      root: "root"
     };
+  },
+  computed:{
+
   },
   methods: {
     button_disable: function() {

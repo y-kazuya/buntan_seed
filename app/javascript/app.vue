@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-vue v-bind:current_user="current_user"></header-vue>
-    <router-view v-bind:items="items"/>
+    <router-view v-bind:items="items" v-bind:current_user="current_user"/>
     <footer-vue></footer-vue>
   </div>
 </template>
