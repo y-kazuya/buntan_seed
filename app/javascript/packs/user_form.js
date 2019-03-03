@@ -12,6 +12,7 @@ import axios from "axios";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
   const el = document.body.appendChild(document.createElement("hello"));
   new Vue({
     el: "#no-spa",
