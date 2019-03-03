@@ -1,4 +1,5 @@
 <template>
+
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
   <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
@@ -6,6 +7,7 @@
     <b-navbar-nav>
       <b-nav-item href="#">資産一覧</b-nav-item>
       <b-nav-item href="#">全てのアイテム</b-nav-item>
+
     </b-navbar-nav>
     <!-- ここから右寄せ -->
     <b-navbar-nav class="ml-auto">
@@ -34,8 +36,8 @@
           </em>
         </template>
 
-        <b-dropdown-item >
-          <router-link to="/user/edit"> マイプロフィール</router-link>
+        <b-dropdown-item href="users/edit">
+          マイプロフィール
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
@@ -85,8 +87,10 @@
 
     </form>
     <div slot="modal-footer" class="w-100">
+
        <span class="other">
         または
+
       </span>
       <div class="other-login__link">
         <a href="/users/auth/facebook">
