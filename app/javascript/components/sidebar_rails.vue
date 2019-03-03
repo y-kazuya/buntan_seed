@@ -45,18 +45,6 @@ export default {
     };
   },
 
-  watch:{
-    sideOpne: function(val){
-      if (val){
-
-      }
-      else
-      {
-
-      }
-    }
-  },
-
   methods:{
     openSidebar: function(){
 

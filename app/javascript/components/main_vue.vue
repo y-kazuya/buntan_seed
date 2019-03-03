@@ -110,7 +110,6 @@ export default {
   },
   props: ["items"],
   mounted: function() {
-    console.log(this.items);
   }
 };
 </script>

@@ -3,7 +3,6 @@ $(document).on('turbolinks:load', function(){
   if ($(".user_type").length){
     var ownerTarget = $(".user_type").find("input")[1]
     var managerTarget = $(".user_type").find("input")[3]
-    console.log(ownerTarget)
     if (ownerTarget.checked){
       $(ownerTarget).parent(".form_item").next(".hidden_item").css("display", "block")
     }
