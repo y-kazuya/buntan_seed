@@ -34,7 +34,7 @@
           </em>
         </template>
 
-        <b-dropdown-item href="users/edit">
+        <b-dropdown-item href="/users/edit">
           マイプロフィール
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
