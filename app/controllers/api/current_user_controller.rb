@@ -6,8 +6,11 @@ class Api::CurrentUserController < ActionController::Base
 
     if current_user
       @user.avatar_url = false unless @user.avatar_url
+      current_user.items == [] ? owner = false : owner = true
       state_code = @user.state_before_type_cast
-      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state,state_code: state_code, city: @user.city, avatar: @user.avatar_url, job: @current_user.job}
+      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state,
+        state_code: state_code, city: @user.city, avatar: @user.avatar_url, job: @current_user.job,
+        owner: owner}
     end
 
     respond_to do |format|

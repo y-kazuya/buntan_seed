@@ -11,6 +11,7 @@
     </b-navbar-nav>
     <!-- ここから右寄せ -->
     <b-navbar-nav class="ml-auto">
+
       <b-nav-form>
         <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="キーワードを入力"/>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">検索</b-button>
@@ -22,29 +23,32 @@
         <b-dropdown-item href="#" v-for="(area, key, index) in areas" :key="index">{{ area }}</b-dropdown-item>
       </b-nav-item-dropdown>
 
-
-
-
-
-
-      <b-nav-item-dropdown v-if="current_user" right>
-
+    <b-nav-item v-if="current_user && current_user.owner" href="#">物件管理</b-nav-item>
+    <b-nav-item v-else href="/items/new">物件を登録する</b-nav-item>
+    <template v-if="current_user">
+      <b-nav-item-dropdown right>
         <template slot="button-content">
           <em v-once>
             <img class="avatar" v-bind:src="current_user.avatar" alt="">
             {{this.current_user.name}}さん
           </em>
         </template>
-
         <b-dropdown-item href="/users/edit">
           マイプロフィール
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
-      <span v-else>
+
+    </template>
+    <template v-else>
+      <span>
         <b-nav-item v-b-modal.modal-center style="float: left;">ログイン</b-nav-item>
         <b-nav-item href="/users/sign_up" style="float: right;">新規登録</b-nav-item>
       </span>
+    </template>
+
+
+
     </b-navbar-nav>
   </b-collapse>
 

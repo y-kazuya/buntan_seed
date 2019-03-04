@@ -28,7 +28,7 @@ class Public::ItemsController < Public::ApplicationController
   end
 
   def new
-    return redirect_to edit_user_path(current_user) unless current_user.owner
+    # return redirect_to edit_user_path(current_user) unless current_user.owner
     @item = Item.new
     @item.pictures.build
     3.times{@item.tags.build}

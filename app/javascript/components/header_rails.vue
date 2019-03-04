@@ -28,6 +28,7 @@
       <b-nav-item-dropdown v-if="current_user" right>
 
         <template slot="button-content">
+
           <em v-once>
             <img class="avatar" v-bind:src="current_user.avatar" alt="">
             {{this.current_user.name}}さん
