@@ -11,6 +11,7 @@ import HeaderVue from "./components/header_vue.vue";
 import MainVue from "./components/main_vue.vue";
 import FooterVue from "./components/footer_vue.vue";
 import ItemDetail from "./components/item_detail.vue";
+import AboutVue from "./components/about_vue.vue";
 
 import axios from "axios";
 
@@ -44,7 +45,8 @@ export default {
     HeaderVue,
     MainVue,
     FooterVue,
-    ItemDetail
+    ItemDetail,
+    AboutVue
   }
 };
 </script>
