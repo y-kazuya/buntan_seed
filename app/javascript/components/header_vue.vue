@@ -7,7 +7,6 @@
     <b-navbar-nav>
       <b-nav-item href="#">全てのアイテム</b-nav-item>
       <b-nav-item href="/about">Vacantとは？
-        <!-- <router-link :to="{ path: 'about' }">Vacantとは？</router-link> -->
       </b-nav-item>
     </b-navbar-nav>
     <!-- ここから右寄せ -->
