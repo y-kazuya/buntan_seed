@@ -5,9 +5,9 @@
   <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
-      <b-nav-item href="#">資産一覧</b-nav-item>
       <b-nav-item href="#">全てのアイテム</b-nav-item>
-
+      <b-nav-item href="/about">Vacantとは？
+      </b-nav-item>
     </b-navbar-nav>
     <!-- ここから右寄せ -->
     <b-navbar-nav class="ml-auto">
@@ -136,9 +136,7 @@ export default {
       this.isTestDisabled = false;
       this.message = "メールアドレスまたはパスワードが間違っています。";
     }
-  },
-
-
+  }
 };
 </script>
 <style scoped>
@@ -202,11 +200,11 @@ export default {
   margin-right: 5px;
 }
 
-.dropdown-item a{
+.dropdown-item a {
   color: black;
 }
 
-.dropdown-item a:hover{
+.dropdown-item a:hover {
   text-decoration: none;
 }
 </style>

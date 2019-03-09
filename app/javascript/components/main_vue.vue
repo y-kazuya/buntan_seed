@@ -109,8 +109,7 @@ export default {
     };
   },
   props: ["items"],
-  mounted: function() {
-  }
+  mounted: function() {}
 };
 </script>
 <style scoped lang="scss">
@@ -164,7 +163,7 @@ export default {
       }
 
       .item-mobile:hover {
-        background-color: #C7EBF1;
+        background-color: #c7ebf1;
       }
     }
   }
