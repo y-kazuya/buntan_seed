@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/users/edit", to: "public/pages#top"
   get "/user/edit", to: "public/pages#top"
   get "/about", to: "public/pages#top"
+  get '/privacy-poricy', to: 'public/pages#top'
 
 
   namespace :admin do
