@@ -5,8 +5,11 @@
   <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
-      <b-nav-item href="#">全てのアイテム</b-nav-item>
-      <b-nav-item href="/about">Vacantとは？
+      <!-- <b-nav-item href="#">全てのアイテム</b-nav-item> -->
+      <b-nav-item>
+        <router-link to="/about">
+          Vacantとは？
+        </router-link>
       </b-nav-item>
     </b-navbar-nav>
     <!-- ここから右寄せ -->
@@ -139,72 +142,6 @@ export default {
   }
 };
 </script>
-<style scoped>
-.navbar {
-  color: gray;
-  background-color: whitesmoke;
-  padding: 10px;
-  text-align: center;
-}
-.top_logo {
-  font-size: 30px;
-  font-weight: bold;
-  color: gray;
-}
-.links {
-  float: right;
-}
-
-.validate-field {
-  color: #ff1493;
-}
-
-.mb-3 {
-  margin-bottom: 2rem !important;
-}
-
-.login_btn {
-  width: 50%;
-  display: block;
-  margin: 10px auto;
-}
-
-.other {
-  float: left;
-  margin-top: -30px;
-  margin-left: 44%;
-  background-color: white;
-}
-
-.other-login__link-img {
-  width: 80%;
-  margin: 10px 0;
-  opacity: 1;
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
-
-.other-login__link-img:hover {
-  opacity: 0.5;
-}
-
-.avatar {
-  height: 35px;
-  width: 35px;
-  /* display: block; */
-  margin: 0px;
-  border-radius: 20px;
-  border: 1px solid gray;
-  box-sizing: border-box;
-  margin-top: -5px;
-  margin-right: 5px;
-}
-
-.dropdown-item a {
-  color: black;
-}
-
-.dropdown-item a:hover {
-  text-decoration: none;
-}
+<style scoped lang="scss">
+@import "app/assets/stylesheets/header.scss";
 </style>
