@@ -23,7 +23,14 @@ const router = new VueRouter({
     },
     { path: "/user/edit", component: UserEdit },
     { path: "/privacy-poricy", component: PrivacyPoricy }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
 
 export default router;
