@@ -127,12 +127,9 @@ legend {
   display: none;
 }
 
-.navbar{
-  a{
-    color: rgba(255, 255, 255, .5) !important;
-  }
-
-  a:hover{
-    text-decoration: none;
-  }
+.n-link{
+  color: rgba(255, 255, 255, .5) !important;
+}
+.n-link:hover{
+  text-decoration: none;
 }

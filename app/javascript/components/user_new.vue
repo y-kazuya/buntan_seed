@@ -18,7 +18,7 @@
         <div class="content-box">
           <div class="form-group right-content">
             <label class="need-item" for="user_name">名前</label>
-            <input class="form-control" placeholder="土佐 太郎" required="required" type="text" name="user[name]" id="user_name">
+            <input class="form-control" placeholder="土佐 太郎" required="required" maxlength=20 type="text" name="user[name]" id="user_name">
           </div>
 
           <div class="form_item picture_field form-group left-content">
@@ -32,7 +32,7 @@
 
         <div class="form-group">
           <label class="need-item" for="user_email">メールアドレス</label>
-          <input placeholder="vacant@vacant.com" class="form-control" type="email" value="" name="user[email]" id="user_email">
+          <input placeholder="vacant@vacant.com" class="form-control" type="email" required="required" value="" name="user[email]" id="user_email">
         </div>
 
         <div class="form-group form_item dash-content-item">
@@ -52,7 +52,7 @@
 
         <div class="form-group form_item">
           <label class="need-item" for="user_city">市町村</label>
-          <select class="select_citys form-control" name="user[city]" id="user_city">
+          <select required="required" class="select_citys form-control" name="user[city]" id="user_city">
             <option value="">市町村を選択してください</option>
             <template v-for="city in citys">
               <option v-bind:value="city.cityName" v-bind:key="city.cityCode">
@@ -76,11 +76,11 @@
 
         <div class="form_item">
           <label class="need-item" for="user_password">パスワード</label>
-          <input class="form-control" type="password" name="user[password]" id="user_password">
+          <input required="required" class="form-control" type="password" name="user[password]" id="user_password">
         </div>
         <div class="form_item">
           <label class="need-item" for="user_password_confirmation">パスワード確認</label>
-          <input class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+          <input required="required" class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation">
         </div>
 
         <button class="btn btn-outline-info login_btn signup-btn" type="submit">Sign Up</button>
@@ -120,6 +120,9 @@ export default {
       }
     };
   },
+  created: function() {
+    this.setCity()
+  },
   methods: {
     changeState: function(event){
       this.setCity(event.target.selectedIndex)
@@ -127,9 +130,8 @@ export default {
 
     },
 
-    setCity: function(val = 22){
+    setCity: function(val = 38){
       let url = `https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=${val + 1}`
-      console.log(val)
       axios({
       headers: {
         "X-API-KEY" : "sLXRi2Ovt21lcBxeFykUus8r0XIiHIAqtPrxntoW"

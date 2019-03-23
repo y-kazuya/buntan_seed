@@ -27,7 +27,7 @@
 
     <b-nav-item v-if="current_user && current_user.owner" href="#">物件管理</b-nav-item>
 
-      <b-nav-item v-else><router-link to="/item/new">物件を登録する</router-link></b-nav-item>
+      <b-nav-item v-else><router-link to="/item/new" class="n-link">物件を登録する</router-link></b-nav-item>
 
     <template v-if="current_user">
       <b-nav-item-dropdown right>
@@ -48,7 +48,7 @@
       <span>
         <b-nav-item v-b-modal.modal-center style="float: left;">ログイン</b-nav-item>
 
-          <b-nav-item style="float: right;" ><router-link to="/user/new" >新規登録</router-link></b-nav-item>
+          <b-nav-item style="float: right;" ><router-link to="/user/new" class="n-link">新規登録</router-link></b-nav-item>
 
       </span>
     </template>

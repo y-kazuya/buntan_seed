@@ -30,7 +30,6 @@ export default {
   methods: {
     getCurrentUser: function() {
       axios.get("/api/get_current_user").then(response => {
-        console.log("ss")
         this.current_user = response.data;
 
       });
@@ -38,11 +37,9 @@ export default {
     getItems: function() {
       axios.get("/api/get_items").then(response => {
         this.items = response.data;
-        console.log(this.items);
       });
     },
     reloadAll: function(){
-      console.log("eeee")
       this.$parent.$forceUpdate()
     },
 
