@@ -12,7 +12,7 @@ module UsersHelper
     if user.avatar.file
       return user.avatar_url(type)
     else
-      return "hito.jpg"
+      return "assets/hito.jpg"
     end
   end
 

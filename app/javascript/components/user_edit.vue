@@ -41,7 +41,7 @@
 
     <div class="form-group form_item">
       <label class="need-item" for="user_city">市町村</label>
-      <select class="form-control select_citys" name="user[city]" id="user_city" v-model.lazy="current_user.city">
+      <select class="form-control select_citys" name="user[city]" id="user_city" v-model="current_user.city" debounce="500">
         <option v-for="city in citys" v-bind:value="city.cityName" v-bind:key="city.cityCode">
           {{city.cityName}}
         </option>
@@ -74,19 +74,16 @@
 
 <script>
 import axios from "axios";
+import prefs from '../mixins/prefsMixin'
 export default {
   props: ["current_user"],
+  mixins: [ prefs ],
   data: function() {
     return {
-      states: "",
       citys: "",
     };
   },
   mounted: function() {
-    axios.get("/api/get_state").then(response => {
-
-        this.states = response.data
-      });
     axios({
       headers: {
         "X-API-KEY" : "sLXRi2Ovt21lcBxeFykUus8r0XIiHIAqtPrxntoW"
@@ -116,9 +113,11 @@ export default {
         }
       })
       .then(response => {
+        console.log("aa")
       }).catch(error => {
         console.log(error);
       });
+
     },
 
   }

@@ -1,5 +1,5 @@
 class Api::CurrentUserController < ActionController::Base
-  before_action :configure_account_update_params, only: [:update]
+  # before_action :configure_account_update_params, only: [:update]
 
   def index
     @user = current_user || false
@@ -20,16 +20,17 @@ class Api::CurrentUserController < ActionController::Base
 
 
   def update
+    @user = current_user
 
-    current_user.assign_attributes(account_update_params)
+    if params["avatar"]
+      @user.update(avatar: params["avatar"])
+      return
+    end
 
-    if current_user.save
-      flash[:notice] = "編集に成功しました"
-      redirect_back(fallback_location: root_path)
-      redirect_to "/"
+    if @user.update(user_update_params)
+
     else
-      flash[:alert] = "フォームに誤りがあります"
-
+      render :edit
     end
   end
 
@@ -40,7 +41,23 @@ class Api::CurrentUserController < ActionController::Base
     resource.update_without_password(params)
   end
 
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:update, keys: [:attribute])
+  def user_params
+    params.require(:users).permit(
+      :name,
+      :avatar,
+      :state,
+      :city,
+      :job,
+      :profile)
+  end
+
+  def user_update_params
+    params.require(:users).permit(
+      :name,
+      :state,
+      :city,
+      :job,
+      :profile
+    )
   end
 end

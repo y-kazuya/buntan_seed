@@ -25,6 +25,8 @@
 
 
 
+
+
       <b-nav-item-dropdown v-if="current_user" right>
 
         <template slot="button-content">
@@ -35,8 +37,8 @@
           </em>
         </template>
 
-        <b-dropdown-item href="/users/edit">
-          マイプロフィール
+        <b-dropdown-item>
+          <router-link to="/user/basic">マイプロフィールa</router-link>
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>

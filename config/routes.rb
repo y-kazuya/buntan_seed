@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/", to: "public/pages#top", as: "user_root"
   get "/users/edit",to: "public/pages#top"
   get "/user/edit",to: "public/pages#top"
+  get "/user/basic" ,to: "public/pages#top"
 
 
   namespace :admin do

@@ -8,6 +8,7 @@
 import Vue from "vue";
 import BootstrapVue from "bootstrap-vue";
 import VueRouter from "vue-router";
+import VeeValidate from 'vee-validate';
 import App from "../app.vue";
 import router from "./router";
 
@@ -15,14 +16,22 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(VueRouter);
+Vue.use(VeeValidate);
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));
-  new Vue({
-    el: "#app",
-    router,
-    render: h => h(App)
-  });
+  // new Vue({
+  //   el: "#app",
+  //   router,
+  //   render: h => h(App)
+  // });
+
+  let vm = new Vue({
+    router: router,
+    render(h) {
+      return h(App)
+    }
+  }).$mount('#app')
 
 });
 

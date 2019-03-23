@@ -1,7 +1,7 @@
 
 
 
-.dash-wrapper{
+#dash-wrapper{
   display: flex;
   position: relative;
   min-height: 85vh;
@@ -95,7 +95,7 @@
 
 
 
-.dash-wrapper {
+#dash-wrapper {
   @media screen and (max-width: 480px) { //moblie
     display: block;
 

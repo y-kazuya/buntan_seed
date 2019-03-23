@@ -2,10 +2,12 @@
 
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-  <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
+  <b-navbar-brand class="top_logo">
+    <router-link to="/"><img src="../../assets/images/top-logo.png"> </router-link>
+  </b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
-      <b-nav-item href="#">資産一覧</b-nav-item>
+      <b-nav-item >資産一覧</b-nav-item>
       <b-nav-item href="#">全てのアイテム</b-nav-item>
 
     </b-navbar-nav>
@@ -24,17 +26,19 @@
       </b-nav-item-dropdown>
 
     <b-nav-item v-if="current_user && current_user.owner" href="#">物件管理</b-nav-item>
-    <b-nav-item v-else href="/items/new">物件を登録する</b-nav-item>
+
+      <b-nav-item v-else><router-link to="/item/new">物件を登録する</router-link></b-nav-item>
+
     <template v-if="current_user">
       <b-nav-item-dropdown right>
         <template slot="button-content">
+          <img class="avatar" v-bind:src="this.current_user.avatar" alt="">
           <em v-once>
-            <img class="avatar" v-bind:src="current_user.avatar" alt="">
             {{this.current_user.name}}さん
           </em>
         </template>
-        <b-dropdown-item href="/users/edit">
-          マイプロフィール
+        <b-dropdown-item>
+          <router-link to="/user/basic">マイプロフィールa</router-link>
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
@@ -139,9 +143,8 @@ export default {
     enable: function() {
       this.isTestDisabled = false;
       this.message = "メールアドレスまたはパスワードが間違っています。";
-    }
+    },
   },
-
 
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <header-vue v-bind:current_user="current_user"></header-vue>
-    <router-view v-bind:items="items" v-bind:current_user="current_user"/>
+    <header-vue v-if="showHeader" v-bind:current_user="current_user"></header-vue>
+    <router-view v-bind:items="items" v-bind:current_user="current_user" @reloadAll="reloadAll" @getCurrentUser="getCurrentUser"/>
     <footer-vue></footer-vue>
   </div>
 </template>
@@ -18,10 +18,11 @@ export default {
   data: function() {
     return {
       current_user: "",
-      items: ""
+      items: "",
+      showHeader: true
     };
   },
-  mounted: function() {
+  created: function() {
     this.getItems();
     this.getCurrentUser();
   },
@@ -29,14 +30,28 @@ export default {
   methods: {
     getCurrentUser: function() {
       axios.get("/api/get_current_user").then(response => {
+        console.log("ss")
         this.current_user = response.data;
-        // console.log(this.current_user);
+
       });
     },
     getItems: function() {
       axios.get("/api/get_items").then(response => {
         this.items = response.data;
         console.log(this.items);
+      });
+    },
+    reloadAll: function(){
+      console.log("eeee")
+      this.$parent.$forceUpdate()
+    },
+
+    reloadAll() {
+      this.showHeader = false;
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.showHeader = true;
       });
     }
   },
