@@ -43,9 +43,9 @@
           </em>
         </template>
         <b-dropdown-item>
-          <router-link to="/user/basic">マイプロフィールa</router-link>
+          <router-link to="/user/basic" class="d-link">マイプロフィールa</router-link>
         </b-dropdown-item>
-        <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
+        <b-dropdown-item href="/users/sign_out" class="d-link" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
 
     </template>
