@@ -2,12 +2,16 @@
   <div id="footer">
     <b-container>
       <b-row>
-        <b-col>運営会社</b-col>
-        <b-col>サイトポリシー</b-col>
+        <b-col>運営者情報</b-col>
+        <b-col>
+          <router-link to="/privacy-poricy">
+            プライバシーポリシー
+          </router-link>
+        </b-col>
         <b-col>利用規約</b-col>
       </b-row>
       <b-row>
-        <b-col>2018. Kspace©</b-col>
+        <b-col>2019. Vacant©</b-col>
       </b-row>
     </b-container>
   </div>
@@ -30,6 +34,11 @@ export default {
       .col {
         font-size: 15px;
         color: white;
+        text-align: center;
+        a {
+          text-decoration: none;
+          color: white;
+        }
       }
     }
   }
