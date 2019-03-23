@@ -1,107 +1,110 @@
-資産登録ページ
 
-= form_for(@item) do |f|
-  = render 'shared/error_messages', object: f.object
+= javascript_pack_tag 'user_form'
 
-  .form_item.need_item
-    = f.label :title, "名称"
-    = f.text_field :title, class: 'form-control', required: true
+#no-spa
+  .warpper
+    %navbar(v-bind:current_user="current_user")
+    .dash-wrapper
+      .dash-left-warpper
+        .dash-content
+          .dash-content-title.middle-title(v-on:click="ab")
+            新規資産登録
+          .user-form.dash-content-main
+            = form_for(@item) do |f|
+              = render 'shared/error_messages', object: f.object
 
-  .form_item.need_item.need_item
-    = f.label :category, "タイプは?"
-    = f.collection_radio_buttons :category_id, Category.all, :id, :name,{},class: "item_category", required: true
+              .form-group.form_item.dash-content-item
+                = f.label :title, "名称"
+                = f.text_field :title, class: 'form-control', required: true
 
-
-  .form_item#sub_category_form.need_item
-    - if @item.sub_category
-      = f.label :sub_category_ategory, "サブカテゴリーは?"
-      = f.collection_radio_buttons :sub_category_id, SubCategory.where(category_id: @item.category.id), :id, :name,{},class: "item_category"
-
-
-  .form_item.need_item
-    = f.label :profile, "説明"
-    = f.text_field :profile, class: 'form-control', required: true
-
-
-  .form_item
-  = f.label :remark , "備考"
-  = f.text_area :remark
-
-  .form_item.need_item
-    = f.label :state, "都道府県"
-    = f.select :state, Item.states.keys,{selected: "高知県"}, {class: "select_state"}
-
-  .form_item.need_item
-    = f.label :city, "市町村"
-    = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys"}
-
-  - unless current_user.owner_category == "オーナー"
-    .form_item
-      = f.label :comment , "オーナーからのコメント"
-      = f.text_area :comment
-
-  .form_item.picture_area
-    .picture_field
-      = f.fields_for :pictures do |p|
-        = p.label :content do
-          = image_tag("kesiki.jpg", class: "picture_preview")
-        = p.file_field :content, class: "display_none file"
-        .picture_comment
-          = p.text_field :comment
-
-  .add_picture_bottun
-    写真を追加する＋
+              .form-group.form_item.dash-content-item
+                = f.label :category, "タイプは?"
+                = f.collection_radio_buttons :category_id, Category.all, :id, :name,{},class: "item_category form-control", required: true
 
 
+              -# .form_item#sub_category_form.need_item
+              -#   - if @item.sub_category
+              -#     = f.label :sub_category_ategory, "サブカテゴリーは?"
+              -#     = f.collection_radio_buttons :sub_category_id, SubCategory.where(category_id: @item.category.id), :id, :name,{},class: "item_category form-control"
 
 
-  .type_form#buiding_info_form.hidden_item
-    = f.fields_for :building_info,@item.building_info || @item.build_building_info  do |b|
-      .form_item.need_item
-        = b.label :about , "建物の状態"
-        = b.text_area :about
-      .form_item.need_item
-        = b.label :status , "建物の特徴"
-        = b.text_area :status
-      .form_item.need_item
-        = b.label :price, "値段"
-        = b.text_field :price
-      .form_item.need_item
-        = b.radio_button :rent, 0, checked: true
-        = b.label :rent, "建物を貸し出す", value: 0
-        = b.radio_button :rent, 1
-        = b.label :rent, "建物を販売する", value: 1
-      .form_item.need_item
-        使用可能用途
-        .c
-          = f.collection_check_boxes :usage_ids, Usage.all, :id, :name ,include_hidden: false do |b|
-            = b.label width: "150px" do
-              =b.check_box + b.text
+              .form-group.form_item.dash-content-item
+                = f.label :profile, "説明"
+                = f.text_field :profile, class: 'form-control', required: true
 
-  .type_form#food_info_form.hidden_item
-    = f.fields_for :food_info,@item.food_info || @item.build_food_info  do |fo|
-      .form_item.need_item
-        = fo.label :raw , "原材料"
-        = fo.text_area :raw
-      .form_item
-        = fo.label :amount , "量"
-        = fo.text_area :amount
 
-  - 3.times do |n|
-    = f.fields_for :tags,@item.tags[n] || @item.tags.build  do |t|
-      %span.form_item
-        =t.label :name ,"タグ名"
-        =t.text_field :name, class: "tag_field"
-        .tag_summarys
+              .form-group.form_item.dash-content-item
+              = f.label :remark , "備考"
+              = f.text_area :remark,class: "form-control"
+
+              .form-group.form_item.dash-content-item
+                = f.label :state, "都道府県"
+                = f.select :state, Item.states.keys,{selected: "高知県"}, {class: "select_state form-control"}
+
+              .form-group.form_item.dash-content-item
+                = f.label :city, "市町村"
+                = f.select :city,"aa", {prompt: "市町村を選択してください"}, {class: "select_citys "}
+
+
+              .form-group.form_item.dash-content-item
+                = f.label :comment , "オーナーからのコメント"
+                = f.text_area :comment,{class: "form-control"}
+
+              .form_item.picture_area
+                .picture_field
+                  = f.fields_for :pictures do |p|
+                    = p.label :content do
+                      = image_tag("kesiki.jpg", class: "picture_preview")
+                    = p.file_field :content, class: "display_none file"
+                    .picture_comment
+                      = p.text_field :comment
+
+              .add_picture_bottun
+                写真を追加する＋
 
 
 
 
+              .type_form#buiding_info_form.hidden_item
+                = f.fields_for :building_info,@item.building_info || @item.build_building_info  do |b|
+                  .form_item.need_item
+                    = b.label :about , "建物の状態"
+                    = b.text_area :about
+                  .form_item.need_item
+                    = b.label :status , "建物の特徴"
+                    = b.text_area :status
+                  .form_item.need_item
+                    = b.label :price, "値段"
+                    = b.text_field :price
+                  .form_item.need_item
+                    = b.radio_button :rent, 0, checked: true
+                    = b.label :rent, "建物を貸し出す", value: 0
+                    = b.radio_button :rent, 1
+                    = b.label :rent, "建物を販売する", value: 1
+                  .form_item.need_item
+                    使用可能用途
+                    .c
+                      = f.collection_check_boxes :usage_ids, Usage.all, :id, :name ,include_hidden: false do |b|
+                        = b.label width: "150px" do
+                          =b.check_box + b.text
 
+              .type_form#food_info_form.hidden_item
+                = f.fields_for :food_info,@item.food_info || @item.build_food_info  do |fo|
+                  .form_item.need_item
+                    = fo.label :raw , "原材料"
+                    = fo.text_area :raw
+                  .form_item
+                    = fo.label :amount , "量"
+                    = fo.text_area :amount
 
+              - 3.times do |n|
+                = f.fields_for :tags,@item.tags[n] || @item.tags.build  do |t|
+                  %span.form_item
+                    =t.label :name ,"タグ名"
+                    =t.text_field :name, class: "tag_field"
+                    .tag_summarys
+              .form_item
+                = f.submit "資産を登録する", class: "btn btn-primary"
 
+    %foot
 
-
-
-  .form_item
-    = f.submit "資産を登録する", class: "btn btn-primary"

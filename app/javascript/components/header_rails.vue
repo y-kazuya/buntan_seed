@@ -27,17 +27,20 @@
 
 
 
+
+
       <b-nav-item-dropdown v-if="current_user" right>
 
         <template slot="button-content">
+
           <em v-once>
             <img class="avatar" v-bind:src="current_user.avatar" alt="">
             {{this.current_user.name}}さん
           </em>
         </template>
 
-        <b-dropdown-item href="/users/edit">
-          マイプロフィール
+        <b-dropdown-item>
+          <router-link to="/user/basic">マイプロフィールa</router-link>
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>

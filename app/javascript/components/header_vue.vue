@@ -2,9 +2,13 @@
 
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-  <b-navbar-brand href="/" class="top_logo"><img src="../../assets/images/top-logo.png"></b-navbar-brand>
+  <b-navbar-brand class="top_logo">
+    <router-link to="/"><img src="../../assets/images/top-logo.png"> </router-link>
+  </b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
+      <b-nav-item >資産一覧</b-nav-item>
+      <b-nav-item href="#">全てのアイテム</b-nav-item>
       <!-- <b-nav-item href="#">全てのアイテム</b-nav-item> -->
       <b-nav-item>
         <router-link to="/about">
@@ -14,6 +18,7 @@
     </b-navbar-nav>
     <!-- ここから右寄せ -->
     <b-navbar-nav class="ml-auto">
+
       <b-nav-form>
         <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="キーワードを入力"/>
         <b-button size="sm" class="my-2 my-sm-0" type="submit">検索</b-button>
@@ -25,29 +30,36 @@
         <b-dropdown-item href="#" v-for="(area, key, index) in areas" :key="index">{{ area }}</b-dropdown-item>
       </b-nav-item-dropdown>
 
+    <b-nav-item v-if="current_user && current_user.owner" href="#">物件管理</b-nav-item>
 
+      <b-nav-item v-else><router-link to="/item/new" class="n-link">物件を登録する</router-link></b-nav-item>
 
-
-
-
-      <b-nav-item-dropdown v-if="current_user" right>
-
+    <template v-if="current_user">
+      <b-nav-item-dropdown right>
         <template slot="button-content">
+          <img class="avatar" v-bind:src="this.current_user.avatar" alt="">
           <em v-once>
-            <img class="avatar" v-bind:src="current_user.avatar" alt="">
             {{this.current_user.name}}さん
           </em>
         </template>
-
-        <b-dropdown-item href="/users/edit">
-          マイプロフィール
+        <b-dropdown-item>
+          <router-link to="/user/basic">マイプロフィールa</router-link>
         </b-dropdown-item>
         <b-dropdown-item href="/users/sign_out" data-method="delete">ログアウト</b-dropdown-item>
       </b-nav-item-dropdown>
-      <span v-else>
+
+    </template>
+    <template v-else>
+      <span>
         <b-nav-item v-b-modal.modal-center style="float: left;">ログイン</b-nav-item>
-        <b-nav-item href="/users/sign_up" style="float: right;">新規登録</b-nav-item>
+
+          <b-nav-item style="float: right;" ><router-link to="/user/new" class="n-link">新規登録</router-link></b-nav-item>
+
       </span>
+    </template>
+
+
+
     </b-navbar-nav>
   </b-collapse>
 
@@ -66,14 +78,14 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">メールアドレス</span>
         </div>
-        <input class="form-control" placeholder="Vacant@mail.com" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]" id="user_email">
+        <input class="form-control" placeholder="Vacant@mail.com" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]">
       </div>
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">パスワード&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </div>
-        <input class="form-control" autocomplete="current-password" type="password" name="user[password]" id="user_password">
+        <input class="form-control" autocomplete="current-password" type="password" name="user[password]" >
       </div>
       <input name="user[now_path]" type="hidden" :value="$route.path">
 
@@ -138,8 +150,8 @@ export default {
     enable: function() {
       this.isTestDisabled = false;
       this.message = "メールアドレスまたはパスワードが間違っています。";
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

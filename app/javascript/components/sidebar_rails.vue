@@ -2,7 +2,7 @@
   <div id="dash-sidebar">
     <div class="dash-sidebar-main" v-bind:class='{toggle_sidebar:sideOpne}' >
       <div class="dash-sidebar-top">
-        <p class="middle-title"> アカウント設定 </p>
+        <p class="middle-title"> {{sideTitle}} </p>
       </div>
 
       <ul class="dash-sidebar-lists">
@@ -40,7 +40,7 @@ export default {
           path: "#",
         },
       ],
-
+      sideTitle: "アカウント設定",
       sideOpne: true
     };
   },

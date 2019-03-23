@@ -105,17 +105,17 @@ class User < ApplicationRecord
 
 
 
-  def owner_category
-    owner_profile.category || nil
-  end
+  # def owner_category
+  #   owner_profile.category || nil
+  # end
 
-  def manager_category
-    manager_profile.category || nil
-  end
+  # def manager_category
+  #   manager_profile.category || nil
+  # end
 
-  def manager_phone_number
-    manager_profile.phone_number || nil
-  end
+  # def manager_phone_number
+  #   manager_profile.phone_number || nil
+  # end
 
   def yet_look_message_items
     Item.joins(item_contacts: [:messages]).where(user_id: self.id).distinct.where("looked = ?", "0")

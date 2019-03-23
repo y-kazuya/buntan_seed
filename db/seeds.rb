@@ -15,7 +15,7 @@ tags = %W[ 小学校跡 国道沿い 山奥 古民家 好立地 ]
 
 tags.each { |a| Tag.create(name: a, official: true)}
 
-cates = [{name: "その他", path_name: "others"}, {name: "空き山", path_name: "mountain"}, {name: "空き家", path_name: "house"}, {name: "空き畑", path_name: "hatake"}]
+cates = [{name: "空き山", path_name: "mountain"}, {name: "空き家・建物", path_name: "house"}, {name: "空き畑", path_name: "hatake"}, {name: "空き地", path_name: "land"}, {name: "その他", path_name: "others"}, ]
 
 cates.each { |cate| Category.create(name: cate[:name], path_name: cate[:path_name]) }
 

@@ -3,6 +3,11 @@ class Category < ApplicationRecord
   has_many :sub_categories, dependent: :destroy
 
 
+  validates :name,
+            presence: true,
+            length: { maximum: 20 },
+            uniqueness: { case_sensitive: false }
+
   def to_param
     path_name
   end
