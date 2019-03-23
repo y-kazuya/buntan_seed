@@ -103,6 +103,7 @@ label{
 }
 
 .warpper{
+  height: 84vh;
   @media screen and (max-width: 480px) {
     .warp-right{
       width: 90vw;
@@ -116,7 +117,7 @@ label{
     .warp-left{
       width: 100vw;
       height: 100vh;
-      background: #17a2b8;
+
     }
 
     .signup-btn{
@@ -133,6 +134,7 @@ label{
     .warp-right{
       width :30vw;
       right: 0;
+      height: 100%
     }
 
     .signup-btn{
@@ -146,12 +148,12 @@ label{
   }
   position: relative;
   .warp-left{
-
+    height: 100%;
     position: absolute;
     left: 0;
     img{
       width:100vw;
-      height:100vh;
+      height:100%;
     }
   }
 
@@ -173,7 +175,7 @@ label{
     }
     position: absolute;
     background: #F6F6F6;
-    height: 100vh;
+    height: 100%;
     overflow: scroll;
     padding: 20px;
     /* border-left: 2px solid black; */

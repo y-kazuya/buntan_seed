@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function(){
 
   function startCity(){
 
-
+    console.log($(".select_state").find('option:selected'))
     target.empty()
     if ($(".select_state").find('option:selected')[0] == undefined) {
       return false;
@@ -40,11 +40,14 @@ $(document).on('turbolinks:load', function(){
   }
 
 
-  if ($(".select_citys").length ){
-    startCity()
-  }
+  // if ($(".select_citys").length ){
+  //   setTimeout(function(){
+  //     startCity()
+  //   },100);
 
-  $(".select_state").on("change", function(){
-    startCity()
-  })
+  // }
+
+  // $(".select_state").on("change", function(){
+  //   startCity()
+  // })
 });

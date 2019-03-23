@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     def logged_in_user
       unless current_user
         store_location
-        flash[:danger] = "Please log in."
-        redirect_to new_user_session_path
+        flash[:alert] = "ログインまたは会員登録が必要です"
+        redirect_to new_user_registration_path
       end
     end
 end
