@@ -5,7 +5,7 @@
     <div class="dash-left-warpper">
       <div class="dash-content">
         <div class="dash-content-title middle-title">
-          基本編集
+          基本編集{{this.isValid}}
         </div>
         <div class="user-form dash-content-main">
           <form @submit.prevent="onsubmit">
@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group form_item dash-content-item">
-              <label for="user_state" class="need-item">都道府県</label>
+              <label for="user_state" class="need-item" >都道府県</label>
               <select class="select_state form-control" name="user[state]" id="user_state" v-model="current_user.state" @change="changeState">
 
                 <option v-for="pref in prefs" v-bind:value="pref.name" v-bind:key="pref.id" :data-id="pref.id">
@@ -89,7 +89,10 @@ export default {
   data: function(){
     return {
       citys: [],
-      change: false
+      change: false,
+      validation: {
+        name: false
+      }
     };
   },
 
@@ -146,14 +149,27 @@ export default {
         }
       }
 
-      config.headers['X-HTTP-Method-Override'] = 'PUT';
-      axios.post('/api/update_current_user', data, config).then(
-        response => {
-          this.$emit("getCurrentUser")
-          this.$emit("reloadAll")
-        }
-      )
+        config.headers['X-HTTP-Method-Override'] = 'PUT';
+        axios.post('/api/update_current_user', data, config).then(
+          response => {
+            this.$emit("getCurrentUser")
+            this.$emit("reloadAll")
+          }
+        )
 
+    }
+  },
+
+
+  computed: {
+    isValid: function () {
+      var valid = true
+      for (var key in this.validation) {
+        if (!this.validation[key]) {
+          valid = false
+        }
+      }
+      return valid
     }
   },
 

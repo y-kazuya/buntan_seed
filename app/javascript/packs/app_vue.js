@@ -8,7 +8,7 @@
 import Vue from "vue";
 import BootstrapVue from "bootstrap-vue";
 import VueRouter from "vue-router";
-import VeeValidate from 'vee-validate';
+
 import App from "../app.vue";
 import router from "./router";
 
@@ -16,7 +16,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(VueRouter);
-Vue.use(VeeValidate);
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));

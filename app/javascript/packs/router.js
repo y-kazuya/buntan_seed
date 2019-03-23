@@ -4,10 +4,10 @@ import VueRouter from "vue-router";
 import App from "../app.vue";
 import MainVue from "../components/main_vue.vue";
 import ItemDetail from "../components/item_detail.vue";
-import UserEdit from "../components/user_edit.vue";
 import ItemForm from "../components/item_form.vue"
 import NotFoundComponent from '../components/NotFoundComponent.vue'
 import UserBasic  from "../components/user_basic.vue"
+import UserNew from "../components/user_new.vue"
 
 
 Vue.use(VueRouter);
@@ -25,6 +25,7 @@ const router = new VueRouter({
     { path: "/", component: MainVue },
     { path: "/item/new", component: ItemForm},
     { path: "/user/basic", component: UserBasic},
+    { path: "/user/new", component: UserNew},
     {
       path: "/item/:id",
       name: "Item",
@@ -32,7 +33,6 @@ const router = new VueRouter({
       props: route => ({ id: Number(route.params.id) })
     },
     { path: '*', component: NotFoundComponent },
-    { path: "/user/edit", component: UserEdit},
   ]
 });
 

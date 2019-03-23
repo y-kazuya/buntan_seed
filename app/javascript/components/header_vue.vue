@@ -47,7 +47,9 @@
     <template v-else>
       <span>
         <b-nav-item v-b-modal.modal-center style="float: left;">ログイン</b-nav-item>
-        <b-nav-item href="/users/sign_up" style="float: right;">新規登録</b-nav-item>
+
+          <b-nav-item style="float: right;" ><router-link to="/user/new" >新規登録</router-link></b-nav-item>
+
       </span>
     </template>
 
@@ -71,14 +73,14 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">メールアドレス</span>
         </div>
-        <input class="form-control" placeholder="Vacant@mail.com" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]" id="user_email">
+        <input class="form-control" placeholder="Vacant@mail.com" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]">
       </div>
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">パスワード&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </div>
-        <input class="form-control" autocomplete="current-password" type="password" name="user[password]" id="user_password">
+        <input class="form-control" autocomplete="current-password" type="password" name="user[password]" >
       </div>
       <input name="user[now_path]" type="hidden" :value="$route.path">
 

@@ -126,3 +126,13 @@ legend {
 #yui3-css-stamp.cssreset {
   display: none;
 }
+
+.navbar{
+  a{
+    color: rgba(255, 255, 255, .5) !important;
+  }
+
+  a:hover{
+    text-decoration: none;
+  }
+}
