@@ -109,9 +109,10 @@ export default {
       cates: [
         { value: "a", text: "空き家" },
         { value: "b", text: "空き山" },
-        { value: "c", text: "空き畑" }
+        { value: "c", text: "空き地" }
       ],
-      citys: ""
+      citys: "",
+      states: ""
     };
   },
 
@@ -134,6 +135,9 @@ export default {
       .catch(error => {
         console.log(error);
       });
+    axios.get("/api/get_items").then(response => {
+      this.items = response.data;
+    });
   }
 };
 </script>
