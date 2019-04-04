@@ -21,7 +21,6 @@ class Api::CurrentUserController < ActionController::Base
 
   def update
     @user = current_user
-
     if params["avatar"]
       @user.update(avatar: params["avatar"])
       return
