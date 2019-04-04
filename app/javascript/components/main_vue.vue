@@ -2,8 +2,8 @@
   <div id="main">
     <section class="top">
       <div class="top-text">
-        <p class="top-text-big">空き家 X 起業家</p>
-        <p>その空き家、<br/>無限の可能性を秘めています</p>
+        <p class="top-text-big" style="font-family: fantasy;">Have your own Mountain</p>
+        <p>自分だけの山で遊びつくそう</p>
       </div>
       <div class="top-searchForm">
         <b-card>
@@ -18,8 +18,20 @@
             </b-row>
             <b-row>
               <b-col cols="8" class="pr-0 pl-0">
-                <b-form-select v-model="selectedArea" :options="areas">
-                </b-form-select>
+                <div class="form-group form_item">
+                  <label class="need-item" for="user_city">都道府県</label>
+                  <select class="select_state form-control" name="user[state]" id="user_state">
+                    <option v-for="(value, key) in states" v-bind:value="key" v-bind:key="value">
+                      {{key}}
+                    </option>
+                  </select>
+                  <label class="need-item" for="user_city">市町村</label>
+                  <select class="form-control select_citys" name="user[city]" id="user_city">
+                    <option v-for="city in citys" v-bind:value="city.cityName" v-bind:key="city.cityCode">
+                      {{city.cityName}}
+                    </option>
+                  </select>
+                </div>
               </b-col>
               <b-col cols="4" class="pr-0 pl-2">
                 <div>
@@ -88,28 +100,45 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data: function() {
     return {
       input_area: "",
-      selectedArea: null,
-      areas: [
-        { value: null, text: "エリアを選択" },
-        { value: "a", text: "高知市" },
-        { value: "b", text: "嶺北" },
-        { value: "c", text: "四万十" },
-        { value: "d", text: "室戸" }
-      ],
       selectedCate: null,
       cates: [
         { value: "a", text: "空き家" },
         { value: "b", text: "空き山" },
-        { value: "c", text: "空き畑" }
-      ]
+        { value: "c", text: "空き地" }
+      ],
+      citys: "",
+      states: ""
     };
   },
+
   props: ["items"],
-  mounted: function() {}
+  mounted: function() {
+    axios.get("/api/get_state").then(response => {
+      this.states = response.data;
+    });
+    axios({
+      headers: {
+        "X-API-KEY": "Z3EL4ocLlD9uJcZUi61WnBtnZT8fltrlCPjcVeZ5"
+      },
+      method: "get",
+      url: `https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=1
+      }`
+    })
+      .then(response => {
+        this.citys = response.data.result;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios.get("/api/get_items").then(response => {
+      this.items = response.data;
+    });
+  }
 };
 </script>
 <style scoped lang="scss">

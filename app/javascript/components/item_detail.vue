@@ -34,22 +34,25 @@
                 </b-carousel-slide>
               </b-carousel>
         <b-card-body>
-          <h4><strong>{{ id }}</strong></h4>
+          <h4><strong>{{ item.title }}</strong></h4>
           <p class="card-text">
-              周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
+              {{ item.profile }}
           </p>
         </b-card-body>
         <b-list-group flush>
-          <b-list-group-item>カテゴリ</b-list-group-item>
+          <b-list-group-item>
+            <span>カテゴリ</span>
+            <span class="mb-list-right">{{ item.category.name }}</span>
+          </b-list-group-item>
           <b-list-group-item>築年数</b-list-group-item>
           <b-list-group-item>住所</b-list-group-item>
         </b-list-group>
         <div class="clearfix">
           <b-img left src="https://picsum.photos/125/125/?image=58" alt="left image" />
           <div style="position: relative; left: 15px; top: 15px;">
-            <h4>空き家太郎</h4>
-            <p>出身地：高知県幡多郡中村市</p>
-            <p>職業：中村市役所職員</p>
+            <h4>{{ item.user.name }}</h4>
+            <p>{{ item.user.city }}</p>
+            <p>{{ item.user.profile }}</p>
             <p>評価：★★★★☆</p>
           </div>
         </div>
@@ -100,9 +103,9 @@
             </b-row>
             <b-row>
               <b-card-body>
-                <h4><strong>{{ id }}</strong></h4>
+                <h4><strong>{{ item.title }}</strong></h4>
                 <p class="card-text">
-                    周りには、川がたくさんあり、魚の釣り場もあったりして色々なアクティビティを楽しめます！ハンモックと、雨が降ったらログキャビンも利用できます。
+                  {{ item.profile }}
                 </p>
               </b-card-body>
               <b-table striped hover :detail="detail" :fields="fields"></b-table>
@@ -110,23 +113,17 @@
           </b-col>
           <b-col md="4">
             <b-card border-variant="info" header="所在地" align="center" class="mt-3">
-              <p class="card-text">アクセス：</p>
-              <p class="card-text">四万十東インターから20分</p>
+              <p class="card-text">{{ item.user.city }}</p>
               <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
             </b-card>
           </b-col>
         </b-row>
-          
-        
-        
-        
-
-
       </b-container>
     </section>
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   props: { id: Number },
   data: function() {
@@ -144,9 +141,13 @@ export default {
         { isActive: false, table_left: "築年数", table_right: "55年" },
         { isActive: true, table_left: "物件情報", table_right: "2LDK" },
         { isActive: true, table_left: "状態", table_right: "要改修" }
-      ]
+      ],
+      loading: false,
+      item: "",
+      error: null
     };
   },
+
   methods: {
     onSlideStart(slide) {
       this.sliding = true;
@@ -154,33 +155,18 @@ export default {
     onSlideEnd(slide) {
       this.sliding = false;
     }
+  },
+  created: function() {
+    console.log(this.$route.params.id);
+    axios
+      .get("/api/get_item", { params: { id: this.$route.params.id } })
+      .then(response => {
+        this.item = response.data;
+        console.log(this.item);
+      });
   }
 };
 </script>
 <style scoped lang="scss">
-#itempage {
-  @media screen and (max-width: 800px) {
-    #item-mobile {
-      .map {
-        margin: 5px;
-      }
-    }
-    #item-md {
-      display: none;
-    }
-  }
-
-  @media screen and (min-width: 801px) {
-    #item-md {
-      background-color: #f6f4f3;
-
-      .bg-white {
-        background-color: white;
-      }
-    }
-    #item-mobile {
-      display: none;
-    }
-  }
-}
+@import "app/assets/stylesheets/items.scss";
 </style>
