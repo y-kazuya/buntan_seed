@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     get    "/get_current_user", to: "current_user#index"
     put    "/update_current_user", to: "current_user#update"
     get    "/get_item",   to: "get_items#show"
+    get    "/check_unique", to: "check_unique#index"
   end
 
   namespace :api do
