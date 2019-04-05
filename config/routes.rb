@@ -1,5 +1,3 @@
-
-
 Rails.application.routes.draw do
   devise_for :users,controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
                                     sessions: "users/sessions",
@@ -15,6 +13,8 @@ Rails.application.routes.draw do
   get "/users/edit", to: "public/pages#top"
   get "/user/edit", to: "public/pages#top"
   get "/about", to: "public/pages#top"
+  get "/item/new", to: "public/pages#top"
+  get "/item/:id", to: "public/pages#top"
 
 
   namespace :admin do
@@ -62,10 +62,15 @@ Rails.application.routes.draw do
     get    "/get_tags", to: "get_tags#index"
     get    "/get_sub_cates", to: "get_sub_cates#index"
     get    "/get_items",     to: "get_items#index"
+    get    "/get_items_category", to: "get_items#category"
     get    "/get_state",     to:  "get_state#index"
     get    "/get_current_user", to: "current_user#index"
     put    "/update_current_user", to: "current_user#update"
     get    "/get_item",   to: "get_items#show"
+  end
+
+  namespace :api do
+    post   "/create_item",         to: "create_item#index"
   end
 
 

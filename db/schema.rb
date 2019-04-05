@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190210081546) do
+ActiveRecord::Schema.define(version: 20190404005952) do
 
   create_table "building_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "about",      limit: 65535,                 null: false
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20190210081546) do
     t.integer  "category_id"
     t.integer  "sub_category_id"
     t.text     "reject_text",     limit: 65535
+    t.string   "price"
+    t.boolean  "is_rent"
     t.index ["category_id"], name: "index_items_on_category_id", using: :btree
     t.index ["sub_category_id"], name: "index_items_on_sub_category_id", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree

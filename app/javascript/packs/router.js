@@ -9,7 +9,6 @@ import ItemForm from "../components/item_form.vue"
 import NotFoundComponent from '../components/NotFoundComponent.vue'
 import UserBasic  from "../components/user_basic.vue"
 import UserNew from "../components/user_new.vue"
-import UserEdit from "../components/user_edit.vue";
 import AboutVue from "../components/about_vue.vue";
 import PrivacyPoricy from "../components/privacy_policy.vue";
 
@@ -38,11 +37,9 @@ const router = new VueRouter({
       props: route => ({ id: Number(route.params.id) })
     },
     { path: '*', component: NotFoundComponent },
-
-    { path: "/user/edit", component: UserEdit },
     { path: "/privacy-poricy", component: PrivacyPoricy }
   ],
-                             
+
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;

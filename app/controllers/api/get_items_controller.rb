@@ -16,4 +16,12 @@ class Api::GetItemsController < ActionController::Base
     end
   end
 
+  def category
+    @categories =  Category.all.to_json(only: [:id,:name])
+
+    respond_to do |format|
+      format.json {render :json => @categories }
+    end
+  end
+
 end

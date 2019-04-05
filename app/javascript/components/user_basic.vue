@@ -142,7 +142,7 @@ export default {
 
       let data = new FormData();
       data.append('avatar', file)
-
+      console.log(data)
       let config = {
         headers : {
         'content-type' : 'multipart/form-data'

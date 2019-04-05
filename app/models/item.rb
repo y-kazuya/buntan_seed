@@ -42,8 +42,10 @@ class Item < ApplicationRecord
   validates :profile, presence: true, length: { maximum: 800 }
   validates :comment,
             length: { maximum: 800 }
-  validates :state,:city,
+  validates :state,:city,:price,
             presence: true
+
+  validates :is_rent, inclusion: {in: [true, false]}
 
 
   # validates :sub_category_id , presence: true, if: :need_sub_categroy
@@ -51,7 +53,7 @@ class Item < ApplicationRecord
 
 
   validate :need_usage
-  validate :need_picture
+  # validate :need_picture
   validate :check_picture_count
 
 

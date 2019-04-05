@@ -30,7 +30,7 @@
         <b-dropdown-item href="#" v-for="(area, key, index) in areas" :key="index">{{ area }}</b-dropdown-item>
       </b-nav-item-dropdown>
 
-    <b-nav-item v-if="current_user && current_user.owner" href="#">物件管理</b-nav-item>
+    <b-nav-item v-if="current_user && current_user.owner"><router-link to="/item/new" class="n-link">物件管理</router-link></b-nav-item>
 
       <b-nav-item v-else><router-link to="/item/new" class="n-link">物件を登録する</router-link></b-nav-item>
 
