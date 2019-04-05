@@ -8,8 +8,11 @@
         <div class="user-form dash-content-main">
           <form @submit.prevent="onsubmit">
             <div class="form-group form_item dash-content-item">
-                <label for="user_name" class="need-item">タイトル</label>
-                <input placeholder="土佐市のあきやま" required="required" type="text" v-model="item.title" id="item_title" class="form-control">
+                <label for="user_name" class="need-item">タイトル{{validation.title}}</label>
+                <input placeholder="土佐市のあきやま" required="required" type="text" v-model="item.title" id="item_title" v-bind:class="[`form-control`, validTitle ? `is-error`  : '']" @change="valiUnique($event,'Item','title'),valiLong($event,'Item','title',50)">
+                <template v-for="(error,i) in errors.Item.title">
+                  <div class="validate-message" v-bind:key="i" >{{error}} </div>
+                </template>
             </div>
 
             <div class="form-group form_item dash-content-item">
@@ -28,7 +31,7 @@
               </select>
             </div>
 
-            <div class="form-group form_item">
+            <div class="form-group dash-content-item form_item">
               <label class="need-item" for="item_city">市町村</label>
               <select required="required" class="select_citys form-control" id="item_city" v-model="item.city">
                 <option value="">市町村を選択してください</option>
@@ -40,7 +43,7 @@
               </select>
             </div>
 
-            <div class="form-group form_item">
+            <div class="form-group dash-content-item form_item">
               <label class="need-item" for="item_category">資産カテゴリー</label>
               <select required="required" class="form-control" id="item_category" v-model="item.category_id">
                 <option value="">カテゴリーを選択してください</option>
@@ -53,10 +56,10 @@
               </select>
             </div>
 
-            <div class="content-box">
-              <div class="content-title need-item">
+            <div class="content-box form-group dash-content-item form_item">
+              <label class="content-title need-item">
                 貸し出しタイプ/値段
-              </div>
+              </label>
 
               <div class="content-box-area">
                 <b-form-group class="form-group c-left-content">
@@ -72,38 +75,48 @@
             </div>
 
             <div class="form-group form_item dash-content-item">
-              <label for="item_profile">説明文</label>
-              <textarea id="item_profile" class="form-control" v-model="item.profile" required></textarea>
+              <label for="item_profile"  class="need-item">説明文</label>
+              <textarea id="item_profile" v-model="item.profile" required v-bind:class="[`form-control`,`normal-textarea`, validProfile ? `is-error`  : '']" @change="valiLong($event,'Item','profile',50)"></textarea>
+              <template v-for="(error,i) in errors.Item.profile">
+                  <div class="validate-message" v-bind:key="i" >{{error}} </div>
+                </template>
             </div>
 
-            <template v-for="(image, index) in images">
-              <template v-if="index ==0">
-                <div class="form_item form-group" v-bind:key="index" :id="index">
-                  メイン写真{{image.preview}}
-                  <label :for="'image_' + index">
-                    <img class="avatar_preview" :src="image.preview" alt="Hito">
-                  </label>
-                  <input class="display_none file" type="file" :id="'image_' + index" @change="onFileChange">
-                  <input placeholder="土佐 太郎"  type="text" v-model="image.comment" class="form-control">
-                </div>
+            <div class="form-group form_item dash-content-item">
+              <label class="need-item">メイン写真</label>
+
+              <template v-for="(image, index) in images">
+                <template v-if="index ==0">
+                  <div class="form_item form-group t-c" v-bind:key="index" :id="index">
+                    <label :for="'image_' + index">
+                      <img class="avatar_preview" :src="image.preview" alt="Hito">
+                    </label>
+                    <input class="display_none file" type="file" :id="'image_' + index" @change="onFileChange" >
+                    <input placeholder="コメント: 春になると庭には桜が咲きます！"  type="text" v-model="image.comment" class="form-control">
+                  </div>
+                </template>
               </template>
-              <template v-else>
-                <div class="form_item form-group" v-bind:key="index" :id="index">
-                  サブ画像(4マイまで){{image.preview}}
-                  <label :for="'image_' + index">
-                    <img class="avatar_preview" :src="image.preview" alt="Hito">
-                  </label>
-                  <input class="display_none file" type="file" :id="'image_' + index" @change="onFileChange">
-                  <input placeholder="土佐 太郎"  type="text" v-model="image.comment" class="form-control">
-                  <div class="imageDeleteButton" @click="deleteImage"> X</div>
-                </div>
-              </template>
-            </template>
-            <div class="addImage" @click="addImageField" v-if="images.length < 5">
-              写真を追加{{images.length}}
             </div>
             <div class="form-group form_item dash-content-item">
-              <button type="submit" class="btn btn-outline-info login_btn signup-btn dash-submit">保存</button>
+              <label >サブ写真(4枚まで)</label>
+              <template v-for="(image, index) in images">
+                <template v-if="index > 0" >
+                  <div class="form_item form-group t-c" v-bind:key="index" :id="index">
+                    <label :for="'image_' + index">
+                      <img class="avatar_preview" :src="image.preview" alt="Hito">
+                    </label>
+                    <input class="display_none file" type="file" :id="'image_' + index" @change="onFileChange">
+                    <input placeholder="コメント: 家の外観です！"  type="text" v-model="image.comment" class="form-control">
+                    <div class="imageDeleteButton" @click="deleteImage"> 写真の削除</div>
+                  </div>
+                </template>
+              </template>
+            </div>
+            <div class="addImage" @click="addImageField" v-if="images.length < 5">
+              写真を追加+
+            </div>
+            <div class="form-group form_item dash-content-item">
+              <button type="submit" class="btn btn-outline-info login_btn signup-btn dash-submit" :disabled="goSubmit">保存</button>
             </div>
 
 
@@ -119,6 +132,7 @@
 import axios from "axios";
 import prefs from '../mixins/prefsMixin'
 
+
 export default {
   props: {
     current_user: {
@@ -132,9 +146,6 @@ export default {
     return {
       citys: [],
       change: false,
-      validation: {
-        title: false
-      },
       categoryies: [],
       item: {
         title: "",
@@ -143,27 +154,72 @@ export default {
         city: "",
         price: "",
         category_id: "",
-        is_rent: "",
+        is_rent: true,
         price: "",
       },
       images: [
-        {file: "", comment: "", preview: "/assets/hito-f386204efbe5a1895129239362ab0d5dc306159d195d467343a97f9ef5f4adab.jpg"},
-        {file: "", comment: "", preview: "/assets/hito-f386204efbe5a1895129239362ab0d5dc306159d195d467343a97f9ef5f4adab.jpg"}
+        {file: "", comment: "", preview: "/assets/amp_house.png"},
+        {file: "", comment: "", preview: "/assets/amp_house.png"}
       ],
       placeholder: {
-        price: "貸し出しタイプを選択してください"
-      }
+        price: "例)1ヶ月 1万円~"
+      },
+
+
+      validation: {
+        title: false,
+        profile: false,
+        loadtime: false
+      },
+
+      errors: {
+        Item: {
+          title:{
+            unique: "",
+            max: ""
+          },
+          profile: {
+            max: ""
+          }
+
+        }
+      },
+
     };
   },
 
   methods:{
+    valiLong(event,model,name,max){
+      if (event.target.value.length > max) {
+        this.errors[model][name].max = `長すぎます${max}文字以下にしてください`
+      }
+      else{
+        this.errors[model][name].max = ""
+      }
+    },
+
+    valiUnique: function(event, model, name) {
+
+      axios.get("/api/check_unique", {params: {model: model,name: name, value: event.target.value}}).then(response => {
+        if (response.data == "valid"){
+          this.errors[model][name].unique = `すでに使われています。変更してください`
+        }
+        else{
+          this.errors[model][name].unique = ""
+        }
+
+
+      });
+
+    },
+
     deleteImage: function(event){
-      console.log(event.path[1].id)
+
       this.images.splice(event.path[1].id, 1)
     },
     addImageField: function(){
-      console.log("add")
-      this.images.push({file: "", commnet: "", preview: "/assets/hito-f386204efbe5a1895129239362ab0d5dc306159d195d467343a97f9ef5f4adab.jpg"})
+
+      this.images.push({file: "", commnet: "", preview: "/assets/amp_house.png"})
     },
     onFileChange: function(e) {
 
@@ -193,7 +249,6 @@ export default {
       .then(response => {
         this.citys = response.data.result
       }).catch(error => {
-        console.log(error);
       });
     },
 
@@ -206,83 +261,56 @@ export default {
       this.item.is_rent = "false"
       this.placeholder.price = "例)100万円、応相談"
       }
-      console.log(this.item.is_rent)
     },
 
 
     changeState: function(event){
       this.setCity(event.target.selectedIndex)
       this.item.city= ""
-      console.log(this.images[0].file)
     },
 
     onsubmit: function(){
-      const item = this.item
-      let files = new FormData();
-      let file = this.images[0].file
-      // for (var i = 0; i < this.images.length; i++) {
-      //   let file = this.images[i].file;
-      //   files.append('files[' + i + ']', file);
-      // }
+      if (this.images[0].file == ""){
+        alert("メイン画像は必須です")
+        return
+      }
 
-      // files.append("imageeeee", this.images[0].file);
+      this.validation.loadtime = true
+      let data = new FormData();
+      let item = this.item
 
-      // console.log(files)
+      for (let key in item) {
+        data.append(key, item[key])
+      }
 
-      axios({
-        method: 'post',
-        url: '/api/create_item',
-        data: {item: item}
-        })
-        .then(function (response) {
+      for (var i = 0; i < this.images.length; i++) {
+        let file = this.images[i].file;
+        let comment = this.images[i].comment;
+        data.append('files[' + i + ']', file);
+        data.append('comment[' + i + ']', comment)
+      }
 
-          alert("登録に成功しました！");
-        })
-        .catch(function (response) {
-            //handle error
-            console.log(response);
+      let config = {
+        headers : {
+        'content-type' : 'multipart/form-data'
+        }
+      }
+      config.headers['X-HTTP-Method-Override'] = 'POST';
+
+      axios.post('/api/create_item', data, config)
+        .then(
+          response => {
+            alert("登録に成功しました！");
+
+          }
+        ).catch(function (response) {
+          alert("通信エラーです")
+          console.log(response);
         });
 
-      // files.append('yourFileKey', this.images[0].file);
-      // axios({
-      //   method: 'post',
-      //   url: '/api/create_item',
-      //   data: {
-      //     item: item,
-      //     file: files
-      //   },
-      //   config: { headers: {'content-type' : 'multipart/form-data'}}
-      // })
-      // .then(response => {
-      //   console.log("suc")
-      // }).catch(error => {
-      //   console.log(error);
-      // });
-
-      files.append('avatar', file)
-
-      console.log(files)
-      let config = {
-          headers: {
-              'content-type': 'multipart/form-data'
-          }
-      };
-
-      axios.post('/api/create_item', files, config)
-      .then(function(response) {
-
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
 
 
-
-
-
-
-
+    this.validation.loadtime = false
 
     },
 
@@ -290,38 +318,61 @@ export default {
 
 
   computed: {
-    isValid: function () {
-      var valid = true
-      for (var key in this.validation) {
-        if (!this.validation[key]) {
-          valid = false
+    // isValid: function () {
+    //   var valid = true
+    //   for (var key in this.validation) {
+    //     if (!this.validation[key]) {
+    //       valid = false
+    //     }
+    //   }
+    //   return valid
+    // },
+
+    validTitle: function(){
+      for (var key in this.errors.Item.title){
+        if (this.errors.Item.title[key]) {
+          this.validation.title = true
+          return true
         }
       }
-      return valid
+      this.validation.title = false
+      return false
     },
-    // categoryies: function(){
 
-    //   axios.get("/api/get_items_category").then(response => {
-    //     console.log(response.data)
-    //     return response.data
-    //   });
+    validProfile: function(){
+      for (var key in this.errors.Item.profile){
+        if (this.errors.Item.profile[key]) {
 
-    // }
+          this.validation.profile = true
+          return true
+        }
+      }
+      this.validation.profile = false
+      return false
+    },
+
+    goSubmit: function(){
+      for (var key in this.validation){
+        if (this.validation[key]) {
+          return true
+        }
+      }
+      return false
+    }
   },
 
 
   mounted: function(){
-
     this.setCity()
     this.setCategory()
   },
-  beforeDestroy: function(){
-    this.$emit("get_current_user")
-  }
+
+
+
 }
 </script>
 
-<style lang="scss">
+<style scoped>
 
   .content-box-area{
     display: flex;
@@ -334,5 +385,53 @@ export default {
 
   .c-right-content{
     min-width: 20%;
+  }
+
+  .dash-content{
+    padding: 30px 250px 50px 250px;
+
+  }
+  .avatar_preview {
+    border: 1px solid rgb(7, 5, 5);
+    width: 40vw;
+    height: 45vh;
+    margin-left: 0;
+  }
+  .t-c {
+    text-align: center;
+    position: relative;
+  }
+
+  .imageDeleteButton{
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    color: red;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid pink;
+  }
+
+  .imageDeleteButton:hover{
+    color: pink
+  }
+
+  .addImage{
+    color: green;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .addImage:hover{
+    color: lightgreen
+  }
+
+  @media screen and (max-width: 480px) {
+    .avatar_preview{
+      height: 20vh;
+    }
   }
 </style>

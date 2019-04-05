@@ -6,6 +6,16 @@
   display: block;
 }
 
+.normal-textarea{
+  @media screen and (max-width: 480px) {
+    height: 100px !important;
+  }
+  @media screen and (min-width: 481px) {
+    height: 200px !important;
+  }
+
+}
+
 
 .avatar_preview{
   border: 1px solid black;
@@ -237,4 +247,10 @@ label{
 
 .is-error{
   border: 1px solid red !important;
+}
+
+
+
+.validate-message{
+  color: red
 }
