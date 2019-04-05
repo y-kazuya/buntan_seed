@@ -33,6 +33,10 @@ class Item < ApplicationRecord
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
   }
 
+  enum areas: {
+    高知市:1, 仁淀川:2, 嶺北:3, 物部川:4, 安芸・室戸:5, 四万十・足摺:6, 高知県外:7 
+  }
+
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 40 }
 
   validates :profile, presence: true, length: { maximum: 800 }

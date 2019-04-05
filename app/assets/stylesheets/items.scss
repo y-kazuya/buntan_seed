@@ -1,3 +1,35 @@
-// Place all the styles related to the items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#itempage {
+  @media screen and (max-width: 800px) {
+    #item-mobile {
+      .map {
+        margin: 5px;
+      }
+
+      .card {
+        .list-group {
+          .list-group-item {
+            .mb-list-right {
+              float: right;
+            }
+          }
+        }
+      }
+    }
+    #item-md {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 801px) {
+    #item-md {
+      background-color: #f6f4f3;
+
+      .bg-white {
+        background-color: white;
+      }
+    }
+    #item-mobile {
+      display: none;
+    }
+  }
+}

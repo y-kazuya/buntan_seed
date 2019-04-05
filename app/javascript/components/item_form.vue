@@ -229,20 +229,19 @@ export default {
 
       // console.log(files)
 
-      // axios({
-      //   method: 'post',
-      //   url: '/api/create_item',
-      //   data: item,
-      //   // config: { headers: {'Content-Type': 'multipart/form-data' }}
-      //   })
-      //   .then(function (response) {
+      axios({
+        method: 'post',
+        url: '/api/create_item',
+        data: {item: item}
+        })
+        .then(function (response) {
 
-      //       console.log("suc");
-      //   })
-      //   .catch(function (response) {
-      //       //handle error
-      //       console.log(response);
-      //   });
+          alert("登録に成功しました！");
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
 
       // files.append('yourFileKey', this.images[0].file);
       // axios({
@@ -260,22 +259,18 @@ export default {
       //   console.log(error);
       // });
 
-      files.append('avatar', "file")
+      files.append('avatar', file)
 
       console.log(files)
+      let config = {
+          headers: {
+              'content-type': 'multipart/form-data'
+          }
+      };
 
-      // axios.post('/api/create_item', files, config).then(
-      //   response => {
-      //     // this.$emit("getCurrentUser")
-      //     // this.$emit("reloadAll")
-      //   }
-      // )
-      axios.post('/api/create_item', files, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      axios.post('/api/create_item', files, config)
       .then(function(response) {
+
         console.log(response);
       })
       .catch(function(error) {

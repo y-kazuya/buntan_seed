@@ -1,10 +1,9 @@
 class Api::CreateItemController < ActionController::Base
 
   def index
-
     @item = Item.new(item_params)
     @item.status = 1
-    binding.pry
+
     # set_tag
     if @item.save
       flash[:notice] = "作成に成功しました"
