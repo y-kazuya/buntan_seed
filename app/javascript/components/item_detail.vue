@@ -1,5 +1,8 @@
 <template>
   <div id="itempage">
+
+
+    <!-- モバイル画面 -->
     <section id="item-mobile">
       <b-card no-body
             style="max-width: 100%;"
@@ -66,10 +69,34 @@
         <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
       </b-card>
     </section>
+
+
+    <!-- タブレット画面 -->
+
+
+    <!-- PC画面 -->
     <section id="item-md">
       <b-container class="bg-white">
         <b-row>
           <b-col md="8">
+            <b-row>
+              <b-card-body>
+                <h4><strong>{{ item.title }}</strong></h4>
+                <b-badge variant="light">{{ item.user.city }}</b-badge>
+                <b-badge variant="secondary" v-if="category === 1">
+                  空き家
+                </b-badge>
+                <b-badge variant="secondary" v-else-if="category === 2">
+                  空き山
+                </b-badge>
+                <b-badge variant="secondary" v-else-if="category === 3">
+                  空き地
+                </b-badge>
+                <b-badge variant="secondary" v-else>
+                  カテゴリ不明
+                </b-badge>
+              </b-card-body>
+            </b-row>
             <b-row>
               <b-carousel id="item-carousel"
                     style="text-shadow: 1px 1px 2px #333;"
@@ -103,12 +130,14 @@
             </b-row>
             <b-row>
               <b-card-body>
-                <h4><strong>{{ item.title }}</strong></h4>
                 <p class="card-text">
                   {{ item.profile }}
                 </p>
+                <h5>設備・特徴</h5>
+                <ul>
+                  <li v-for="tag in tags" v-vind:key :key="tag">・{{tag}}</li>
+                </ul> 
               </b-card-body>
-              <b-table striped hover :detail="detail" :fields="fields"></b-table>
             </b-row>
           </b-col>
           <b-col md="4">
@@ -122,6 +151,8 @@
     </section>
   </div>
 </template>
+
+
 <script>
 import axios from "axios";
 export default {
@@ -130,7 +161,6 @@ export default {
     return {
       slide: 0,
       sliding: null,
-      fields: ["table_left", "table_right"],
       detail: [
         { isActive: true, table_left: "カテゴリ", table_right: "キャンプ向け" },
         {
@@ -142,9 +172,11 @@ export default {
         { isActive: true, table_left: "物件情報", table_right: "2LDK" },
         { isActive: true, table_left: "状態", table_right: "要改修" }
       ],
+      tags: ["Wifi", "水道", "駅近く", "空港近く", "海が近い", "川が近い"],
       loading: false,
       item: "",
-      error: null
+      error: null,
+      category: 0
     };
   },
 
@@ -156,15 +188,28 @@ export default {
       this.sliding = false;
     }
   },
+  computed: {
+    itemType: function() {
+      if ((this.item.category_id = 1)) {
+        return (this.category = 1);
+      } else if ((this.item.category_id = 2)) {
+        return (this.category = 2);
+      } else {
+        return (this.category = 3);
+      }
+    }
+  },
   created: function() {
     console.log(this.$route.params.id);
+
     axios
       .get("/api/get_item", { params: { id: this.$route.params.id } })
       .then(response => {
         this.item = response.data;
         console.log(this.item);
       });
-  }
+  },
+  mounted: function() {}
 };
 </script>
 <style scoped lang="scss">
