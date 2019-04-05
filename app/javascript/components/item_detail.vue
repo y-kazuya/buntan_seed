@@ -131,13 +131,34 @@
                 <ul>
                   <li v-for="tag in tags" :key="tag.id">・{{tag.name}}</li>
                 </ul>
+                <h5>アクセス</h5>
+                <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
               </b-card-body>
             </b-row>
           </b-col>
           <b-col md="4">
-            <b-card border-variant="info" header="所在地" align="center" class="mt-3">
-              <p class="card-text">{{ item.user.city }}</p>
-              <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
+            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-3">
+              <h5 class="card-text">{{ item.user.name }}</h5>
+              <b-img
+                v-bind="mainProps"
+                src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20170403/20170403204712.png"
+                width="150"
+                height="150"
+                rounded
+                alt="Circle image"
+              ></b-img>
+              <p>{{ item.user.profile }}</p>
+              <ul class="user_sns">
+                <!-- font-awesomeとかのアイコン使う -->
+                <li>Tw</li>
+                <li>Fb</li>
+                <li>Ig</li>
+              </ul>
+              <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
+                <b-dropdown-item @click="chatTohost">チャット</b-dropdown-item>
+                <b-dropdown-item @click="callTohost">電話</b-dropdown-item>
+                <b-dropdown-item @click="mailTohost">Mail</b-dropdown-item>
+              </b-dropdown>
             </b-card>
           </b-col>
         </b-row>
