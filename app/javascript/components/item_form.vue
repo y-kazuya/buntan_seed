@@ -103,7 +103,7 @@
               写真を追加{{images.length}}
             </div>
             <div class="form-group form_item dash-content-item">
-              <button type="submit" class="btn btn-outline-info login_btn signup-btn dash-submit">保存</button>
+              <button type="submit" class="btn btn-outline-info login_btn signup-btn dash-submit" :disabled="isDisable">保存</button>
             </div>
 
 
@@ -152,7 +152,8 @@ export default {
       ],
       placeholder: {
         price: "貸し出しタイプを選択してください"
-      }
+      },
+      isDisable: false
     };
   },
 
@@ -217,6 +218,7 @@ export default {
     },
 
     onsubmit: function(){
+      this.isDisable = true
       const item = this.item
       let files = new FormData();
       let file = this.images[0].file
@@ -239,8 +241,8 @@ export default {
           alert("登録に成功しました！");
         })
         .catch(function (response) {
-            //handle error
-            console.log(response);
+          alert("通信エラーです")
+          console.log(response);
         });
 
       // files.append('yourFileKey', this.images[0].file);
@@ -277,12 +279,7 @@ export default {
         console.log(error);
       });
 
-
-
-
-
-
-
+    this.isDisable = false
 
     },
 
