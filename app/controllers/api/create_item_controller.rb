@@ -1,13 +1,14 @@
 class Api::CreateItemController < ActionController::Base
 
   def index
+    return if params["files"]["0"] == "" || params["files"].length >= 5
     @item = Item.new(item_params)
     @item.status = 1
 
     # set_tag
     if @item.save
       flash[:notice] = "作成に成功しました"
-      redirect_to root_url
+      save_file(@item)
     else
       flash.now[:alert] = "フォームに誤りがあります"
     end
@@ -16,9 +17,19 @@ class Api::CreateItemController < ActionController::Base
 
 
   private
-  def item_params
 
-    params.require(:item).permit(
+  def save_file(item)
+    params["files"].length.times do |i|
+      next if params["files"]["#{i}"] == ""
+      @picture = Picture.new(item_id: item.id, content: params["files"]["#{i}"], comment: params["comment"]["#{i}"])
+      @picture.save
+    end
+
+  end
+
+
+  def item_params
+    params.permit(
       :title,
       :category_id,
       :profile,
@@ -33,5 +44,6 @@ class Api::CreateItemController < ActionController::Base
       # tags_attributes: [:name]
       ).merge(user_id: current_user.id)
   end
+
 
 end
