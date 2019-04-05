@@ -190,7 +190,6 @@ export default {
 
   methods:{
     valiLong(event,model,name,max){
-      console.log(event.target.value.length)
       if (event.target.value.length > max) {
         this.errors[model][name].max = `長すぎます${max}文字以下にしてください`
       }
@@ -250,7 +249,6 @@ export default {
       .then(response => {
         this.citys = response.data.result
       }).catch(error => {
-        console.log(error);
       });
     },
 
@@ -263,14 +261,12 @@ export default {
       this.item.is_rent = "false"
       this.placeholder.price = "例)100万円、応相談"
       }
-      console.log(this.item.is_rent)
     },
 
 
     changeState: function(event){
       this.setCity(event.target.selectedIndex)
       this.item.city= ""
-      console.log(this.images[0].file)
     },
 
     onsubmit: function(){
@@ -346,7 +342,7 @@ export default {
     validProfile: function(){
       for (var key in this.errors.Item.profile){
         if (this.errors.Item.profile[key]) {
-          console.log("un")
+
           this.validation.profile = true
           return true
         }
@@ -367,13 +363,12 @@ export default {
 
 
   mounted: function(){
-
     this.setCity()
     this.setCategory()
   },
-  beforeDestroy: function(){
-    this.$emit("get_current_user")
-  }
+
+
+
 }
 </script>
 
