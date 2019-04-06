@@ -139,7 +139,8 @@ export default {
       name: String,
       state: String,
       city: String
-    }},
+    }
+  },
   mixins: [ prefs ],
 
   data: function(){
@@ -303,8 +304,8 @@ export default {
       axios.post('/api/create_item', data, config)
         .then(
           response => {
-            alert("登録に成功しました！");
-
+            // alert("資産の登録に成功しました！");
+            this.$emit("setFlash", "success", "資産の登録に成功しました！")
           }
         ).catch(function (response) {
           alert("通信エラーです")
