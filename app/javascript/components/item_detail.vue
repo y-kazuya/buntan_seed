@@ -17,24 +17,10 @@
           @sliding-end="onSlideEnd"
         >
           <b-carousel-slide
-            caption="スライド１"
-            text="スライドのキャッチコピー"
-            img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png"
-          ></b-carousel-slide>
-          <b-carousel-slide
-            caption="スライド２"
-            text="スライドのキャッチコピー"
-            img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png"
-          ></b-carousel-slide>
-          <b-carousel-slide
-            caption="スライド３"
-            text="スライドのキャッチコピー"
-            img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png"
-          ></b-carousel-slide>
-          <b-carousel-slide
-            caption="スライド４"
-            text="スライドのキャッチコピー  "
-            img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png"
+            v-for="pic in item.pictures"
+            :key="pic.id"
+            :text="pic.comment"
+            :img-src="pic.content.url"
           ></b-carousel-slide>
         </b-carousel>
         <b-card-body>
@@ -103,24 +89,10 @@
                 @sliding-end="onSlideEnd"
               >
                 <b-carousel-slide
-                  caption="スライド１"
-                  text="スライドのキャッチコピー"
-                  img-src="https://picsum.photos/1024/480/?image=52"
-                ></b-carousel-slide>
-                <b-carousel-slide
-                  caption="スライド２"
-                  text="スライドのキャッチコピー"
-                  img-src="https://picsum.photos/1024/480/?image=52"
-                ></b-carousel-slide>
-                <b-carousel-slide
-                  caption="スライド３"
-                  text="スライドのキャッチコピー"
-                  img-src="https://picsum.photos/1024/480/?image=52"
-                ></b-carousel-slide>
-                <b-carousel-slide
-                  caption="スライド４"
-                  text="スライドのキャッチコピー  "
-                  img-src="https://picsum.photos/1024/480/?image=52"
+                  v-for="pic in item.pictures"
+                  :key="pic.id"
+                  :text="pic.comment"
+                  :img-src="pic.content.url"
                 ></b-carousel-slide>
               </b-carousel>
             </b-row>
@@ -137,7 +109,7 @@
             </b-row>
           </b-col>
           <b-col md="4">
-            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-3">
+            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-4">
               <h5 class="card-text">{{ item.user.name }}</h5>
               <b-img
                 v-bind="mainProps"
@@ -155,9 +127,9 @@
                 <li>Ig</li>
               </ul>
               <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
-                <b-dropdown-item @click="chatTohost">チャット</b-dropdown-item>
-                <b-dropdown-item @click="callTohost">電話</b-dropdown-item>
-                <b-dropdown-item @click="mailTohost">Mail</b-dropdown-item>
+                <b-dropdown-item>チャット</b-dropdown-item>
+                <b-dropdown-item>電話</b-dropdown-item>
+                <b-dropdown-item>Mail</b-dropdown-item>
               </b-dropdown>
             </b-card>
           </b-col>
@@ -195,7 +167,8 @@ export default {
       loading: false,
       item: "",
       error: null,
-      category: 0
+      category: 0,
+      pictures: []
     };
   },
 

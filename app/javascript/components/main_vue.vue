@@ -75,7 +75,7 @@
               <b-card class="item-mobile">
                 <b-row>
                   <b-col cols="4">
-                    <b-img left rounded blank width="100" height="100" blank-color="#777" alt="img"/>
+                    <b-img left rounded v-for="pic in item.pictures" :src="pic.content.url" width="100" height="100" alt="img"/>
                   </b-col>
                   <b-col cols="8">
                     <h5>{{ item.title }}</h5>
@@ -137,6 +137,7 @@ export default {
       });
     axios.get("/api/get_items").then(response => {
       this.items = response.data;
+      console.log(this.item);
     });
   }
 };
