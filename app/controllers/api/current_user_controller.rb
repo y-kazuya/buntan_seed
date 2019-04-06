@@ -33,6 +33,18 @@ class Api::CurrentUserController < ActionController::Base
     end
   end
 
+  def check
+    if current_user
+      @check = true
+    else
+      @check = false
+    end
+
+    respond_to do |format|
+      format.json {render :json => @check}
+    end
+  end
+
   protected
 
 

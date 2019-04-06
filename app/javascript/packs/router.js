@@ -11,9 +11,10 @@ import UserBasic  from "../components/user_basic.vue"
 import UserNew from "../components/user_new.vue"
 import AboutVue from "../components/about_vue.vue";
 import PrivacyPoricy from "../components/privacy_policy.vue";
-
+import axios from "axios";
 
 Vue.use(VueRouter);
+
 
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
@@ -26,9 +27,9 @@ const router = new VueRouter({
   mode: "history",
   routes: [
     { path: "/", component: MainVue },
-    { path: "/item/new", component: ItemForm},
-    { path: "/user/basic", component: UserBasic},
-    { path: "/user/new", component: UserNew},
+    { path: "/item/new", component: ItemForm ,meta: {requiresAuth: true}},
+    { path: "/user/basic", component: UserBasic ,meta: {requiresAuth: true}},
+    { path: "/user/new", component: UserNew ,meta: {NonrequiresAuth: true}},
     { path: "/about", component: AboutVue },
     {
       path: "/item/:id",
@@ -54,6 +55,40 @@ router.afterEach((to, from) => {
   if (to.meta && to.meta.title) {
     document.title = to.meta.title
   }
+});
+
+router.beforeEach((to, from, next) => {
+
+
+
+  if(to.matched.some(record => record.meta.requiresAuth) ){ //login 必要
+
+    axios.get("/api/check_login").then(response => { // login認証
+      if (response.data){
+        next()
+      }else {
+        next({path: '/'})
+      }
+    });
+  }
+  else {
+   next()
+  }
+
+  if(to.matched.some(record => record.meta.NonrequiresAuth) ){ //login 必要
+
+    axios.get("/api/check_login").then(response => { // login認証
+      if (!response.data){
+        next()
+      }else {
+        next({path: '/'})
+      }
+    });
+  }
+  else {
+   next()
+  }
+
 })
 
 
