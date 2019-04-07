@@ -8,7 +8,7 @@ class Api::CurrentUserController < ActionController::Base
       @user.avatar_url = false unless @user.avatar_url
       current_user.items == [] ? owner = false : owner = true
       state_code = @user.state_before_type_cast
-      @user = {name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state,
+      @user = {id: @user.id, name: @user.name,profile: @user.profile, admin: @user.admin, state: @user.state,
         state_code: state_code, city: @user.city, avatar: @user.avatar_url, job: @current_user.job,
         owner: owner}
     end
@@ -17,6 +17,7 @@ class Api::CurrentUserController < ActionController::Base
       format.json {render :json => @user}
     end
   end
+
 
 
   def update

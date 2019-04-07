@@ -11,6 +11,7 @@ import UserBasic  from "../components/user_basic.vue"
 import UserNew from "../components/user_new.vue"
 import AboutVue from "../components/about_vue.vue";
 import PrivacyPoricy from "../components/privacy_policy.vue";
+import UserItems from "../components/user_items.vue"
 import axios from "axios";
 
 Vue.use(VueRouter);
@@ -38,7 +39,13 @@ const router = new VueRouter({
       props: route => ({ id: Number(route.params.id) })
     },
     { path: '*', component: NotFoundComponent },
-    { path: "/privacy-poricy", component: PrivacyPoricy }
+    { path: "/privacy-poricy", component: PrivacyPoricy },
+    {
+      path: "/user/:id/items",
+      name: "userItem",
+      component: UserItems,
+      props: route => ({ id: Number(route.params.id) })
+    },
   ],
 
   scrollBehavior(to, from, savedPosition) {

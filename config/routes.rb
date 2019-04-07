@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/about", to: "public/pages#top"
   get "/item/new", to: "public/pages#top"
   get "/item/:id", to: "public/pages#top"
+  get "/user/:id/items",to: "public/pages#top"
 
 
   namespace :admin do
@@ -69,6 +70,7 @@ Rails.application.routes.draw do
     get    "/get_item",   to: "get_items#show"
     get    "/check_unique", to: "check_unique#index"
     get    "/check_login",  to: "current_user#check"
+    get    "/get_user", to: "get_user#index"
   end
 
   namespace :api do
