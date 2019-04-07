@@ -1,7 +1,7 @@
 class Api::CreateItemController < ActionController::Base
 
   def index
-    return if params["files"]["0"] == "" || params["files"].length >= 5
+    return if params["files"]["0"] == "" || params["files"].length >= 6
     @item = Item.new(item_params)
     @item.status = 1
 
