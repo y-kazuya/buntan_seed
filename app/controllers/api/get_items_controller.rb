@@ -2,7 +2,7 @@ class Api::GetItemsController < ActionController::Base
 
   def index
 
-    @items = Item.all
+    @items = Item.all.to_json(include: [:category, :user, :tags, :pictures])
 
     respond_to do |format|
       format.json {render :json => @items}

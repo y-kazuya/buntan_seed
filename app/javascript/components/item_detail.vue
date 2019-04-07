@@ -1,7 +1,7 @@
 <template>
   <div id="itempage">
     <!-- モバイル画面 -->
-    <section id="item-mobile">
+    <!-- <section id="item-mobile">
       <b-card no-body style="max-width: 100%;">
         <b-carousel
           id="item-carousel"
@@ -53,12 +53,12 @@
         <b-card-footer>所在地</b-card-footer>
         <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
       </b-card>
-    </section>
+    </section>-->
 
     <!-- タブレット画面 -->
 
     <!-- PC画面 -->
-    <section id="item-md">
+    <section id="item-detail">
       <b-container class="bg-white">
         <b-row>
           <b-col md="8">
@@ -67,34 +67,32 @@
                 <h4>
                   <strong>{{ item.title }}</strong>
                 </h4>
-                <b-badge variant="light">{{ item.user.city }}</b-badge>
-                <b-badge variant="secondary" v-if="category === 1">空き家</b-badge>
-                <b-badge variant="secondary" v-else-if="category === 2">空き山</b-badge>
-                <b-badge variant="secondary" v-else-if="category === 3">空き地</b-badge>
-                <b-badge variant="secondary" v-else>カテゴリ不明</b-badge>
+                <b-badge variant="light">{{ item.city }}</b-badge>
+                <b-badge v-if="is_rent=true">レンタル</b-badge>
+                <b-badge v-if="is_rent=false">購入</b-badge>
+                <b-badge variant="secondary">{{item.category.name}}</b-badge>
+                <b-carousel
+                  id="item-carousel"
+                  class="mt-1"
+                  style="text-shadow: 1px 1px 2px #333;"
+                  controls
+                  indicators
+                  background="#ababab"
+                  :interval="4000"
+                  img-width="1024"
+                  img-height="480"
+                  v-model="slide"
+                  @sliding-start="onSlideStart"
+                  @sliding-end="onSlideEnd"
+                >
+                  <b-carousel-slide
+                    v-for="pic in item.pictures"
+                    :key="pic.id"
+                    :text="pic.comment"
+                    :img-src="pic.content.url"
+                  ></b-carousel-slide>
+                </b-carousel>
               </b-card-body>
-            </b-row>
-            <b-row>
-              <b-carousel
-                id="item-carousel"
-                style="text-shadow: 1px 1px 2px #333;"
-                controls
-                indicators
-                background="#ababab"
-                :interval="4000"
-                img-width="1024"
-                img-height="480"
-                v-model="slide"
-                @sliding-start="onSlideStart"
-                @sliding-end="onSlideEnd"
-              >
-                <b-carousel-slide
-                  v-for="pic in item.pictures"
-                  :key="pic.id"
-                  :text="pic.comment"
-                  :img-src="pic.content.url"
-                ></b-carousel-slide>
-              </b-carousel>
             </b-row>
             <b-row>
               <b-card-body>
@@ -109,11 +107,10 @@
             </b-row>
           </b-col>
           <b-col md="4">
-            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-4">
+            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-4 mb-2">
               <h5 class="card-text">{{ item.user.name }}</h5>
               <b-img
-                v-bind="mainProps"
-                src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20170403/20170403204712.png"
+                :src="item.user.avatar.url"
                 width="150"
                 height="150"
                 rounded
@@ -180,17 +177,7 @@ export default {
       this.sliding = false;
     }
   },
-  computed: {
-    itemType: function() {
-      if ((this.item.category_id = 1)) {
-        return (this.category = 1);
-      } else if ((this.item.category_id = 2)) {
-        return (this.category = 2);
-      } else {
-        return (this.category = 3);
-      }
-    }
-  },
+  computed: {},
   created: function() {
     console.log(this.$route.params.id);
 
