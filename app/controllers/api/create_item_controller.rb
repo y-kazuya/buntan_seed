@@ -9,9 +9,14 @@ class Api::CreateItemController < ActionController::Base
     if @item.save
       flash[:notice] = "作成に成功しました"
       save_file(@item)
+
     else
       flash.now[:alert] = "フォームに誤りがあります"
     end
+
+    respond_to do |format|
+        format.json {render :json => @item}
+      end
   end
 
 

@@ -3,7 +3,6 @@
     <header-vue v-if="showHeader" v-bind:current_user="current_user"  @setFlash="setFlash"></header-vue>
     <flash v-bind:flashs="flashs"></flash>
     <router-view
-      v-bind:items="items"
       v-bind:current_user="current_user"
       @reloadAll="reloadAll"
       @getCurrentUser="getCurrentUser"
@@ -28,7 +27,6 @@ export default {
   data: function() {
     return {
       current_user: "",
-      items: "",
       showHeader: true,
       flashs: {
         main : {
@@ -43,7 +41,6 @@ export default {
     };
   },
   created: function() {
-    this.getItems();
     this.getCurrentUser();
   },
 
@@ -67,11 +64,6 @@ export default {
     getCurrentUser: function() {
       axios.get("/api/get_current_user").then(response => {
         this.current_user = response.data;
-      });
-    },
-    getItems: function() {
-      axios.get("/api/get_items").then(response => {
-        this.items = response.data;
       });
     },
     reloadAll: function() {

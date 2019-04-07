@@ -153,8 +153,6 @@ export default {
         axios.post('/api/update_current_user', data, config).then(
           response => {
             this.$emit("setFlash", "success", "保存しました！")
-            this.$emit("getCurrentUser")
-            this.$emit("reloadAll")
           }
         )
 
