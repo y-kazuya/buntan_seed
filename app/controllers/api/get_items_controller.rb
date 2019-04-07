@@ -16,6 +16,7 @@ class Api::GetItemsController < ActionController::Base
     end
   end
 
+
   def category
     @categories =  Category.all.to_json(only: [:id,:name])
 

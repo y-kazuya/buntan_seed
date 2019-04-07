@@ -152,6 +152,7 @@ export default {
         config.headers['X-HTTP-Method-Override'] = 'PUT';
         axios.post('/api/update_current_user', data, config).then(
           response => {
+            this.$emit("setFlash", "success", "保存しました！")
             this.$emit("getCurrentUser")
             this.$emit("reloadAll")
           }

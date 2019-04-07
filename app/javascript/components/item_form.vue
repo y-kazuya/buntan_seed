@@ -6,7 +6,7 @@
         <div class="user-form dash-content-main">
           <form @submit.prevent="onsubmit">
             <div class="form-group form_item dash-content-item">
-              <label for="user_name" class="need-item">タイトル{{validation.title}}</label>
+              <label for="user_name" class="need-item">タイトル</label>
               <input
                 placeholder="土佐市のあきやま"
                 required="required"
@@ -200,7 +200,7 @@ export default {
       city: String
     }
   },
-  mixins: [prefs],
+  mixins: [ prefs ],
 
   data: function() {
     return {
@@ -245,8 +245,8 @@ export default {
     };
   },
 
-  methods: {
-    valiLong(event, model, name, max) {
+  methods:{
+    valiLong(event,model,name,max){
       if (event.target.value.length > max) {
         this.errors[model][name].max = `長すぎます${max}文字以下にしてください`;
       } else {
@@ -353,16 +353,15 @@ export default {
       };
       config.headers["X-HTTP-Method-Override"] = "POST";
 
-      axios
-        .post("/api/create_item", data, config)
-        .then(response => {
-          alert("登録に成功しました！");
-        })
-        .catch(function(response) {
-          alert("通信エラーです");
+      axios.post('/api/create_item', data, config)
+        .then(
+          response => {
+            this.$emit("setFlash", "success", "資産の登録に成功しました！")
+          }
+        ).catch(function (response) {
+          alert("通信エラーです")
           console.log(response);
         });
-
       this.validation.loadtime = false;
     }
   },
@@ -410,11 +409,13 @@ export default {
     }
   },
 
+
   mounted: function() {
     this.setCity();
     this.setCategory();
   }
 };
+
 </script>
 
 <style scoped>
