@@ -8,7 +8,7 @@
         <div class="user-form dash-content-main">
           <form @submit.prevent="onsubmit">
             <div class="form-group form_item dash-content-item">
-                <label for="user_name" class="need-item">タイトル{{validation.title}}</label>
+                <label for="user_name" class="need-item">タイトル</label>
                 <input placeholder="土佐市のあきやま" required="required" type="text" v-model="item.title" id="item_title" v-bind:class="[`form-control`, validTitle ? `is-error`  : '']" @change="valiUnique($event,'Item','title'),valiLong($event,'Item','title',50)">
                 <template v-for="(error,i) in errors.Item.title">
                   <div class="validate-message" v-bind:key="i" >{{error}} </div>
@@ -139,7 +139,8 @@ export default {
       name: String,
       state: String,
       city: String
-    }},
+    }
+  },
   mixins: [ prefs ],
 
   data: function(){
@@ -189,6 +190,9 @@ export default {
   },
 
   methods:{
+    needLogin(){
+
+    },
     valiLong(event,model,name,max){
       if (event.target.value.length > max) {
         this.errors[model][name].max = `長すぎます${max}文字以下にしてください`
@@ -300,8 +304,8 @@ export default {
       axios.post('/api/create_item', data, config)
         .then(
           response => {
-            alert("登録に成功しました！");
-
+            // alert("資産の登録に成功しました！");
+            this.$emit("setFlash", "success", "資産の登録に成功しました！")
           }
         ).catch(function (response) {
           alert("通信エラーです")
@@ -363,6 +367,7 @@ export default {
 
 
   mounted: function(){
+    this.needLogin()
     this.setCity()
     this.setCategory()
   },
