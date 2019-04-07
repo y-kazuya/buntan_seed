@@ -123,8 +123,8 @@
                 <li>Fb</li>
                 <li>Ig</li>
               </ul>
-              <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
-                <b-dropdown-item>チャット</b-dropdown-item>
+              <b-dropdown id="dropdown-right" left text="予約リクエスト" variant="success" class="m-2">
+                <b-dropdown-item>チャット(推奨)</b-dropdown-item>
                 <b-dropdown-item>電話</b-dropdown-item>
                 <b-dropdown-item>Mail</b-dropdown-item>
               </b-dropdown>

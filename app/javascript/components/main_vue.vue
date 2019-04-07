@@ -51,7 +51,7 @@
     </section>
     <section class="items-area mt-4 mb-2">
       <b-container>
-        <h3>こんな物件があります</h3>
+        <h3>こんな土地・物件があります</h3>
 
         <!-- PC -->
         <div class="pc-only">
@@ -61,7 +61,6 @@
                 <b-card
                   :img-src="item.pictures[0].content.url"
                   img-alt="Image"
-                  img-height="238px"
                   img-top
                   tag="article"
                   style="max-width: 20rem;"
@@ -267,6 +266,10 @@ export default {
           .card-title {
             font-size: 20px;
             font-weight: bold;
+          }
+
+          .card-img-top {
+            height: 238.5px;
           }
         }
       }
