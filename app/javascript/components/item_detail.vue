@@ -1,43 +1,33 @@
 <template>
   <div id="itempage">
-    <section id="item-mobile">
-      <b-card no-body
-            style="max-width: 100%;"
-            >
-        <b-carousel id="item-carousel"
-                    style="text-shadow: 1px 1px 2px #333; height: 373px;"
-                    controls
-                    indicators
-                    background="#ababab"
-                    :interval="8000"
-                    img-width="373"
-                    img-height="373"
-                    v-model="slide"
-                    @sliding-start="onSlideStart"
-                    @sliding-end="onSlideEnd"
-              >
-                <b-carousel-slide caption="スライド１"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド２"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド３"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド４"
-                                  text="スライドのキャッチコピー  "
-                                  img-src="https://cdn-ak.f.st-hatena.com/images/fotolife/k/kyuma-morita/20190202/20190202174926.png">
-                </b-carousel-slide>
-              </b-carousel>
+    <!-- モバイル画面 -->
+    <!-- <section id="item-mobile">
+      <b-card no-body style="max-width: 100%;">
+        <b-carousel
+          id="item-carousel"
+          style="text-shadow: 1px 1px 2px #333; height: 373px;"
+          controls
+          indicators
+          background="#ababab"
+          :interval="8000"
+          img-width="373"
+          img-height="373"
+          v-model="slide"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
+        >
+          <b-carousel-slide
+            v-for="pic in item.pictures"
+            :key="pic.id"
+            :text="pic.comment"
+            :img-src="pic.content.url"
+          ></b-carousel-slide>
+        </b-carousel>
         <b-card-body>
-          <h4><strong>{{ item.title }}</strong></h4>
-          <p class="card-text">
-              {{ item.profile }}
-          </p>
+          <h4>
+            <strong>{{ item.title }}</strong>
+          </h4>
+          <p class="card-text">{{ item.profile }}</p>
         </b-card-body>
         <b-list-group flush>
           <b-list-group-item>
@@ -48,7 +38,7 @@
           <b-list-group-item>住所</b-list-group-item>
         </b-list-group>
         <div class="clearfix">
-          <b-img left src="https://picsum.photos/125/125/?image=58" alt="left image" />
+          <b-img left src="https://picsum.photos/125/125/?image=58" alt="left image"/>
           <div style="position: relative; left: 15px; top: 15px;">
             <h4>{{ item.user.name }}</h4>
             <p>{{ item.user.city }}</p>
@@ -57,64 +47,87 @@
           </div>
         </div>
         <b-card-body>
-            <a href="#"
-               class="card-link">シェアする</a>
-            <a href="#"
-               class="card-link">管理者にメッセージ</a>
+          <a href="#" class="card-link">シェアする</a>
+          <a href="#" class="card-link">管理者にメッセージ</a>
         </b-card-body>
         <b-card-footer>所在地</b-card-footer>
         <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
       </b-card>
-    </section>
-    <section id="item-md">
+    </section>-->
+
+    <!-- タブレット画面 -->
+
+    <!-- PC画面 -->
+    <section id="item-detail">
       <b-container class="bg-white">
         <b-row>
           <b-col md="8">
             <b-row>
-              <b-carousel id="item-carousel"
-                    style="text-shadow: 1px 1px 2px #333;"
-                    controls
-                    indicators
-                    background="#ababab"
-                    :interval="4000"
-                    img-width="1024"
-                    img-height="480"
-                    v-model="slide"
-                    @sliding-start="onSlideStart"
-                    @sliding-end="onSlideEnd"
-              >
-                <b-carousel-slide caption="スライド１"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド２"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド３"
-                                  text="スライドのキャッチコピー"
-                                  img-src="https://picsum.photos/1024/480/?image=52">
-                </b-carousel-slide>
-                <b-carousel-slide caption="スライド４"
-                                  text="スライドのキャッチコピー  "
-                                  img-src="https://picsum.photos/1024/480/?image=52">
-                </b-carousel-slide>
-              </b-carousel>
+              <b-card-body>
+                <h4>
+                  <strong>{{ item.title }}</strong>
+                </h4>
+                <b-badge variant="light">{{ item.city }}</b-badge>
+                <b-badge v-if="is_rent=true">レンタル</b-badge>
+                <b-badge v-if="is_rent=false">購入</b-badge>
+                <b-badge variant="secondary">{{item.category.name}}</b-badge>
+                <b-carousel
+                  id="item-carousel"
+                  class="mt-1"
+                  style="text-shadow: 1px 1px 2px #333;"
+                  controls
+                  indicators
+                  background="#ababab"
+                  :interval="4000"
+                  img-width="1024"
+                  img-height="480"
+                  v-model="slide"
+                  @sliding-start="onSlideStart"
+                  @sliding-end="onSlideEnd"
+                >
+                  <b-carousel-slide
+                    v-for="pic in item.pictures"
+                    :key="pic.id"
+                    :text="pic.comment"
+                    :img-src="pic.content.url"
+                  ></b-carousel-slide>
+                </b-carousel>
+              </b-card-body>
             </b-row>
             <b-row>
               <b-card-body>
-                <h4><strong>{{ item.title }}</strong></h4>
-                <p class="card-text">
-                  {{ item.profile }}
-                </p>
+                <p class="card-text">{{ item.profile }}</p>
+                <h5>設備・特徴</h5>
+                <ul>
+                  <li v-for="tag in tags" :key="tag.id">・{{tag.name}}</li>
+                </ul>
+                <h5>アクセス</h5>
+                <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
               </b-card-body>
-              <b-table striped hover :detail="detail" :fields="fields"></b-table>
             </b-row>
           </b-col>
           <b-col md="4">
-            <b-card border-variant="info" header="所在地" align="center" class="mt-3">
-              <p class="card-text">{{ item.user.city }}</p>
-              <iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅" class="map"></iframe>
+            <b-card border-variant="info" header="ホスト情報" align="center" class="mt-4 mb-2">
+              <h5 class="card-text">{{ item.user.name }}</h5>
+              <b-img
+                :src="item.user.avatar.url"
+                width="150"
+                height="150"
+                rounded
+                alt="Circle image"
+              ></b-img>
+              <p>{{ item.user.profile }}</p>
+              <ul class="user_sns">
+                <!-- font-awesomeとかのアイコン使う -->
+                <li>Tw</li>
+                <li>Fb</li>
+                <li>Ig</li>
+              </ul>
+              <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
+                <b-dropdown-item>チャット</b-dropdown-item>
+                <b-dropdown-item>電話</b-dropdown-item>
+                <b-dropdown-item>Mail</b-dropdown-item>
+              </b-dropdown>
             </b-card>
           </b-col>
         </b-row>
@@ -122,6 +135,8 @@
     </section>
   </div>
 </template>
+
+
 <script>
 import axios from "axios";
 export default {
@@ -130,7 +145,6 @@ export default {
     return {
       slide: 0,
       sliding: null,
-      fields: ["table_left", "table_right"],
       detail: [
         { isActive: true, table_left: "カテゴリ", table_right: "キャンプ向け" },
         {
@@ -142,9 +156,16 @@ export default {
         { isActive: true, table_left: "物件情報", table_right: "2LDK" },
         { isActive: true, table_left: "状態", table_right: "要改修" }
       ],
+      tags: [
+        { id: 1, name: "水道" },
+        { id: 2, name: "wifi" },
+        { id: 3, name: "トイレ" }
+      ],
       loading: false,
       item: "",
-      error: null
+      error: null,
+      category: 0,
+      pictures: []
     };
   },
 
@@ -156,15 +177,18 @@ export default {
       this.sliding = false;
     }
   },
+  computed: {},
   created: function() {
     console.log(this.$route.params.id);
+
     axios
       .get("/api/get_item", { params: { id: this.$route.params.id } })
       .then(response => {
         this.item = response.data;
         console.log(this.item);
       });
-  }
+  },
+  mounted: function() {}
 };
 </script>
 <style scoped lang="scss">

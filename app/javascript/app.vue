@@ -2,7 +2,13 @@
   <div id="app">
     <header-vue v-if="showHeader" v-bind:current_user="current_user"  @setFlash="setFlash"></header-vue>
     <flash v-bind:flashs="flashs"></flash>
-    <router-view v-bind:items="items" v-bind:current_user="current_user" @reloadAll="reloadAll" @getCurrentUser="getCurrentUser" @setFlash="setFlash"/>
+    <router-view
+      v-bind:items="items"
+      v-bind:current_user="current_user"
+      @reloadAll="reloadAll"
+      @getCurrentUser="getCurrentUser"
+      @setFlash="setFlash"
+    />
     <footer-vue></footer-vue>
   </div>
 </template>
@@ -61,7 +67,6 @@ export default {
     getCurrentUser: function() {
       axios.get("/api/get_current_user").then(response => {
         this.current_user = response.data;
-
       });
     },
     getItems: function() {
@@ -69,8 +74,8 @@ export default {
         this.items = response.data;
       });
     },
-    reloadAll: function(){
-      this.$parent.$forceUpdate()
+    reloadAll: function() {
+      this.$parent.$forceUpdate();
     },
 
     reloadAll() {

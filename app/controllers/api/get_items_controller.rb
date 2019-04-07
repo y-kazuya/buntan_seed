@@ -2,7 +2,7 @@ class Api::GetItemsController < ActionController::Base
 
   def index
 
-    @items = Item.all
+    @items = Item.all.to_json(include: [:category, :user, :tags, :pictures])
 
     respond_to do |format|
       format.json {render :json => @items}
@@ -10,7 +10,7 @@ class Api::GetItemsController < ActionController::Base
   end
 
   def show
-    @item = Item.find(params[:id].to_i).to_json(include: [:category, :user])
+    @item = Item.find(params[:id].to_i).to_json(include: [:category, :user, :tags, :pictures])
     respond_to do |format|
       format.json {render :json => @item}
     end
