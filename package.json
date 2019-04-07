@@ -2,7 +2,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap-vue": "^2.0.0-rc.16",
     "dotenv": "^6.2.0",
     "vee-validate": "^2.2.0",
     "vue": "^2.5.21",

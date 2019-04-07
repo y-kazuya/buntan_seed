@@ -17,7 +17,6 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(VueRouter);
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("hello"));
   // new Vue({
@@ -29,10 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let vm = new Vue({
     router: router,
     render(h) {
-      return h(App)
+      return h(App);
     }
-  }).$mount('#app')
-
+  }).$mount("#app");
 });
 
 Vue.use(BootstrapVue);
