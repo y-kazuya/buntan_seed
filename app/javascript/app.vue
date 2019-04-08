@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header-vue v-if="showHeader" v-bind:current_user="current_user"  @setFlash="setFlash"></header-vue>
+    <header-vue v-if="showHeader" v-bind:current_user="current_user" @setFlash="setFlash"></header-vue>
     <flash v-bind:flashs="flashs"></flash>
     <router-view
       v-bind:current_user="current_user"
@@ -17,7 +17,7 @@ import HeaderVue from "./components/header_vue.vue";
 import MainVue from "./components/main_vue.vue";
 import FooterVue from "./components/footer_vue.vue";
 import ItemDetail from "./components/item_detail.vue";
-import flash from "./components/flash.vue"
+import flash from "./components/flash.vue";
 import AboutVue from "./components/about_vue.vue";
 import PrivacyPoricy from "./components/privacy_policy.vue";
 
@@ -29,7 +29,7 @@ export default {
       current_user: "",
       showHeader: true,
       flashs: {
-        main : {
+        main: {
           success: "",
           warning: "",
           info: "",
@@ -37,7 +37,6 @@ export default {
         },
         visible: true
       }
-
     };
   },
   created: function() {
@@ -45,20 +44,19 @@ export default {
   },
 
   methods: {
-
-    resetFlash: function(){
+    resetFlash: function() {
       for (let ob in this.flashs.main) {
-        this.flashs.main[ob] = ""
+        this.flashs.main[ob] = "";
       }
-      this.flashs.visible = true
+      this.flashs.visible = true;
     },
-    setFlash: function(style, mes){
-      this.resetFlash()
-      this.flashs.main[style] = mes
+    setFlash: function(style, mes) {
+      this.resetFlash();
+      this.flashs.main[style] = mes;
       setTimeout(this.deleteFlash, 8000);
     },
-    deleteFlash: function(){
-      this.flashs.visible = false
+    deleteFlash: function() {
+      this.flashs.visible = false;
     },
 
     getCurrentUser: function() {
@@ -80,9 +78,10 @@ export default {
     }
   },
   watch: {
-    '$route': function (to, from) { //ページ遷移の際にフラッシュをリセット
+    $route: function(to, from) {
+      //ページ遷移の際にフラッシュをリセット
       if (to.path !== from.path) {
-        this.resetFlash()
+        this.resetFlash();
       }
     }
   },
@@ -93,7 +92,7 @@ export default {
     ItemDetail,
     AboutVue,
     PrivacyPoricy,
-    flash,
+    flash
   }
 };
 </script>

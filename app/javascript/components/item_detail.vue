@@ -116,18 +116,19 @@
                 rounded
                 alt="Circle image"
               ></b-img>
-              <p>{{ item.user.profile }}</p>
+              <p class="mt-2">{{ item.user.profile }}</p>
               <ul class="user_sns">
-                <!-- font-awesomeとかのアイコン使う -->
-                <li>Tw</li>
-                <li>Fb</li>
-                <li>Ig</li>
+                <li>
+                  <i class="fa fa-twitter"></i>
+                </li>
+                <li>
+                  <i class="fa fa-facebook"></i>
+                </li>
+                <li>
+                  <i class="fa fa-instagram"></i>
+                </li>
               </ul>
-              <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
-                <b-dropdown-item>チャット</b-dropdown-item>
-                <b-dropdown-item>電話</b-dropdown-item>
-                <b-dropdown-item>Mail</b-dropdown-item>
-              </b-dropdown>
+              <b-button variant="success">予約リクエスト</b-button>
             </b-card>
           </b-col>
         </b-row>
