@@ -71,11 +71,7 @@ Rails.application.routes.draw do
     get    "/check_unique", to: "check_unique#index"
     get    "/check_login",  to: "current_user#check"
     get    "/get_user", to: "get_user#index"
-  end
-
-  namespace :api do
     post   "/create_item",         to: "create_item#index"
   end
-
 
 end

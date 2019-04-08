@@ -141,7 +141,8 @@
 <script>
 import axios from "axios";
 export default {
-  props: { id: Number },
+  props: { id: Number,
+           create: Boolean},
   data: function() {
     return {
       slide: 0,
@@ -180,7 +181,9 @@ export default {
   },
   computed: {},
   created: function() {
-    console.log(this.$route.params.id);
+    if (this.$route.params.create){
+      this.$emit("setFlash", "success", "資産の登録に成功しました！")
+    }
 
     axios
       .get("/api/get_item", { params: { id: this.$route.params.id } })

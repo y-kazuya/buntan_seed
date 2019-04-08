@@ -353,10 +353,14 @@ export default {
       };
       config.headers["X-HTTP-Method-Override"] = "POST";
 
+      let main = this
+
       axios.post('/api/create_item', data, config)
         .then(
           response => {
-            this.$emit("setFlash", "success", "資産の登録に成功しました！")
+            this.$emit("getCurrentUser")
+            this.$emit("reloadAll")
+            main.$router.push({ name: 'Item', params: { id: response.data.id, create: true} })
           }
         ).catch(function (response) {
           alert("通信エラーです")

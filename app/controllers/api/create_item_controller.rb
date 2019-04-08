@@ -1,7 +1,7 @@
 class Api::CreateItemController < ActionController::Base
 
   def index
-    return if params["files"]["0"] == "" || params["files"].length >= 5
+    return if params["files"]["0"] == "" || params["files"].length >= 6
     @item = Item.new(item_params)
     @item.status = 1
 
@@ -9,9 +9,14 @@ class Api::CreateItemController < ActionController::Base
     if @item.save
       flash[:notice] = "作成に成功しました"
       save_file(@item)
+
     else
       flash.now[:alert] = "フォームに誤りがあります"
     end
+
+    respond_to do |format|
+        format.json {render :json => @item}
+      end
   end
 
 

@@ -132,18 +132,24 @@ export default {
       ],
       citys: "",
       states: "",
-      item: ""
+      item: "",
+      items: ""
     };
   },
 
-  props: ["items"],
   methods: {
     onSlideStart(slide) {
       this.sliding = true;
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    }
+    },
+
+    getItems: function() {
+      axios.get("/api/get_items").then(response => {
+        this.items = response.data;
+      });
+    },
   },
   mounted: function() {
     axios.get("/api/get_state").then(response => {
@@ -167,6 +173,10 @@ export default {
       this.items = response.data;
       console.log(this.items);
     });
+  },
+
+  created: function(){
+    this.getItems();
   }
 };
 </script>
