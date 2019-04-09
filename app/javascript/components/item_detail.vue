@@ -68,8 +68,8 @@
                   <strong>{{ item.title }}</strong>
                 </h4>
                 <b-badge variant="light">{{ item.city }}</b-badge>
-                <b-badge v-if="is_rent=true">レンタル</b-badge>
-                <b-badge v-if="is_rent=false">購入</b-badge>
+                <b-badge v-if="item.is_rent">レンタル</b-badge>
+                <b-badge v-else>購入</b-badge>
                 <b-badge variant="secondary">{{item.category.name}}</b-badge>
                 <b-carousel
                   id="item-carousel"
@@ -121,13 +121,23 @@
                 <!-- font-awesomeとかのアイコン使う -->
                 <li>Tw</li>
                 <li>Fb</li>
-                <li>Ig</li>
+                <li></li>
               </ul>
-              <b-dropdown id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
+
+              <b-dropdown v-if="!itemOwner" id="dropdown-right" left text="ホストに連絡" variant="success" class="m-2">
                 <b-dropdown-item>チャット</b-dropdown-item>
                 <b-dropdown-item>電話</b-dropdown-item>
                 <b-dropdown-item>Mail</b-dropdown-item>
               </b-dropdown>
+              <div v-else class="owner_item_btns">
+                <div class="item_edit_btn">
+                  編集する
+                </div>
+
+                <div class="item_delete_btn">
+                  削除する
+                </div>
+              </div>
             </b-card>
           </b-col>
         </b-row>
@@ -141,7 +151,8 @@
 import axios from "axios";
 export default {
   props: { id: Number,
-           create: Boolean},
+           create: Boolean,
+           current_user: Object},
   data: function() {
     return {
       slide: 0,
@@ -176,9 +187,20 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    }
+    },
+
   },
-  computed: {},
+  computed: {
+    itemOwner: function (){
+      if(this.current_user && this.current_user.id == this.item.user.id){
+        console.log("aa")
+        return true
+      }
+
+      return false
+    }
+
+  },
   created: function() {
     if (this.$route.params.create){
       this.$emit("setFlash", "success", "資産の登録に成功しました！")
