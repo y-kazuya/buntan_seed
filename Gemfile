@@ -84,3 +84,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem 'open_uri_redirections'
+
+gem "font-awesome-rails"
+gem 'font-awesome-sass', '~> 5.8.1'

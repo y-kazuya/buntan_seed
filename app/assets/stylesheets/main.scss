@@ -1,0 +1,108 @@
+#main {
+  @media screen and (max-width: 480px) {
+    .top {
+      background-image: url("../../assets/images/top-mobile.png");
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 600px;
+      background-position: top;
+      background-size: cover;
+
+      .top-text {
+        position: relative;
+        top: 80px;
+        text-align: center;
+
+        p {
+          color: #3e3d3c;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .top-searchForm {
+        margin: 0 30px;
+        position: relative;
+        top: 210px;
+      }
+    }
+
+    .items-area {
+      .items {
+        margin-left: 5%;
+
+        .item-card {
+          width: 80%;
+          text-align: auto 0;
+          margin: 5px 10px 5px 10px;
+
+          .card-title {
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .card-body {
+        padding: 8px;
+      }
+
+      .item-mobile:hover {
+        background-color: #c7ebf1;
+      }
+    }
+  }
+
+  @media screen and (min-width: 481px) {
+    .top {
+      background-image: url("../../assets/images/top-pc.png");
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 700px;
+      background-position: bottom center;
+      background-size: cover;
+
+      .top-text {
+        position: relative;
+        top: 100px;
+        margin-left: 10%;
+
+        p {
+          color: white;
+          font-size: 30px;
+          font-weight: bold;
+        }
+
+        .top-text-big {
+          font-size: 50px;
+        }
+      }
+
+      .top-searchForm {
+        width: 30%;
+        position: relative;
+        top: 100px;
+        margin-left: 10%;
+      }
+    }
+
+    .items-area {
+      .items {
+        .item-card {
+          width: 100%;
+          text-align: auto 0;
+          margin: 15px 20px 15px 20px;
+
+          .card-title {
+            font-size: 20px;
+            font-weight: bold;
+          }
+
+          .card-img-top {
+            height: 238.5px;
+          }
+        }
+      }
+    }
+  }
+}
