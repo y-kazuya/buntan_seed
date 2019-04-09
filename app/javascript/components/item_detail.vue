@@ -68,8 +68,8 @@
                   <strong>{{ item.title }}</strong>
                 </h4>
                 <b-badge variant="light">{{ item.city }}</b-badge>
-                <b-badge v-if="is_rent=true">レンタル</b-badge>
-                <b-badge v-if="is_rent=false">購入</b-badge>
+                <b-badge v-if="item.is_rent">レンタル</b-badge>
+                <b-badge v-else>購入</b-badge>
                 <b-badge variant="secondary">{{item.category.name}}</b-badge>
                 <b-carousel
                   id="item-carousel"
@@ -142,7 +142,8 @@
 import axios from "axios";
 export default {
   props: { id: Number,
-           create: Boolean},
+           create: Boolean,
+           current_user: Object},
   data: function() {
     return {
       slide: 0,
@@ -177,9 +178,20 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    }
+    },
+
   },
-  computed: {},
+  computed: {
+    itemOwner: function (){
+      if(this.current_user && this.current_user.id == this.item.user.id){
+        console.log("aa")
+        return true
+      }
+
+      return false
+    }
+
+  },
   created: function() {
     if (this.$route.params.create){
       this.$emit("setFlash", "success", "資産の登録に成功しました！")

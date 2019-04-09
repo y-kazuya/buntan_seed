@@ -12,35 +12,39 @@
         </b-col>
       </b-row>
       <ul class="mt-4">
-        <li v-for="(item, key, index) in user.items" :key="index">
-          <b-card>
-            <b-row>
-              <b-col cols="4">
-                <b-img
-                  left
-                  rounded
-                  :src="item.pictures[0].content.url"
-                  width="100"
-                  height="100"
-                  alt="img"
-                />
-              </b-col>
-              <b-col cols="6">
-                <h5>{{ item.title }}</h5>
-                <span>
-                  <b-badge>{{ item.city }}</b-badge>
-                  <b-badge v-if="is_rent=true">レンタル</b-badge>
-                  <b-badge v-if="is_rent=false">購入</b-badge>
-                </span>
-                <p v-if="is_rent=true">{{item.price}}万円/月</p>
-                <p v-if="is_rent=false">{{item.price}}万円で購入</p>
-              </b-col>
-              <b-col cols="2">
-                <b-badge>編集</b-badge>
-                <b-badge>削除</b-badge>
-              </b-col>
-            </b-row>
-          </b-card>
+        <li v-for="(item,index) in user.items" :key="index" :id="'item' + index">
+          <router-link class="d-link" :to="{ name: 'Item', params: { id: item.id }}">
+            <b-card>
+              <b-row>
+                <b-col cols="4">
+                  <b-img
+                    left
+                    rounded
+                    :src="item.pictures[0].content.url"
+                    width="100"
+                    height="100"
+                    alt="img"
+                  />
+                </b-col>
+                <b-col cols="6">
+                  <h5>{{ item.title }}</h5>
+                  <span>
+                    <b-badge>{{ item.city }}</b-badge>
+                    <b-badge v-if="item.is_rent==true">レンタル</b-badge>
+                    <b-badge v-else>購入</b-badge>
+                  </span>
+                  <p >{{item.price}}</p>
+                </b-col>
+                <b-col cols="2">
+                  <router-link :to="{ name: 'Item_basic', params: { id: item.id }}">
+                    <button type="button" class="btn btn-info">編集</button>
+                  </router-link>
+
+                  <button type="button" class="btn btn-danger" @click="deleteItem(item.id, index)">削除</button>
+                </b-col>
+              </b-row>
+            </b-card>
+          </router-link>
         </li>
       </ul>
     </b-container>
@@ -53,7 +57,7 @@ export default {
   props: { id: Number },
   data: function() {
     return {
-      user: ""
+      user: "",
     };
   },
 
@@ -63,13 +67,39 @@ export default {
       .get("/api/get_user", { params: { id: this.$props.id } })
       .then(response => {
         this.user = response.data;
-        console.log(this.user);
       })
       .catch(function(response) {
         main.$router.push({ path: "/" });
       });
+  },
+
+  methods:{
+    deleteItem: function(id,index){
+      var res = confirm("削除してもよろしいですか？");
+      if (!res){
+        return
+      }
+
+      axios
+        .delete("/api/delete_item", {
+          params: {id: id}
+        })
+        .then(response => {
+          this.$emit("setFlash", "info", "削除しました")
+          document.getElementById(`item${index}`).textContent = null
+        })
+        .catch(error => {
+          alert("通信エラーです")
+        });;
+    }
   }
 };
 </script>
 <style scoped lang="scss">
+@media screen and (max-width: 700px) {
+  .col-2{
+    padding: 0;
+  }
+}
+
 </style>

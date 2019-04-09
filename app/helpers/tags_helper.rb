@@ -1,6 +1,6 @@
 module TagsHelper
   def delete_unuse_tag
-    all_tags = Tag.group(:id).count.keys
+    all_tags = Tag.where(official: 0).group(:id).count.keys
     using_tags = Tag.joins(:items_tags).group("tag_id").count.keys
     if all_tags.length != using_tags.length
       unusing_tags = all_tags - using_tags

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "/item/new", to: "public/pages#top"
   get "/item/:id", to: "public/pages#top"
   get "/user/:id/items",to: "public/pages#top"
+  get "/item/:id/basic", to: "public/pages#top"
 
 
   namespace :admin do
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
     get    "/check_login",  to: "current_user#check"
     get    "/get_user", to: "get_user#index"
     post   "/create_item",         to: "create_item#index"
+    delete "/delete_item", to:"delete_item#index"
   end
 
 end

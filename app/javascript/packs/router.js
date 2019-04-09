@@ -12,6 +12,7 @@ import UserNew from "../components/user_new.vue"
 import AboutVue from "../components/about_vue.vue";
 import PrivacyPoricy from "../components/privacy_policy.vue";
 import UserItems from "../components/user_items.vue"
+import ItemBasic from "../components/item_basic.vue"
 import axios from "axios";
 
 Vue.use(VueRouter);
@@ -36,6 +37,12 @@ const router = new VueRouter({
       path: "/item/:id",
       name: "Item",
       component: ItemDetail,
+      props: route => ({ id: Number(route.params.id) }),
+    },
+    {
+      path: "/item/:id/basic",
+      name: "Item_basic",
+      component: ItemBasic,
       props: route => ({ id: Number(route.params.id) })
     },
     { path: '*', component: NotFoundComponent },

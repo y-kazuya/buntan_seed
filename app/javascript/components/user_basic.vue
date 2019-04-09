@@ -1,7 +1,7 @@
 <template>
 
-  <div id="dash-wrapper">
-    <side></side>
+  <div class="dash-wrapper">
+    <side v-bind:side_lists="side_lists"></side>
     <div class="dash-left-warpper">
       <div class="dash-content">
         <div class="dash-content-title middle-title">
@@ -88,6 +88,28 @@ export default {
 
   data: function(){
     return {
+      side_lists: {
+        links:[
+          {
+            name: "基本情報",
+            path_name: "",
+          },
+          {
+            name: "お支払い情報",
+            path_name: "",
+          },
+          {
+            name: "アカウント",
+            path_name: "",
+          },
+          {
+            name: "設定",
+            path_name: "",
+          },
+        ],
+        sideTitle: "アカウント設定",
+        sideOpne: true
+      },
       citys: [],
       change: false,
       validation: {
@@ -152,6 +174,8 @@ export default {
         config.headers['X-HTTP-Method-Override'] = 'PUT';
         axios.post('/api/update_current_user', data, config).then(
           response => {
+            this.$emit("getCurrentUser")
+            this.$emit("reloadAll")
             this.$emit("setFlash", "success", "保存しました！")
           }
         )

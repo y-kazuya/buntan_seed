@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   has_many :item_contacts, dependent: :destroy
 
   has_and_belongs_to_many :tags
+  has_many :items_tags, dependent: :destroy
 
   accepts_nested_attributes_for :building_info, reject_if: :reject_build
   accepts_nested_attributes_for :food_info, reject_if: :reject_food
@@ -34,7 +35,7 @@ class Item < ApplicationRecord
   }
 
   enum areas: {
-    高知市:1, 仁淀川:2, 嶺北:3, 物部川:4, 安芸・室戸:5, 四万十・足摺:6, 高知県外:7 
+    高知市:1, 仁淀川:2, 嶺北:3, 物部川:4, 安芸・室戸:5, 四万十・足摺:6, 高知県外:7
   }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 40 }
